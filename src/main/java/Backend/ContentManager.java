@@ -3,6 +3,7 @@ package main.java.Backend;
 import java.awt.Image;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContentManager {
     private ArrayList<Content> contents;
@@ -34,6 +35,23 @@ public class ContentManager {
 
     public ArrayList<Content> allContent(){
         return contents;
+    }
+    
+    public ArrayList<Content> userFriendContent(String userID){
+        ArrayList<Content> friendsContentList = new ArrayList<>();
+        ConnectHub cH = new ConnectHub();
+        List<String> friendsList = cH.getFriendsList(userID);
+        for(int i=0;i<contents.size();i++){
+            for(int j=0;j<friendsList.size();j++){
+                if(contents.get(i).getAuthorID().equals(friendsList.get(j))){
+                    friendsContentList.add(contents.get(i));
+                }
+            }
+        }
+        if(!friendsContentList.isEmpty()){
+            return friendsContentList;
+        }
+        return null;
     }
 
     public ArrayList<Content> userContent(String userID){
