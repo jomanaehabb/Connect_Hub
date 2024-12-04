@@ -1,4 +1,4 @@
-package main.jave.Backend;
+package main.java.Backend;
 
 import java.awt.Image;
 import java.time.LocalDateTime;
