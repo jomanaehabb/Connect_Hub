@@ -15,7 +15,7 @@ public class SuggestFriends extends JFrame {
     public SuggestFriends() {
         setTitle("Friend Suggestions");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         userIdField = new JTextField(15);
         suggestButton = new JButton("Get Suggestions");

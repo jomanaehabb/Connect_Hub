@@ -4,8 +4,8 @@
  */
 package Backend;
 
-//import com.fasterxml.jackson.core.type.TypeReference;
-//import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import java.util.Map;
 public class ProfileDatabase {
     private static final String PROFILE_DB = "profiles.json";
     private Map<String, Profile> profiles = new HashMap<>();
- //   private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public ProfileDatabase() {
- //       loadDatabase();
+        loadDatabase();
     }
 
     public Profile getProfile(String userId) {
@@ -27,25 +27,25 @@ public class ProfileDatabase {
 
     public void saveProfile(String userId, Profile profile) {
         profiles.put(userId, profile);
- //       saveDatabase();
+        saveDatabase();
     }
 
-//    private void loadDatabase() {
-//        File file = new File(PROFILE_DB);
-//        if (file.exists()) {
-//            try {
-//                profiles = objectMapper.readValue(file, new TypeReference<Map<String, Profile>>() {});
-//            } catch (IOException e) {
-//                System.err.println("Failed to load profile database: " + e.getMessage());
-//            }
-//        }
-//    }
+    private void loadDatabase() {
+        File file = new File(PROFILE_DB);
+        if (file.exists()) {
+            try {
+                profiles = objectMapper.readValue(file, new TypeReference<Map<String, Profile>>() {});
+            } catch (IOException e) {
+                System.err.println("Failed to load profile database: " + e.getMessage());
+            }
+        }
+    }
 
-//    private void saveDatabase() {
-//        try {
-//            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(PROFILE_DB), profiles);
-//        } catch (IOException e) {
-//            System.err.println("Failed to save profile database: " + e.getMessage());
-//        }
-//    }
+    private void saveDatabase() {
+        try {
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(PROFILE_DB), profiles);
+        } catch (IOException e) {
+            System.err.println("Failed to save profile database: " + e.getMessage());
+        }
+    }
 }

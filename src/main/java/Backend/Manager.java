@@ -1,7 +1,7 @@
 package Backend;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -17,25 +17,25 @@ public abstract class Manager {
         //loadUsers();
     }
 
-//    public void loadUsers() {
-//        File file = new File(DATABASE_FILE);
-//        if (file.exists()) {
-//            try {
-//                ObjectMapper objectMapper = new ObjectMapper();
-//                users = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {});
-//            } catch (IOException e) {
-//                System.err.println("Failed to load users: " + e.getMessage());
-//            }
-//        }
-//    }
+       public void loadUsers() {
+        File file = new File(DATABASE_FILE);
+        if (file.exists()) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                users = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {});
+            } catch (IOException e) {
+                System.err.println("Failed to load users: " + e.getMessage());
+            }
+        }
+    }
 
     public void saveUsers() {
-//        try {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(DATABASE_FILE), users);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(DATABASE_FILE), users);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String hashPassword(String password) {
