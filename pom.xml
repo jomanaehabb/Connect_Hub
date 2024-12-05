@@ -10,9 +10,4 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>com.mycompany.connect.hub.proj.ConnectHubProj</exec.mainClass>
     </properties>
-    <dependency>
-        <groupId>org.json</groupId>
-        <artifactId>json</artifactId>
-        <version>20240303</version>
-    </dependency>
 </project>
