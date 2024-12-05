@@ -29,11 +29,12 @@ public class ProfileManager extends Manager {
 
     public void createPost(String email, String content, String imagePath) {
         User user = users.get(email);
-        if (user != null) {
+        /*if (user != null) {
             Post newPost = new Post(content, imagePath);
             user.getPosts().add(newPost);
             saveUsers();
-        }
+            el mafrod fe content database object w meno bt3mely create post
+        }*/
     }
 }
 
