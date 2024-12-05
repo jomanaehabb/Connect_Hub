@@ -1,4 +1,4 @@
-package main.java.Backend;
+package Backend;
 
 import java.awt.Image;
 import java.time.LocalDateTime;
@@ -10,7 +10,7 @@ public class ContentDatabase {
     private ArrayList<Story> stories;
 
     public ContentDatabase(){
-        FileReader fR = new FileReader();
+        ContentFileReader fR = new ContentFileReader();
         this.posts = fR.readPostsFile(this);
         this.stories = fR.readStoriesFile(this);
     }

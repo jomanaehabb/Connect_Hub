@@ -1,4 +1,4 @@
-package main.java.Backend;
+package Backend;
 
 import java.awt.Image;
 

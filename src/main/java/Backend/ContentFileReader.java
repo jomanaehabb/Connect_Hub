@@ -1,4 +1,4 @@
-package main.java.Backend;
+package Backend;
 
 import java.awt.Image;
 import java.io.BufferedReader;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-public class FileReader {
+public class ContentFileReader {
     public ArrayList<Story> readStoriesFile(ContentDatabase cD){
             ArrayList<Story> stories = new ArrayList<>();
             try {
