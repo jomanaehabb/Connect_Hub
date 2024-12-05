@@ -1,0 +1,58 @@
+[
+    {
+        "email": "john@example.com",
+        "username": "john123",
+        "password": "hashedpassword123",
+        "dateOfBirth": "1990-01-01",
+        "status": "offline"
+    },
+    {
+        "email": "jane@example.com",
+        "username": "jane456",
+        "password": "hashedpassword456",
+        "dateOfBirth": "1985-05-15",
+        "status": "offline"
+    },
+    {
+        "email": "alice@example.com",
+        "username": "alice789",
+        "password": "hashedpassword789",
+        "dateOfBirth": "1995-08-25",
+        "status": "offline"
+    },
+    {
+        "email": "bob@example.com",
+        "username": "bob101",
+        "password": "hashedpassword101",
+        "dateOfBirth": "1988-12-12",
+        "status": "offline"
+    },
+    {
+        "email": "charlie@example.com",
+        "username": "charlie202",
+        "password": "hashedpassword202",
+        "dateOfBirth": "1993-03-18",
+        "status": "offline"
+    },
+    {
+        "email": "david@example.com",
+        "username": "david303",
+        "password": "hashedpassword303",
+        "dateOfBirth": "1992-07-11",
+        "status": "offline"
+    },
+    {
+        "email": "eve@example.com",
+        "username": "eve404",
+        "password": "hashedpassword404",
+        "dateOfBirth": "1996-11-05",
+        "status": "offline"
+    },
+    {
+        "email": "frank@example.com",
+        "username": "frank505",
+        "password": "hashedpassword505",
+        "dateOfBirth": "1989-09-09",
+        "status": "offline"
+    }
+]
