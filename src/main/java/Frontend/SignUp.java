@@ -1,18 +1,19 @@
 
 package Frontend;
 
-import Backend.UserManager;
+import Backend.UserAccountManager;
 import Frontend.Login;
 import javax.swing.JOptionPane;
 
 
 public class SignUp extends javax.swing.JFrame {
 
- 
+      private UserAccountManager userAccountManager; 
+  
     public SignUp() {
+        userAccountManager = new UserAccountManager();
         initComponents();
     }
-
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,7 +49,7 @@ public class SignUp extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Showcard Gothic", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Company Name");
+        jLabel2.setText("Connect Hub");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
@@ -69,7 +70,7 @@ public class SignUp extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(jLabel2)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,20 +257,32 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    String email = emailField.getText();
-    String username = usernameField.getText();
-    String password = new String(passwordField.getPassword());
-    String dateOfBirth = dateOfBirthField.getText(); // Add date of birth field
 
-    UserManager userManager = new UserManager();
-    
-    // Sign up user and show message
-    if (userManager.signUp(email, username, password, dateOfBirth)) {
-        JOptionPane.showMessageDialog(SignUp.this, "Sign-up successful!");
-        // Redirect to login or main page
-    } else {
-        JOptionPane.showMessageDialog(SignUp.this, "User already exists.");
+        // Get the input values
+    String username = usernameField.getText();
+    String email = emailField.getText();
+    String password = new String(passwordField.getPassword());
+    String dateOfBirth = new String(dateOfBirthField.getPassword());
+
+    if (username.isEmpty() || email.isEmpty() || password.isEmpty() || dateOfBirth.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+
+    boolean success = UserAccountManager.signup(username, email, password, dateOfBirth);
+
+    if (success) {
+        JOptionPane.showMessageDialog(this, "Sign up successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+        Login loginFrame = new Login();
+        loginFrame.setVisible(true);
+        loginFrame.pack();
+        loginFrame.setLocationRelativeTo(null);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Sign up failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dateOfBirthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfBirthFieldActionPerformed
