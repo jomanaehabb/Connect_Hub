@@ -1,0 +1,19 @@
+{
+  "friendships": [
+    {
+      "user1Username": "john123",
+      "user2Username": "alice789",
+      "status": "Accepted"
+    },
+    {
+      "user1Username": "john123",
+      "user2Username": "bob101",
+      "status": "Accepted"
+    },
+    {
+      "user1Username": "alice789",
+      "user2Username": "bob101",
+      "status": "Accepted"
+    }
+  ]
+}
