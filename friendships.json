@@ -1,0 +1,69 @@
+{
+  "friendships": [
+    {
+      "user1Username": "john123",
+      "user2Username": "alice789",
+      "status": "Accepted"
+    },
+    {
+      "user1Username": "john123",
+      "user2Username": "bob101",
+      "status": "Accepted"
+    },
+    {
+      "user1Username": "alice789",
+      "user2Username": "bob101",
+      "status": "Accepted"
+    },
+    {
+      "user1Username": "",
+      "user2Username": "",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "-111",
+      "user2Username": "",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "-111",
+      "user2Username": "1000",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "rgreg",
+      "user2Username": "2432",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "grege",
+      "user2Username": "42342",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "-123123",
+      "user2Username": "234234",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "greger",
+      "user2Username": "3535",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "-21444",
+      "user2Username": "3535",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "htrhrt",
+      "user2Username": "",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "43535",
+      "user2Username": "43646",
+      "status": "Pending"
+    }
+  ]
+}

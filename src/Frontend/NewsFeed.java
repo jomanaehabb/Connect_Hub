@@ -1,5 +1,8 @@
 package Frontend;
 
+import Backend.Content;
+import Backend.Post;
+
 public class NewsFeed extends javax.swing.JFrame {
 
     public NewsFeed() {
@@ -18,6 +21,7 @@ public class NewsFeed extends javax.swing.JFrame {
         contentTabbedPane = new javax.swing.JTabbedPane();
         postsPanel = new javax.swing.JPanel();
         storiesPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,15 +48,24 @@ public class NewsFeed extends javax.swing.JFrame {
 
         contentTabbedPane.addTab("Posts", postsPanel);
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         javax.swing.GroupLayout storiesPanelLayout = new javax.swing.GroupLayout(storiesPanel);
         storiesPanel.setLayout(storiesPanelLayout);
         storiesPanelLayout.setHorizontalGroup(
             storiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, storiesPanelLayout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         storiesPanelLayout.setVerticalGroup(
             storiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGroup(storiesPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         contentTabbedPane.addTab("Stories", storiesPanel);
@@ -77,7 +90,7 @@ public class NewsFeed extends javax.swing.JFrame {
                 .addComponent(settingsButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshButton))
-            .addComponent(contentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(contentTabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +101,7 @@ public class NewsFeed extends javax.swing.JFrame {
                     .addComponent(homeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+                .addComponent(contentTabbedPane))
         );
 
         pack();
@@ -100,7 +113,9 @@ public class NewsFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
+        Content post = new Post();
+        AddContent addContent = new AddContent(post);
+        addContent.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     public static void main(String args[]) {
@@ -114,6 +129,7 @@ public class NewsFeed extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JTabbedPane contentTabbedPane;
     private javax.swing.JLabel homeLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel postsPanel;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton settingsButton;
