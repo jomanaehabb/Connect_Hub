@@ -10,8 +10,9 @@ public class ContentDatabase {
     private ArrayList<Story> stories;
 
     public ContentDatabase(){
-        this.posts = new ArrayList<>();
-        this.stories = new ArrayList<>();
+        FileReader fR = new FileReader();
+        this.posts = fR.readPostsFile(this);
+        this.stories = fR.readStoriesFile(this);
     }
 
     public Post createPost(String userID, String text, Image image){
@@ -36,7 +37,7 @@ public class ContentDatabase {
         stories.remove(findStory(storyID));
     }
 
-    public Content findPost(String postID){
+    public Post findPost(String postID){
         for(int i=0;i<posts.size();i++){
             if(posts.get(i).getContentID().equals(postID)){
                 return posts.get(i);
@@ -45,7 +46,7 @@ public class ContentDatabase {
         return null;
     }
     
-    public Content findStory(String storyID){
+    public Story findStory(String storyID){
         for(int i=0;i<stories.size();i++){
             if(stories.get(i).getContentID().equals(storyID)){
                 return stories.get(i);

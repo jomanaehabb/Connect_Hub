@@ -1,16 +1,18 @@
 package main.java.Backend;
 
+import java.awt.Image;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 public class FileReader {
-    public ArrayList<Story> readStoriesFile(){
+    public ArrayList<Story> readStoriesFile(ContentDatabase cD){
+            ArrayList<Story> stories = new ArrayList<>();
             try {
-                BufferedReader reader = new BufferedReader(new java.io.FileReader("users.json"));
+                BufferedReader reader = new BufferedReader(new java.io.FileReader("stories.json"));
                 StringBuilder jsonBuilder = new StringBuilder();
                 String line;
 
@@ -22,20 +24,68 @@ public class FileReader {
                 String jsonContent = jsonBuilder.toString();
                 // Parse users.json manually
                 if (jsonContent.contains("[") && jsonContent.contains("]")) {
-                    String usersArray = jsonContent.substring(
+                    String storiesArray = jsonContent.substring(
                             jsonContent.indexOf("[") + 1,
                             jsonContent.lastIndexOf("]")
                     ).trim();
 
-                    for (String user : usersArray.split("},")) {
-                        String fullUser = user + (user.endsWith("}") ? "" : "}");
-                        String email = fullUser.split("\"email\": \"")[1].split("\"")[0];
-                        String username = fullUser.split("\"username\": \"")[1].split("\"")[0];
-                        emailToUsernameMap.put(email, username);
+                    for (String story : storiesArray.split("},")) {
+                        String fullStory = story + (story.endsWith("}") ? "" : "}");
+                        String text = fullStory.split("\"text\": \"")[1].split("\"")[0];
+                        String imagePath = fullStory.split("\"imagePath\": \"")[1].split("\"")[0];
+                        String authorID = fullStory.split("\"authorID\":\"")[1].split("\"")[0];
+                        String date = fullStory.split("\"date\":\"")[1].split("\"")[0];
+                        ImageIcon icon = new ImageIcon(imagePath);
+                        Image image = icon.getImage();
+                        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                        LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
+                        InternalContent content = new InternalContent(text, image);
+                        Story storyInstance = new Story(authorID, content, timeStamp);
+                        stories.add(storyInstance);
                     }
                 }
             } catch (IOException e) {
             }
-        }
+            return stories;
+    }
+    
+    public ArrayList<Post> readPostsFile(ContentDatabase cD){
+            ArrayList<Post> posts = new ArrayList<>();
+            try {
+                BufferedReader reader = new BufferedReader(new java.io.FileReader("posts.json"));
+                StringBuilder jsonBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    jsonBuilder.append(line);
+                }
+                reader.close();
+
+                String jsonContent = jsonBuilder.toString();
+                // Parse users.json manually
+                if (jsonContent.contains("[") && jsonContent.contains("]")) {
+                    String postsArray = jsonContent.substring(
+                            jsonContent.indexOf("[") + 1,
+                            jsonContent.lastIndexOf("]")
+                    ).trim();
+
+                    for (String post : postsArray.split("},")) {
+                        String fullPost = post + (post.endsWith("}") ? "" : "}");
+                        String text = fullPost.split("\"text\": \"")[1].split("\"")[0];
+                        String imagePath = fullPost.split("\"imagePath\": \"")[1].split("\"")[0];
+                        String authorID = fullPost.split("\"authorID\":\"")[1].split("\"")[0];
+                        String date = fullPost.split("\"date\":\"")[1].split("\"")[0];
+                        ImageIcon icon = new ImageIcon(imagePath);
+                        Image image = icon.getImage();
+                        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                        LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
+                        InternalContent content = new InternalContent(text, image);
+                        Post postInstance = new Post(authorID, content, timeStamp);
+                        posts.add(postInstance);
+                    }
+                }
+            } catch (IOException e) {
+            }
+            return posts;
     }
 }
