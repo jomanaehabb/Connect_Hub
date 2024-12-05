@@ -1,114 +1,67 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Frontend;
 
+/**
+ *
+ * @author cf
+ */
  // Alternative to the GUI but this time instead of tabs we use separate panels for each page(we may use it)
  // Use the MainGUI.java instead
 
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.List;
+
 import Backend.ConnectHub;
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 
-public class FriendRequestsWindow extends JFrame {
-    private JTextField userIdField;
-    private JButton loadRequestsButton;
-    private JTextArea requestListArea;
-    private JTextField requestIdField;
-    private JButton acceptButton;
-    private JButton declineButton;
+public class FriendRequests extends JPanel {
+    public FriendRequests(String currentUsername, ConnectHub connectHub) {
+        // Main panel for friend requests
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-    public FriendRequestsWindow() {
-        setTitle("Friend Requests");
-        setSize(500, 400);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // Get friend requests from the backend
+        List<String[]> friendRequests = connectHub.getFriendRequests(currentUsername);
 
-        // User input Components
-        userIdField = new JTextField(15);
-        loadRequestsButton = new JButton("Load Friend Requests");
-        requestListArea = new JTextArea(10, 40);
-        requestIdField = new JTextField(15);
-        acceptButton = new JButton("Accept Request");
-        declineButton = new JButton("Decline Request");
+        for (String[] request : friendRequests) {
+            if (request.length == 1) {
+                String requesterUsername = request[0];
+                JLabel requesterLabel = new JLabel("Friend request from: " + requesterUsername);
 
-        // Action for loading friend requests
-        loadRequestsButton.addActionListener((ActionEvent e) -> {
-            String userId = userIdField.getText();
-            if (userId.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter your user ID.");
-                return;
+                // Accept button
+                JButton acceptButton = new JButton("Accept");
+                acceptButton.addActionListener(e -> {
+                    connectHub.respondToFriendRequest(requesterUsername, currentUsername, true);
+                    JOptionPane.showMessageDialog(this, "You accepted the friend request from " + requesterUsername);
+                });
+
+                // Decline button
+                JButton declineButton = new JButton("Decline");
+                declineButton.addActionListener(e -> {
+                    connectHub.respondToFriendRequest(requesterUsername, currentUsername, false);
+                    JOptionPane.showMessageDialog(this, "You declined the friend request from " + requesterUsername);
+                });
+
+                // Add components to a sub-panel
+                JPanel requestPanel = new JPanel();
+                requestPanel.add(requesterLabel);
+                requestPanel.add(acceptButton);
+                requestPanel.add(declineButton);
+
+                // Add the sub-panel to the content panel
+                contentPanel.add(requestPanel);
             }
-            
-            // Get a list of friend requests from the backend
-            ConnectHub connectHub = new ConnectHub();
-            List<String> requests = connectHub.getPendingFriendRequests(userId);
-            
-            if (requests.isEmpty()) {
-                requestListArea.setText("No pending friend requests.");
-            } else {
-                StringBuilder sb = new StringBuilder();
-                for (String request : requests) {
-                    sb.append(request).append("\n");
-                }
-                requestListArea.setText(sb.toString());
-            }
-        });
+        }
 
-        // Action for accepting a friend request
-        acceptButton.addActionListener((ActionEvent e) -> {
-            String requestId = requestIdField.getText();
-            String userId = userIdField.getText();
-            if (requestId.isEmpty() || userId.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter your user ID and request ID.");
-                return;
-            }
-            else if (!requestId.matches("-?\\d+") || !userId.matches("-?\\d+")) {
-                JOptionPane.showMessageDialog(null, "Please enter valid integers only.");
-                requestIdField.setText("");
-                userIdField.setText("");
-                return;
-            }    
-            else if(requestId.matches("-\\d+") || userId.matches("-\\d+")) {
-                JOptionPane.showMessageDialog(null, "Please enter positive integers only.");
-                requestIdField.setText("");
-                userIdField.setText("");
-                return;
-            }
-            
-            // Accept the friend request
-            ConnectHub connectHub = new ConnectHub();
-            connectHub.respondToFriendRequest(requestId,userId, true);
-            JOptionPane.showMessageDialog(null, "Friend request accepted!");
-            requestListArea.setText("");
-            requestIdField.setText("");
-        });
+        // Wrap the content panel with a JScrollPane
+        JScrollPane scrollPane = new JScrollPane(contentPanel);
+        scrollPane.setPreferredSize(new Dimension(400, 300));
 
-        // Action for declining a friend request
-        declineButton.addActionListener((ActionEvent e) -> {
-            String requestId = requestIdField.getText();
-            String userId = userIdField.getText();
-            if (requestId.isEmpty() || userId.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter your user ID and request ID.");
-                return;
-            }
-            
-            // Decline the friend request
-            ConnectHub connectHub = new ConnectHub();
-            connectHub.respondToFriendRequest(requestId,userId, false);
-            JOptionPane.showMessageDialog(null, "Friend request declined.");
-            requestListArea.setText("");
-            requestIdField.setText("");
-        });
-
-        
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Your User ID:"));
-        panel.add(userIdField);
-        panel.add(loadRequestsButton);
-        panel.add(new JScrollPane(requestListArea));
-        panel.add(new JLabel("Request ID:"));
-        panel.add(requestIdField);
-        panel.add(acceptButton);
-        panel.add(declineButton);
-
-        add(panel);
+        // Add the scroll pane to the FriendRequestsWindow panel
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
     }
 }
