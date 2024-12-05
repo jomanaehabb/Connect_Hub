@@ -1,18 +1,41 @@
 package main.java.Backend;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 public class FileReader {
     public ArrayList<Story> readStoriesFile(){
-        ArrayList<Story> stories = new ArrayList<>();
-        try{
-            String json = new String(Files.readAllBytes(Paths.get(C:\Users\Kimo Store\Desktop\meow.txt)));
-            JSONArray postsArray = new JSONArray(json);
-        }
-        catch(FileNotFoundException e){
-            JOptionPane.showMessageDialog(null, "Error loading file.");
+            try {
+                BufferedReader reader = new BufferedReader(new java.io.FileReader("users.json"));
+                StringBuilder jsonBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    jsonBuilder.append(line);
+                }
+                reader.close();
+
+                String jsonContent = jsonBuilder.toString();
+                // Parse users.json manually
+                if (jsonContent.contains("[") && jsonContent.contains("]")) {
+                    String usersArray = jsonContent.substring(
+                            jsonContent.indexOf("[") + 1,
+                            jsonContent.lastIndexOf("]")
+                    ).trim();
+
+                    for (String user : usersArray.split("},")) {
+                        String fullUser = user + (user.endsWith("}") ? "" : "}");
+                        String email = fullUser.split("\"email\": \"")[1].split("\"")[0];
+                        String username = fullUser.split("\"username\": \"")[1].split("\"")[0];
+                        emailToUsernameMap.put(email, username);
+                    }
+                }
+            } catch (IOException e) {
+            }
         }
     }
 }
