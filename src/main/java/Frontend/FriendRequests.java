@@ -1,20 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Frontend;
 
-/**
- *
- * @author cf
- */
  // Alternative to the GUI but this time instead of tabs we use separate panels for each page(we may use it)
  // Use the MainGUI.java instead
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
-import Backend.ConnectHub;
+import Backend.ConnectHub1;
 
 public class FriendRequests extends JFrame {
     private JTextField userIdField;
@@ -27,7 +19,7 @@ public class FriendRequests extends JFrame {
     public FriendRequests() {
         setTitle("Friend Requests");
         setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // User input Components
         userIdField = new JTextField(15);
@@ -46,7 +38,7 @@ public class FriendRequests extends JFrame {
             }
             
             // Get a list of friend requests from the backend
-            ConnectHub connectHub = new ConnectHub();
+            ConnectHub1 connectHub = new ConnectHub1();
             List<String> requests = connectHub.getPendingFriendRequests(userId);
             
             if (requests.isEmpty()) {
@@ -68,9 +60,21 @@ public class FriendRequests extends JFrame {
                 JOptionPane.showMessageDialog(null, "Please enter your user ID and request ID.");
                 return;
             }
+            else if (!requestId.matches("-?\\d+") || !userId.matches("-?\\d+")) {
+                JOptionPane.showMessageDialog(null, "Please enter valid integers only.");
+                requestIdField.setText("");
+                userIdField.setText("");
+                return;
+            }    
+            else if(requestId.matches("-\\d+") || userId.matches("-\\d+")) {
+                JOptionPane.showMessageDialog(null, "Please enter positive integers only.");
+                requestIdField.setText("");
+                userIdField.setText("");
+                return;
+            }
             
             // Accept the friend request
-            ConnectHub connectHub = new ConnectHub();
+            ConnectHub1 connectHub = new ConnectHub1();
             connectHub.respondToFriendRequest(requestId,userId, true);
             JOptionPane.showMessageDialog(null, "Friend request accepted!");
             requestListArea.setText("");
@@ -87,7 +91,7 @@ public class FriendRequests extends JFrame {
             }
             
             // Decline the friend request
-            ConnectHub connectHub = new ConnectHub();
+            ConnectHub1 connectHub = new ConnectHub1();
             connectHub.respondToFriendRequest(requestId,userId, false);
             JOptionPane.showMessageDialog(null, "Friend request declined.");
             requestListArea.setText("");
@@ -107,9 +111,4 @@ public class FriendRequests extends JFrame {
 
         add(panel);
     }
-
-    public static void main(String[] args) {
-        new FriendRequests().setVisible(true);
-    }
 }
-

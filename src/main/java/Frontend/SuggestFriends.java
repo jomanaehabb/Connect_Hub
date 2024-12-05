@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Frontend;
-import Backend.ConnectHub;
 
+import Backend.ConnectHub1;
 
-/**
- *
- * @author cf
- */
   // Use the MainGUI.java instead
 import java.awt.event.*;
 import javax.swing.*;
@@ -23,7 +15,7 @@ public class SuggestFriends extends JFrame {
     public SuggestFriends() {
         setTitle("Friend Suggestions");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         userIdField = new JTextField(15);
         suggestButton = new JButton("Get Suggestions");
@@ -31,9 +23,21 @@ public class SuggestFriends extends JFrame {
 
         suggestButton.addActionListener((ActionEvent e) -> {
             String userId = userIdField.getText();
-            ConnectHub fm = new ConnectHub();
-            List<String> suggestions = fm.suggestFriends(userId);
-            suggestionsArea.setText(String.join("\n", suggestions));
+            if(userId.isEmpty())
+                JOptionPane.showMessageDialog(null, "Please fill in all fields.");
+            else if (!userId.matches("-?\\d+")) {
+                JOptionPane.showMessageDialog(null, "Please enter valid integers only.");
+                userIdField.setText("");
+            }    
+            else if(userId.matches("-\\d+")) {
+                JOptionPane.showMessageDialog(null, "Please enter positive integers only.");
+                userIdField.setText("");
+            }
+            else {
+                ConnectHub1 fm = new ConnectHub1();
+                List<String> suggestions = fm.suggestFriends(userId);
+                suggestionsArea.setText(String.join("\n", suggestions));
+            } 
         });
 
         JPanel panel = new JPanel();
@@ -44,9 +48,4 @@ public class SuggestFriends extends JFrame {
 
         add(panel);
     }
-
-    public static void main(String[] args) {
-        new SuggestFriends().setVisible(true);
-    }
 }
-

@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Frontend;
-import Backend.ConnectHub;
 
-/**
- *
- * @author cf
- */
+import Backend.ConnectHub1;
+
   // Use the MainGUI.java instead
 import javax.swing.*;
 import java.util.List;
@@ -19,20 +12,15 @@ public class FriendsList extends JFrame {
     public FriendsList() {
         setTitle("Friends List");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         friendsArea = new JTextArea(10, 30);
         JScrollPane scrollPane = new JScrollPane(friendsArea);
 
-        ConnectHub fm = new ConnectHub();
+        ConnectHub1 fm = new ConnectHub1();
         List<String> friends = fm.suggestFriends("someUserId"); // Replace with actual user ID
         friendsArea.setText(String.join("\n", friends));
 
         add(scrollPane);
     }
-
-    public static void main(String[] args) {
-        new FriendsList().setVisible(true);
-    }
 }
-
