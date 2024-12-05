@@ -248,19 +248,19 @@ public class SignUpWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Some fields are empty", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        try {
-            LocalDate registrationDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            UserAccountManager userAccountManager = new UserAccountManager();
-            if (userAccountManager.signUp(email, username, password, registrationDate)) {
-                JOptionPane.showMessageDialog(this, "Sign Up Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
-                new ProfileManagementWindow(email).setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Email already in use or invalid format", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(this, "Invalid date format. Use yyyy-MM-dd.", "Date Error", JOptionPane.ERROR_MESSAGE);
-        }    
+            try {
+        LocalDate registrationDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        UserAccountManager userAccountManager = new UserAccountManager();
+        if (userAccountManager.signUp(email, username, password, registrationDate)) {
+            JOptionPane.showMessageDialog(this, "Sign Up Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+            new ProfileManagementWindow(email).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Email already in use or invalid format", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this, "Invalid date format. Use yyyy-MM-dd.", "Date Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

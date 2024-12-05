@@ -14,6 +14,10 @@ public class AddContentWindow extends javax.swing.JFrame {
         setTitle("Add Content");
         this.post = post;
     }
+
+    AddContentWindow() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     private void addPostStory(String textInput) {
         InternalContent content = new InternalContent();

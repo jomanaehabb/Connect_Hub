@@ -113,9 +113,11 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        //Content post = new Post(content, imagePath); el mafrod mn el database
-        //AddContentWindow addContent = new AddContentWindow(post);
-        //addContent.setVisible(true);
+        AddContentWindow addContentWindow = new AddContentWindow();
+        addContentWindow.setVisible(true);
+        addContentWindow.pack();
+        addContentWindow.setLocationRelativeTo(null); 
+        this.dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 
     /*public static void main(String args[]) {

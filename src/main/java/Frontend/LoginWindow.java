@@ -219,6 +219,10 @@ public class LoginWindow extends javax.swing.JFrame {
         String email = emailField.getText();
         String password = String.valueOf(passwordField.getPassword());
         UserAccountManager userAccountManager = new UserAccountManager();
+        if (email.isEmpty() || password.isEmpty()) {
+    JOptionPane.showMessageDialog(this, "Email and Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
         if(userAccountManager.login(email, password)){
             JOptionPane.showMessageDialog(this, "Login in Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
             new ProfileManagementWindow(email).setVisible(true);

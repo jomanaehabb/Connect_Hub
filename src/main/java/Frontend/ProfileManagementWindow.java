@@ -104,10 +104,11 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
         emailLabel = new javax.swing.JLabel();
         saveBioButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+        viewNewsFeed = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(238, 238, 238));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 700));
 
         profilePhotoButton.setText("Change profile photo");
@@ -134,10 +135,9 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
         bioTextArea.setRows(5);
         jScrollPane1.setViewportView(bioTextArea);
 
-        usernameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        usernameLabel.setBackground(new java.awt.Color(0, 0, 0));
         usernameLabel.setText("Username");
 
-        emailLabel.setForeground(new java.awt.Color(255, 255, 255));
         emailLabel.setText("Email");
 
         saveBioButton.setText("Save Bio");
@@ -154,22 +154,19 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
             }
         });
 
+        viewNewsFeed.setText("View News Feed");
+        viewNewsFeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewNewsFeedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(coverPhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(profilePhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(coverPhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(173, 173, 173)
-                        .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(403, 403, 403)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,35 +178,46 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
                         .addGap(174, 174, 174)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(421, 421, 421)
-                        .addComponent(saveBioButton)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                        .addGap(81, 81, 81)
+                        .addComponent(viewNewsFeed)
+                        .addGap(224, 224, 224)
+                        .addComponent(saveBioButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(profilePhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(coverPhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 41, Short.MAX_VALUE)
+                .addComponent(coverPhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(coverPhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(coverPhotoButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(profilePhotoButton)
-                        .addGap(9, 9, 9)))
-                .addComponent(usernameLabel)
+                .addContainerGap()
+                .addComponent(coverPhotoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(coverPhotoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(profilePhotoButton)
+                .addGap(9, 9, 9)
+                .addComponent(usernameLabel)
+                .addGap(13, 13, 13)
                 .addComponent(emailLabel)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logoutButton))
                 .addGap(18, 18, 18)
-                .addComponent(saveBioButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveBioButton)
+                    .addComponent(viewNewsFeed))
                 .addGap(155, 155, 155))
         );
 
@@ -249,6 +257,15 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void viewNewsFeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewNewsFeedActionPerformed
+        // TODO add your handling code here:
+        NewsFeedWindow newsFeedWindow = new NewsFeedWindow();
+        newsFeedWindow.setVisible(true);
+        newsFeedWindow.pack();
+        newsFeedWindow.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_viewNewsFeedActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -263,5 +280,6 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
     private javax.swing.JLabel profilePhotoLabel;
     private javax.swing.JButton saveBioButton;
     private javax.swing.JLabel usernameLabel;
+    private javax.swing.JButton viewNewsFeed;
     // End of variables declaration//GEN-END:variables
 }

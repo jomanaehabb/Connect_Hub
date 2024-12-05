@@ -4,12 +4,17 @@
  */
 package Backend;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class UserDatabase {
     private ArrayList<User> users;
-    private final String databaseFile = "users.db";
+    private final String databaseFile = "users.json";
 
     public UserDatabase() {
         users = new ArrayList<>();
@@ -17,17 +22,29 @@ public class UserDatabase {
     }
 
     private void loadDatabase() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(databaseFile))) {
-            users = (ArrayList<User>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            users = new ArrayList<>();
+        File file = new File(databaseFile);
+        if (file.exists()) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                users = objectMapper.readValue(file, new TypeReference<ArrayList<User>>() {});
+            } catch (IOException e) {
+                System.err.println("Failed to load users: " + e.getMessage());
+                e.printStackTrace();
+                users = new ArrayList<>();
+            }
         }
     }
 
     private void saveDatabase() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
-            oos.writeObject(users);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(databaseFile), users);
         } catch (IOException e) {
+            System.err.println("Failed to save users: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -39,7 +56,9 @@ public class UserDatabase {
 
     public User getUserByEmail(String email) {
         for (User user : users) {
-            if (user.getEmail().equals(email)) return user;
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
         }
         return null;
     }
