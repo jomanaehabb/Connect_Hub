@@ -1,4 +1,4 @@
-package main.java.Backend;
+package Backend;
 
 import java.awt.Image;
 
@@ -9,6 +9,10 @@ public class InternalContent {
     public InternalContent(String text, Image image) {
         this.text = text;
         this.image = image;
+    }
+
+    public InternalContent() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getText() {

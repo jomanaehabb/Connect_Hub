@@ -6,7 +6,7 @@ package Frontend;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.List;
-import Backend.ConnectHub1;
+import Backend.ConnectHub;
 
 public class FriendRequests extends JFrame {
     private JTextField userIdField;
@@ -38,7 +38,7 @@ public class FriendRequests extends JFrame {
             }
             
             // Get a list of friend requests from the backend
-            ConnectHub1 connectHub = new ConnectHub1();
+            ConnectHub connectHub = new ConnectHub();
             List<String> requests = connectHub.getPendingFriendRequests(userId);
             
             if (requests.isEmpty()) {
@@ -74,7 +74,7 @@ public class FriendRequests extends JFrame {
             }
             
             // Accept the friend request
-            ConnectHub1 connectHub = new ConnectHub1();
+            ConnectHub connectHub = new ConnectHub();
             connectHub.respondToFriendRequest(requestId,userId, true);
             JOptionPane.showMessageDialog(null, "Friend request accepted!");
             requestListArea.setText("");
@@ -91,7 +91,7 @@ public class FriendRequests extends JFrame {
             }
             
             // Decline the friend request
-            ConnectHub1 connectHub = new ConnectHub1();
+            ConnectHub connectHub = new ConnectHub();
             connectHub.respondToFriendRequest(requestId,userId, false);
             JOptionPane.showMessageDialog(null, "Friend request declined.");
             requestListArea.setText("");

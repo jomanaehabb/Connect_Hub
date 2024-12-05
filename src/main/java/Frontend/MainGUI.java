@@ -193,7 +193,7 @@ public class MainGUI extends JFrame {
         repaint();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Replace this with the actuall Login logic(for now use this simple login window)
         String username = JOptionPane.showInputDialog("Enter your username:");
         if (username != null && !username.isEmpty()) {
@@ -202,5 +202,6 @@ public class MainGUI extends JFrame {
             System.out.println("Username is required!");
         }
     }
+*/
 }
 

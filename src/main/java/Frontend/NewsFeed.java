@@ -118,13 +118,13 @@ public class NewsFeed extends javax.swing.JFrame {
         addContent.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewsFeed().setVisible(true);
             }
         });
-    }
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JTabbedPane contentTabbedPane;

@@ -1,6 +1,6 @@
 package Frontend;
 
-import Backend.ConnectHub1;
+import Backend.ConnectHub;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -35,7 +35,7 @@ public class AddFriend extends JFrame {
                 user2Field.setText("");
             }
             else {
-                ConnectHub1 fm = new ConnectHub1();
+                ConnectHub fm = new ConnectHub();
                 fm.sendFriendRequest(user1Id, user2Id);
                 JOptionPane.showMessageDialog(null, "Friend has been successfully added!");
                 this.setVisible(false);

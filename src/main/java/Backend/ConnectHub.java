@@ -18,7 +18,15 @@ import java.util.Set;
  * @author cf
  */
 public class ConnectHub {
+    
+    /*    
+    public List<String> getFriendsList(String usedID){
+        List<String> list = null;
+        return list;
+    }
+*/
     //Function to send request
+   
     public void sendFriendRequest(String user1Id, String user2Id) {
 
         // Read current friendships to check if there is existing friend request

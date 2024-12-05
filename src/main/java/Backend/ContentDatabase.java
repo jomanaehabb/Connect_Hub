@@ -1,4 +1,4 @@
-package main.java.Backend;
+package Backend;
 
 import java.awt.Image;
 import java.time.LocalDateTime;
@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ContentDatabase {
     private ArrayList<Post> posts;
-    private ArrayList<Story> stories;
+    private final ArrayList<Story> stories;
 
     public ContentDatabase(){
         this.posts = new ArrayList<>();

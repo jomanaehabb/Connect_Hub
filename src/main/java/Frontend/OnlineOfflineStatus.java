@@ -41,7 +41,7 @@ public class OnlineOfflineStatus extends JFrame {
         add(panel);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new OnlineOfflineStatus().setVisible(true);
-    }
+    }*/
 }
