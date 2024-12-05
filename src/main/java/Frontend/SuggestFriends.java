@@ -23,9 +23,21 @@ public class SuggestFriends extends JFrame {
 
         suggestButton.addActionListener((ActionEvent e) -> {
             String userId = userIdField.getText();
-            ConnectHub1 fm = new ConnectHub1();
-            List<String> suggestions = fm.suggestFriends(userId);
-            suggestionsArea.setText(String.join("\n", suggestions));
+            if(userId.isEmpty())
+                JOptionPane.showMessageDialog(null, "Please fill in all fields.");
+            else if (!userId.matches("-?\\d+")) {
+                JOptionPane.showMessageDialog(null, "Please enter valid integers only.");
+                userIdField.setText("");
+            }    
+            else if(userId.matches("-\\d+")) {
+                JOptionPane.showMessageDialog(null, "Please enter positive integers only.");
+                userIdField.setText("");
+            }
+            else {
+                ConnectHub1 fm = new ConnectHub1();
+                List<String> suggestions = fm.suggestFriends(userId);
+                suggestionsArea.setText(String.join("\n", suggestions));
+            } 
         });
 
         JPanel panel = new JPanel();
@@ -35,9 +47,5 @@ public class SuggestFriends extends JFrame {
         panel.add(new JScrollPane(suggestionsArea));
 
         add(panel);
-    }
-
-    public static void main(String[] args) {
-        new SuggestFriends().setVisible(true);
     }
 }

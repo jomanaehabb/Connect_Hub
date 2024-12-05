@@ -115,7 +115,8 @@ public class Settings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void friendsSuggestionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsSuggestionsButtonActionPerformed
-        // TODO add your handling code here:
+        SuggestFriends suggestions = new SuggestFriends();
+        suggestions.setVisible(true);
     }//GEN-LAST:event_friendsSuggestionsButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
