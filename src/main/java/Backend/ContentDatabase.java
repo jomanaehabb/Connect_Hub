@@ -97,8 +97,8 @@ public class ContentDatabase {
         return null;
     }
 
-    public ArrayList<Content> userPosts(String userID){
-        ArrayList<Content> userContent = new ArrayList<>();
+    public ArrayList<Post> userPosts(String userID){
+        ArrayList<Post> userContent = new ArrayList<>();
         for(int i=0;i<posts.size();i++){
             if(posts.get(i).getAuthorID().equals(userID)){
                 userContent.add(posts.get(i));
@@ -110,8 +110,8 @@ public class ContentDatabase {
         return null;
     }
     
-    public ArrayList<Content> userStories(String userID){
-        ArrayList<Content> userContent = new ArrayList<>();
+    public ArrayList<Story> userStories(String userID){
+        ArrayList<Story> userContent = new ArrayList<>();
         for(int i=0;i<stories.size();i++){
             if(stories.get(i).getAuthorID().equals(userID)){
                 userContent.add(stories.get(i));
