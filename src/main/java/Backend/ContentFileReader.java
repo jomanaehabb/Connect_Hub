@@ -22,7 +22,7 @@ public class ContentFileReader {
                 reader.close();
 
                 String jsonContent = jsonBuilder.toString();
-                // Parse users.json manually
+                // Parse stories.json manually
                 if (jsonContent.contains("[") && jsonContent.contains("]")) {
                     String storiesArray = jsonContent.substring(
                             jsonContent.indexOf("[") + 1,
@@ -32,11 +32,11 @@ public class ContentFileReader {
                     for (String story : storiesArray.split("},")) {
                         String fullStory = story + (story.endsWith("}") ? "" : "}");
                         String text = fullStory.split("\"text\": \"")[1].split("\"")[0];
-                        String imagePath = fullStory.split("\"imagePath\": \"")[1].split("\"")[0];
+                        String imageString = fullStory.split("\"image\": \"")[1].split("\"")[0];
                         String authorID = fullStory.split("\"authorID\":\"")[1].split("\"")[0];
                         String date = fullStory.split("\"date\":\"")[1].split("\"")[0];
-                        ImageIcon icon = new ImageIcon(imagePath);
-                        Image image = icon.getImage();
+                        ImageIcon icon = new ImageIcon(imageString);
+                        Image image = icon.getImage(); //making an icon to turn the string to an image
                         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
                         LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
                         InternalContent content = new InternalContent(text, image);
@@ -62,7 +62,7 @@ public class ContentFileReader {
                 reader.close();
 
                 String jsonContent = jsonBuilder.toString();
-                // Parse users.json manually
+                // Parse posts.json manually
                 if (jsonContent.contains("[") && jsonContent.contains("]")) {
                     String postsArray = jsonContent.substring(
                             jsonContent.indexOf("[") + 1,
@@ -72,11 +72,11 @@ public class ContentFileReader {
                     for (String post : postsArray.split("},")) {
                         String fullPost = post + (post.endsWith("}") ? "" : "}");
                         String text = fullPost.split("\"text\": \"")[1].split("\"")[0];
-                        String imagePath = fullPost.split("\"imagePath\": \"")[1].split("\"")[0];
+                        String imageString = fullPost.split("\"image\": \"")[1].split("\"")[0];
                         String authorID = fullPost.split("\"authorID\":\"")[1].split("\"")[0];
                         String date = fullPost.split("\"date\":\"")[1].split("\"")[0];
-                        ImageIcon icon = new ImageIcon(imagePath);
-                        Image image = icon.getImage();
+                        ImageIcon icon = new ImageIcon(imageString);
+                        Image image = icon.getImage(); //making an icon to turn the string to an image
                         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
                         LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
                         InternalContent content = new InternalContent(text, image);
