@@ -2,6 +2,8 @@ package Backend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -22,9 +24,12 @@ public abstract class Manager {
         if (file.exists()) {
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
                 users = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {});
             } catch (IOException e) {
                 System.err.println("Failed to load users: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -32,8 +37,11 @@ public abstract class Manager {
     public void saveUsers() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(DATABASE_FILE), users);
         } catch (IOException e) {
+            System.err.println("Failed to save users: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -52,3 +60,4 @@ public abstract class Manager {
         }
     }
 }
+

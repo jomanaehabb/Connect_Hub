@@ -17,11 +17,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class MainGUI extends JFrame {
+public class FriendsManagementWindow extends JFrame {
     private ConnectHub connectHub; 
     private String currentUsername; 
 
-    public MainGUI(String username) {
+    public FriendsManagementWindow(String username) {
         this.currentUsername = username;
         this.connectHub = new ConnectHub(); 
 

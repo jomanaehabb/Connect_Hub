@@ -7,12 +7,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.List;
 
-public class SuggestFriends extends JFrame {
+public class SuggestFriendsWindow extends JFrame {
     private JTextField userIdField;
     private JButton suggestButton;
     private JTextArea suggestionsArea;
 
-    public SuggestFriends() {
+    public SuggestFriendsWindow() {
         setTitle("Friend Suggestions");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

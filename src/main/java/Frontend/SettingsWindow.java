@@ -1,8 +1,8 @@
 package Frontend;
 
-public class Settings extends javax.swing.JFrame {
+public class SettingsWindow extends javax.swing.JFrame {
 
-    public Settings() {
+    public SettingsWindow() {
         initComponents();
         setTitle("Settings");
     }
@@ -115,7 +115,7 @@ public class Settings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void friendsSuggestionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsSuggestionsButtonActionPerformed
-        SuggestFriends suggestions = new SuggestFriends();
+        SuggestFriendsWindow suggestions = new SuggestFriendsWindow();
         suggestions.setVisible(true);
     }//GEN-LAST:event_friendsSuggestionsButtonActionPerformed
 
@@ -124,27 +124,27 @@ public class Settings extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void addFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFriendButtonActionPerformed
-        AddFriend addFriend = new AddFriend();
+        AddFriendWindow addFriend = new AddFriendWindow();
         addFriend.setVisible(true);
     }//GEN-LAST:event_addFriendButtonActionPerformed
 
     private void blockFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockFriendButtonActionPerformed
-        BlockFriend blockFriend = new BlockFriend();
+        BlockFriendWindow blockFriend = new BlockFriendWindow();
         blockFriend.setVisible(true);
     }//GEN-LAST:event_blockFriendButtonActionPerformed
 
     private void friendRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendRequestsButtonActionPerformed
-        FriendRequests friendRequests = new FriendRequests();
+        FriendRequestsWindow friendRequests = new FriendRequestsWindow();
         friendRequests.setVisible(true);
     }//GEN-LAST:event_friendRequestsButtonActionPerformed
 
     private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsButtonActionPerformed
-        FriendsList friends = new FriendsList();
+        FriendsListWindow friends = new FriendsListWindow();
         friends.setVisible(true);
     }//GEN-LAST:event_friendsButtonActionPerformed
 
     private void removeFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFriendButtonActionPerformed
-        RemoveFriend removeFriend = new RemoveFriend();
+        RemoveFriendWindow removeFriend = new RemoveFriendWindow();
         removeFriend.setVisible(true);
     }//GEN-LAST:event_removeFriendButtonActionPerformed
 

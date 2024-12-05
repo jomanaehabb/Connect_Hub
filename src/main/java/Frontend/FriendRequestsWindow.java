@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.util.List;
 import Backend.ConnectHub;
 
-public class FriendRequests extends JFrame {
+public class FriendRequestsWindow extends JFrame {
     private JTextField userIdField;
     private JButton loadRequestsButton;
     private JTextArea requestListArea;
@@ -16,7 +16,7 @@ public class FriendRequests extends JFrame {
     private JButton acceptButton;
     private JButton declineButton;
 
-    public FriendRequests() {
+    public FriendRequestsWindow() {
         setTitle("Friend Requests");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

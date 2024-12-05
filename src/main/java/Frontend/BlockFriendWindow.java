@@ -6,11 +6,11 @@ import Backend.ConnectHub;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class BlockFriend extends JFrame {
+public class BlockFriendWindow extends JFrame {
     private JTextField user1Field, user2Field;
     private JButton blockFriendButton;
 
-    public BlockFriend() {
+    public BlockFriendWindow() {
         setTitle("Block Friend");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

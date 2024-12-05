@@ -15,11 +15,11 @@ import Backend.UserActivity;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class OnlineOfflineStatus extends JFrame {
+public class OnlineOfflineStatusWindow extends JFrame {
     private JTextField userIdField;
     private JButton updateStatusButton;
 
-    public OnlineOfflineStatus() {
+    public OnlineOfflineStatusWindow() {
         setTitle("Update Online/Offline Status");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

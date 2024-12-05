@@ -6,10 +6,10 @@ import Backend.ConnectHub;
 import javax.swing.*;
 import java.util.List;
 
-public class FriendsList extends JFrame {
+public class FriendsListWindow extends JFrame {
     private JTextArea friendsArea;
 
-    public FriendsList() {
+    public FriendsListWindow() {
         setTitle("Friends List");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

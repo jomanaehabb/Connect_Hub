@@ -2,18 +2,21 @@
 package Frontend;
 
 import Backend.UserAccountManager;
-import Frontend.Login;
+import Frontend.LoginWindow;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 
-public class SignUp extends javax.swing.JFrame {
+public class SignUpWindow extends javax.swing.JFrame {
 
       private UserAccountManager userAccountManager; 
   private javax.swing.JTextField usernameField;
     
     
     
-    public SignUp() {
+    public SignUpWindow() {
         userAccountManager = new UserAccountManager();
         initComponents();
     }
@@ -239,7 +242,7 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Login LoginFrame = new Login();
+        LoginWindow LoginFrame = new LoginWindow();
         LoginFrame.setVisible(true);
         LoginFrame.pack();
         LoginFrame.setLocationRelativeTo(null); 
@@ -260,38 +263,51 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-// Get the input values
-    String username = usernameField.getText();  // Ensure this is inside the correct method
-    String email = emailField.getText();
-    String password = new String(passwordField.getPassword());
-    String dateOfBirth = new String(dateOfBirthField.getPassword());
+       /* String username = usernameField.getText();
+        String email = emailField.getText();
+        String password = new String(passwordField.getPassword());
+        String dateInput = dateOfBirthField.getText();
 
-    // Validate inputs
-    if (username.isEmpty() || email.isEmpty() || password.isEmpty() || dateOfBirth.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || dateInput.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Some fields are empty", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            LocalDate registrationDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            UserAccountManager userAccountManager = new UserAccountManager();
+            if (userAccountManager.signUp(email, username, password, registrationDate)) {
+                JOptionPane.showMessageDialog(this, "Sign Up Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+                new ProfileManagementWindow(email).setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email already in use or invalid format", "Sign Up Failed", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Use yyyy-MM-dd.", "Date Error", JOptionPane.ERROR_MESSAGE);
+        } 
+*/
+       String username = usernameField.getText().trim();
+        String email = emailField.getText().trim();
+        String password = new String(passwordField.getPassword()).trim();
+        String dateInput = dateOfBirthField.getText().trim();
 
-    // Create an instance of UserAccountManager
-    UserAccountManager userAccountManager = new UserAccountManager();
-    
-    // Use the signup method from the instance
-    boolean success = userAccountManager.signup(username, email, password, dateOfBirth);
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || dateInput.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields are required.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-    if (success) {
-        JOptionPane.showMessageDialog(this, "Sign up successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        // Open the login screen
-        Login loginFrame = new Login();
-        loginFrame.setVisible(true);
-        loginFrame.pack();
-        loginFrame.setLocationRelativeTo(null);
-        this.dispose();
-    } else {
-        JOptionPane.showMessageDialog(this, "Sign up failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
-        
+        try {
+            LocalDate registrationDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (userAccountManager.signUp(email, username, password, registrationDate)) {
+                JOptionPane.showMessageDialog(this, "Sign Up Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                new ProfileManagementWindow(email).setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email already in use.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use yyyy-MM-dd.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dateOfBirthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfBirthFieldActionPerformed

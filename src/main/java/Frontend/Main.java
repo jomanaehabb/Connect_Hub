@@ -1,14 +1,14 @@
 
 package Frontend;
 
-import Frontend.Login;
+import Frontend.LoginWindow;
 
 public class Main {
 
 
     public static void main(String[] args) {
 
-        Login LoginFrame = new Login();
+        LoginWindow LoginFrame = new LoginWindow();
         LoginFrame.setVisible(true);
         LoginFrame.pack();
         LoginFrame.setLocationRelativeTo(null); 

@@ -4,12 +4,12 @@ import Backend.Content;
 import Backend.InternalContent;
 import javax.swing.JOptionPane;
 
-public class AddContent extends javax.swing.JFrame {
+public class AddContentWindow extends javax.swing.JFrame {
 
     private Content post;
     private String textInput;
     
-    public AddContent(Content post) {
+    public AddContentWindow(Content post) {
         initComponents();
         setTitle("Add Content");
         this.post = post;

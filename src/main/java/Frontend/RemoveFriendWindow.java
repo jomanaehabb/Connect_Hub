@@ -1,25 +1,25 @@
 package Frontend;
 
 import Backend.ConnectHub;
+
+  // Use the MainGUI.java instead
 import java.awt.event.*;
 import javax.swing.*;
 
-  // Use the MainGUI.java instead
-  // Alternative to the GUI but this time instead of tabs we use separate panels for each page(we may use it)
-public class AddFriend extends JFrame {
+public class RemoveFriendWindow extends JFrame {
     private JTextField user1Field, user2Field;
-    private JButton addFriendButton;
+    private JButton removeFriendButton;
 
-    public AddFriend() {
-        setTitle("Add Friend");
+    public RemoveFriendWindow() {
+        setTitle("Remove Friend");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         user1Field = new JTextField(15);
         user2Field = new JTextField(15);
-        addFriendButton = new JButton("Send Friend Request");
+        removeFriendButton = new JButton("Remove Friend");
 
-        addFriendButton.addActionListener((ActionEvent e) -> {
+        removeFriendButton.addActionListener((ActionEvent e) -> {
             String user1Id = user1Field.getText();
             String user2Id = user2Field.getText();
             if(user1Id.isEmpty() || user2Id.isEmpty())
@@ -36,8 +36,8 @@ public class AddFriend extends JFrame {
             }
             else {
                 ConnectHub fm = new ConnectHub();
-                fm.sendFriendRequest(user1Id, user2Id);
-                JOptionPane.showMessageDialog(null, "Friend has been successfully added!");
+                fm.removeFriend(user1Id, user2Id);
+                JOptionPane.showMessageDialog(null, "Friend has been successfully removed.");
                 this.setVisible(false);
             } 
         });
@@ -47,7 +47,7 @@ public class AddFriend extends JFrame {
         panel.add(user1Field);
         panel.add(new JLabel("Friend's ID:"));
         panel.add(user2Field);
-        panel.add(addFriendButton);
+        panel.add(removeFriendButton);
 
         add(panel);
     }

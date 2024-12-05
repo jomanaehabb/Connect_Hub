@@ -3,9 +3,9 @@ package Frontend;
 import Backend.Content;
 import Backend.Post;
 
-public class NewsFeed extends javax.swing.JFrame {
+public class NewsFeedWindow extends javax.swing.JFrame {
 
-    public NewsFeed() {
+    public NewsFeedWindow() {
         initComponents();
         setTitle("NewsFeed");
         homeLabel.setText("Welcome, ");
@@ -108,13 +108,13 @@ public class NewsFeed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        Settings settings = new Settings();
+        SettingsWindow settings = new SettingsWindow();
         settings.setVisible(true);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        Content post = new Post();
-        AddContent addContent = new AddContent(post);
+        Content post = new Post(content, imagePath);
+        AddContentWindow addContent = new AddContentWindow(post);
         addContent.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 

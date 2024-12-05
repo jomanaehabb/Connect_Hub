@@ -4,48 +4,67 @@
  */
 package Backend;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.ArrayList;
 
 public class UserDatabase {
-    private static final String DATABASE_FILE = "users.json";
-    private Map<String, User> users = new HashMap<>();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private ArrayList<User> users;
+    private final String databaseFile = "users.db";
 
     public UserDatabase() {
+        users = new ArrayList<>();
         loadDatabase();
     }
 
-    public void saveUser(User user) {
-        users.put(user.getEmail(), user);
-        saveDatabase();
-    }
-
-    public User getUser(String email) {
-        return users.get(email);
-    }
-
     private void loadDatabase() {
-        File file = new File(DATABASE_FILE);
-        if (file.exists()) {
-            try {
-                users = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {});
-            } catch (IOException e) {
-                System.err.println("Failed to load user database: " + e.getMessage());
-            }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(databaseFile))) {
+            users = (ArrayList<User>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            users = new ArrayList<>();
         }
     }
 
     private void saveDatabase() {
-        try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(DATABASE_FILE), users);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile))) {
+            oos.writeObject(users);
         } catch (IOException e) {
-            System.err.println("Failed to save user database: " + e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+        saveDatabase();
+    }
+
+    public User getUserByEmail(String email) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) return user;
+        }
+        return null;
+    }
+
+    public boolean authenticateUser(String email, String hashedPassword) {
+        User user = getUserByEmail(email);
+        return user != null && user.getHashedPassword().equals(hashedPassword);
+    }
+
+    public void updateUser(User user) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserId().equals(user.getUserId())) {
+                users.set(i, user);
+                break;
+            }
+        }
+        saveDatabase();
+    }
+
+    public void deleteUser(String userId) {
+        users.removeIf(user -> user.getUserId().equals(userId));
+        saveDatabase();
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return users;
     }
 }
