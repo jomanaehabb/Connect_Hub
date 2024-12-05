@@ -6,6 +6,5 @@ public class Post extends Content{
 
     public Post(String authorID, InternalContent content, LocalDateTime timeStamp) {
         super(authorID, content, timeStamp);
-
     }
 }
