@@ -1,124 +1,111 @@
+
 package Backend;
 
 import java.awt.Image;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContentDatabase {
-    private ArrayList<Post> posts;
-    private final ArrayList<Story> stories;
+    private List<Post> posts;
+    private final List<Story> stories;
 
-    public ContentDatabase(){
+    public ContentDatabase() {
         this.posts = new ArrayList<>();
         this.stories = new ArrayList<>();
     }
 
-    public Post createPost(String userID, String text, Image image){
-        InternalContent content = new InternalContent(text, image);
-        Post post = new Post(userID, content, LocalDateTime.now());
+    public Post createPost(String userID, String text, Image image) {
+        Post post = new Post(text, LocalDateTime.now(), null, userID);
         posts.add(post);
         return post;
     }
 
-    public Story createStory(String userID, String text, Image image){
-        InternalContent content = new InternalContent(text, image);
-        Story story = new Story(userID, content, LocalDateTime.now());
+    public Story createStory(String userID, String text, Image image) {
+        Story story = new Story(text, LocalDateTime.now(), null, userID);
         stories.add(story);
         return story;
     }
-    
-    public void deletePost(String postID){
+
+    public void deletePost(String postID) {
         posts.remove(findPost(postID));
     }
-    
-    public void deleteStory(String storyID){
+
+    public void deleteStory(String storyID) {
         stories.remove(findStory(storyID));
     }
 
-    public Content findPost(String postID){
-        for(int i=0;i<posts.size();i++){
-            if(posts.get(i).getContentID().equals(postID)){
-                return posts.get(i);
+    public Content findPost(String postID) {
+        for (Post post : posts) {
+            if (post.getContentID().equals(postID)) {
+                return post;
             }
         }
-        return null;
+        return null; // Consider handling not-found cases explicitly
     }
-    
-    public Content findStory(String storyID){
-        for(int i=0;i<stories.size();i++){
-            if(stories.get(i).getContentID().equals(storyID)){
-                return stories.get(i);
+
+    public Content findStory(String storyID) {
+        for (Story story : stories) {
+            if (story.getContentID().equals(storyID)) {
+                return story;
             }
         }
         return null;
     }
 
-    public ArrayList<Post> allPosts(){
+    public List<Post> allPosts() {
         return posts;
     }
-    
-    public ArrayList<Story> allStories(){
+
+    public List<Story> allStories() {
         return stories;
     }
-    
-    public ArrayList<Post> userFriendPosts(String userID){
+
+    public List<Post> userFriendPosts(String userID) {
         ArrayList<Post> friendsPostList = new ArrayList<>();
         ConnectHub cH = new ConnectHub();
-        List<String> friendsList = cH.getFriendsList(userID);
-        for(int i=0;i<posts.size();i++){
-            for(int j=0;j<friendsList.size();j++){
-                if(posts.get(i).getAuthorID().equals(friendsList.get(j))){
-                    friendsPostList.add(posts.get(i));
-                }
+        Set<String> friendsSet = new HashSet<>(cH.getFriendsList(userID));
+
+        for (Post post : posts) {
+            if (friendsSet.contains(post.getAuthorID())) {
+                friendsPostList.add(post);
             }
         }
-        if(!friendsPostList.isEmpty()){
-            return friendsPostList;
-        }
-        return null;
-    }
-    
-     public ArrayList<Story> userFriendStories(String userID){
-        ArrayList<Story> friendsStoryList = new ArrayList<>();
-        ConnectHub cH = new ConnectHub();
-        List<String> friendsList = cH.getFriendsList(userID);
-        for(int i=0;i<stories.size();i++){
-            for(int j=0;j<friendsList.size();j++){
-                if(stories.get(i).getAuthorID().equals(friendsList.get(j))){
-                    friendsStoryList.add(stories.get(i));
-                }
-            }
-        }
-        if(!friendsStoryList.isEmpty()){
-            return friendsStoryList;
-        }
-        return null;
+        return friendsPostList;
     }
 
-    public ArrayList<Content> userPosts(String userID){
-        ArrayList<Content> userContent = new ArrayList<>();
-        for(int i=0;i<posts.size();i++){
-            if(posts.get(i).getAuthorID().equals(userID)){
-                userContent.add(posts.get(i));
+    public List<Story> userFriendStories(String userID) {
+        ArrayList<Story> friendsStoryList = new ArrayList<>();
+        ConnectHub cH = new ConnectHub();
+        Set<String> friendsSet = new HashSet<>(cH.getFriendsList(userID));
+
+        for (Story story : stories) {
+            if (friendsSet.contains(story.getAuthorID())) {
+                friendsStoryList.add(story);
             }
         }
-        if(!userContent.isEmpty()){
-            return userContent;
-        }
-        return null;
+        return friendsStoryList;
     }
-    
-    public ArrayList<Content> userStories(String userID){
+
+    public List<Content> userPosts(String userID) {
         ArrayList<Content> userContent = new ArrayList<>();
-        for(int i=0;i<stories.size();i++){
-            if(stories.get(i).getAuthorID().equals(userID)){
-                userContent.add(stories.get(i));
+        for (Post post : posts) {
+            if (post.getAuthorID().equals(userID)) {
+                userContent.add(post);
             }
         }
-        if(!userContent.isEmpty()){
-            return userContent;
+        return userContent;
+    }
+
+    public List<Content> userStories(String userID) {
+        ArrayList<Content> userContent = new ArrayList<>();
+        for (Story story : stories) {
+            if (story.getAuthorID().equals(userID)) {
+                userContent.add(story);
+            }
         }
-        return null;
+        return userContent;
     }
 }
