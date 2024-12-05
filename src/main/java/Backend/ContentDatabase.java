@@ -122,4 +122,10 @@ public class ContentDatabase {
         }
         return null;
     }
+    
+    public void saveToFiles(){
+        ContentFileSaver fS = new ContentFileSaver();
+        fS.savePostsToFile(posts);
+        fS.saveStoriesToFile(stories);
+    }
 }
