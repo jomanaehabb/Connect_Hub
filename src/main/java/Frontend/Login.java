@@ -1,16 +1,15 @@
 package Frontend;
 
 
-import Backend.UserManager;
-import Frontend.SignUp;
+import Backend.UserAccountManager;
 import javax.swing.JOptionPane;
-
-
 
 public class Login extends javax.swing.JFrame {
 
+     private UserAccountManager userAccountManager; 
   
     public Login() {
+        userAccountManager = new UserAccountManager();
         initComponents();
     }
 
@@ -218,23 +217,32 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        // Get input values
     String email = emailField.getText();
     String password = new String(PasswordField.getPassword());
-    UserManager userManager = new UserManager();
-
-    // Validate login credentials
-    if (userManager.validateLogin(email, password)) {
-        JOptionPane.showMessageDialog(Login.this, "Login successful!");
-        // Update status to online
-        userManager.updateStatus(email, "online");
-
-        // Proceed to next screen (e.g., main dashboard)
-        // For example: MainDashboard mainDashboard = new MainDashboard();
-        // mainDashboard.setVisible(true);
-        // this.dispose();
-    } else {
-        JOptionPane.showMessageDialog(Login.this, "Invalid credentials.");
+    
+    // Validate inputs
+    if (email.isEmpty() || password.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please fill in both email and password.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
     }
+    
+    // Create an instance of UserAccountManager
+    UserAccountManager userAccountManager = new UserAccountManager();
+    
+    // Use the login method from the instance
+    boolean isLoggedIn = userAccountManager.login(email, password);
+    
+    if (isLoggedIn) {
+        JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        // Redirect to another frame or functionality
+        // Home homeFrame = new Home(); // Assuming a Home frame exists
+        // homeFrame.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid email or password. Please try again.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

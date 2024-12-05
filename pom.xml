@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.mycompany</groupId>
     <artifactId>Connect-Hub-Proj</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>bi.deep</groupId>
@@ -12,28 +16,71 @@
             <version>0.1.1</version>
             <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>com.atlassian.dummy</groupId>
             <artifactId>release-atlassian-plugin-module</artifactId>
             <version>1.1</version>
             <type>atlassian-plugin</type>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.11.0</version>
             <type>jar</type>
         </dependency>
+
         <dependency>
             <groupId>io.github.palexdev</groupId>
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
             <type>jar</type>
         </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- Stable version of Atlassian plugin dependency -->
+        <dependency>
+            <groupId>com.atlassian.pom</groupId>
+            <artifactId>central-pom</artifactId>
+            <version>3.0.24</version> <!-- Change to stable version -->
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>atlassian-repo</id>
+            <url>https://maven.atlassian.com/repository/public/</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>com.mycompany.connect.hub.proj.ConnectHubProj</exec.mainClass>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -4,22 +4,18 @@
  */
 package Backend;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author DELL-G3
- */
-
-class UserDatabase {
+public class UserDatabase {
     private static final String DATABASE_FILE = "users.json";
     private Map<String, User> users = new HashMap<>();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public UserDatabase() {
         loadDatabase();
@@ -35,21 +31,21 @@ class UserDatabase {
     }
 
     private void loadDatabase() {
-        try {
-            if (!Files.exists(Paths.get(DATABASE_FILE))) return;
-            String json = Files.readString(Paths.get(DATABASE_FILE));
-            users = new Gson().fromJson(json, new TypeToken<Map<String, User>>() {}.getType());
-        } catch (IOException e) {
-            System.out.println("Failed to load user database.");
+        File file = new File(DATABASE_FILE);
+        if (file.exists()) {
+            try {
+                users = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {});
+            } catch (IOException e) {
+                System.err.println("Failed to load user database: " + e.getMessage());
+            }
         }
     }
 
     private void saveDatabase() {
         try {
-            String json = new Gson().toJson(users);
-            Files.writeString(Paths.get(DATABASE_FILE), json);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(DATABASE_FILE), users);
         } catch (IOException e) {
-            System.out.println("Failed to save user database.");
+            System.err.println("Failed to save user database: " + e.getMessage());
         }
     }
 }

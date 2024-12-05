@@ -4,25 +4,20 @@
  */
 package Backend;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author DELL-G3
- */
 public class ProfileDatabase {
     private static final String PROFILE_DB = "profiles.json";
     private Map<String, Profile> profiles = new HashMap<>();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public ProfileDatabase() throws IOException {
+    public ProfileDatabase() {
         loadDatabase();
     }
 
@@ -30,19 +25,27 @@ public class ProfileDatabase {
         return profiles.getOrDefault(userId, new Profile("", "", ""));
     }
 
-    public void saveProfile(String userId, Profile profile) throws IOException {
+    public void saveProfile(String userId, Profile profile) {
         profiles.put(userId, profile);
         saveDatabase();
     }
 
-    private void loadDatabase() throws IOException {
-        if (!Files.exists(Paths.get(PROFILE_DB))) return;
-        String json = Files.readString(Paths.get(PROFILE_DB));
-        profiles = new Gson().fromJson(json, new TypeToken<Map<String, Profile>>() {}.getType());
+    private void loadDatabase() {
+        File file = new File(PROFILE_DB);
+        if (file.exists()) {
+            try {
+                profiles = objectMapper.readValue(file, new TypeReference<Map<String, Profile>>() {});
+            } catch (IOException e) {
+                System.err.println("Failed to load profile database: " + e.getMessage());
+            }
+        }
     }
 
-    private void saveDatabase() throws IOException {
-        String json = new Gson().toJson(profiles);
-        Files.writeString(Paths.get(PROFILE_DB), json);
+    private void saveDatabase() {
+        try {
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(PROFILE_DB), profiles);
+        } catch (IOException e) {
+            System.err.println("Failed to save profile database: " + e.getMessage());
+        }
     }
 }

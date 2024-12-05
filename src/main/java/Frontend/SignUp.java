@@ -9,7 +9,10 @@ import javax.swing.JOptionPane;
 public class SignUp extends javax.swing.JFrame {
 
       private UserAccountManager userAccountManager; 
-  
+  private javax.swing.JTextField usernameField;
+    
+    
+    
     public SignUp() {
         userAccountManager = new UserAccountManager();
         initComponents();
@@ -257,23 +260,28 @@ public class SignUp extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-        // Get the input values
-    String username = usernameField.getText();
+// Get the input values
+    String username = usernameField.getText();  // Ensure this is inside the correct method
     String email = emailField.getText();
     String password = new String(passwordField.getPassword());
     String dateOfBirth = new String(dateOfBirthField.getPassword());
 
+    // Validate inputs
     if (username.isEmpty() || email.isEmpty() || password.isEmpty() || dateOfBirth.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    boolean success = UserAccountManager.signup(username, email, password, dateOfBirth);
+    // Create an instance of UserAccountManager
+    UserAccountManager userAccountManager = new UserAccountManager();
+    
+    // Use the signup method from the instance
+    boolean success = userAccountManager.signup(username, email, password, dateOfBirth);
 
     if (success) {
         JOptionPane.showMessageDialog(this, "Sign up successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        
+
+        // Open the login screen
         Login loginFrame = new Login();
         loginFrame.setVisible(true);
         loginFrame.pack();
@@ -282,6 +290,7 @@ public class SignUp extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Sign up failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
     }
+    
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
