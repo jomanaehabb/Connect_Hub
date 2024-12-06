@@ -27,7 +27,7 @@ public class ProfileManager extends Manager {
         }
     }
 
-    public void createPost(String email, String content, String imagePath) {
+    /*public void createPost(String email, String content, String imagePath) {
         User user = users.get(email);
        if (user != null) {
             Post newPost = new Post(content, imagePath);
@@ -35,5 +35,6 @@ public class ProfileManager extends Manager {
             saveUsers();
         }
     }
+*/
 }
 

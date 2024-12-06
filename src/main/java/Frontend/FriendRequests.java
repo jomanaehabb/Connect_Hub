@@ -12,13 +12,13 @@ package Frontend;
  // Use the MainGUI.java instead
 
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class FriendRequests extends JPanel {
-    public FriendRequests(String currentUsername, ConnectHub connectHub) {
+    public FriendRequests(String currentUsername, FriendsManagement connectHub) {
         // Main panel for friend requests
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));

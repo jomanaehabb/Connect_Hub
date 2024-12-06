@@ -1,6 +1,9 @@
 package Backend;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*public class ConnectHub {
     public List<String> getFriendsList(String usedID){
@@ -9,7 +12,7 @@ import java.util.List;
     }
 }
 */
-public class ConnectHub {
+public class FriendsManagement {
     //Function to send request
     public void sendFriendRequest(String user1Id, String user2Id) {
 
@@ -198,10 +201,6 @@ public class ConnectHub {
 //        }
 //
 //        return suggestions;
-    }
-
-    public static void main(String[] args) {
-        
     }
     
     public List<String> getPendingFriendRequests(String userId) {

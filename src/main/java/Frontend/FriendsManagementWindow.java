@@ -4,7 +4,7 @@
  */
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import Frontend.FriendRequestWindow;
 import Frontend.FriendsListWindow;
 import Frontend.SuggestedFriendsWindow;
@@ -14,7 +14,7 @@ import Frontend.SuggestedFriendsWindow;
  * @author Lenovo
  */
 public class FriendsManagementWindow extends javax.swing.JPanel {
-    private ConnectHub connectHub; // Backend connection
+    private FriendsManagement connectHub; // Backend connection
     private String currentUsername; // Current logged-in username
 
     /**
@@ -23,7 +23,7 @@ public class FriendsManagementWindow extends javax.swing.JPanel {
      */
     public FriendsManagementWindow(String username) {
         this.currentUsername = username;
-        this.connectHub = new ConnectHub(); // Initialize backend connection
+        this.connectHub = new FriendsManagement(); // Initialize backend connection
 
         initComponents();   // Initialize GUI components (auto-generated)
         initializeTabs(username);   // Load dynamic content into the tabs

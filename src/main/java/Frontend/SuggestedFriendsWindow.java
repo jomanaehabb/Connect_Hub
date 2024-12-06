@@ -4,9 +4,9 @@
  */
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import java.awt.BorderLayout;
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -20,9 +20,9 @@ public class SuggestedFriendsWindow extends javax.swing.JPanel {
     /**
      * Creates new form SuggestedFriendsWindow
      */
-    private ConnectHub connectHub;
+    private FriendsManagement connectHub;
 
-    public SuggestedFriendsWindow(String currentUsername, ConnectHub connectHub) {
+    public SuggestedFriendsWindow(String currentUsername, FriendsManagement connectHub) {
         this.connectHub = connectHub;
         initComponents(currentUsername);
     }

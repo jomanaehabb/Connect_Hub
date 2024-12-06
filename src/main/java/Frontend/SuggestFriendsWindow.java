@@ -1,6 +1,6 @@
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 
   // Use the MainGUI.java instead
 import java.awt.event.*;
@@ -34,7 +34,7 @@ public class SuggestFriendsWindow extends JFrame {
                 userIdField.setText("");
             }
             else {
-                ConnectHub fm = new ConnectHub();
+                FriendsManagement fm = new FriendsManagement();
                 List<String> suggestions = fm.suggestFriends(userId);
                 suggestionsArea.setText(String.join("\n", suggestions));
             } 

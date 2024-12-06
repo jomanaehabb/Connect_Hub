@@ -1,6 +1,6 @@
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 
   // Use the MainGUI.java instead
 import java.awt.event.*;
@@ -35,7 +35,7 @@ public class RemoveFriendWindow extends JFrame {
                 user2Field.setText("");
             }
             else {
-                ConnectHub fm = new ConnectHub();
+                FriendsManagement fm = new FriendsManagement();
                 fm.removeFriend(user1Id, user2Id);
                 JOptionPane.showMessageDialog(null, "Friend has been successfully removed.");
                 this.setVisible(false);

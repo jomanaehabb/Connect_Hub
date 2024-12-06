@@ -4,7 +4,7 @@
  */
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
@@ -17,12 +17,12 @@ import javax.swing.JScrollPane;
  * @author Lenovo
  */
 public class FriendsListWindow extends JPanel {
-    private ConnectHub connectHub; 
+    private FriendsManagement connectHub; 
     private String currentUsername; 
     private JPanel friendsPanel; // Panel for dynamically adding friend rows
 
 
-    public FriendsListWindow(String username, ConnectHub connectHub) {
+    public FriendsListWindow(String username, FriendsManagement connectHub) {
         this.connectHub = connectHub;
         this.currentUsername = username; // Store the passed username
 
@@ -44,7 +44,7 @@ public class FriendsListWindow extends JPanel {
      * @param username The username of the logged-in user
      * @param connectHub The backend connection for retrieving the friends list
      */
-    public void init(String username, ConnectHub connectHub) {
+    public void init(String username, FriendsManagement connectHub) {
         // Update the current username and backend connection
         this.currentUsername = username;
         this.connectHub = connectHub;

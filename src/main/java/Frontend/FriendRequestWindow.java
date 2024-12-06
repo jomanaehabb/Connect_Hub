@@ -4,7 +4,7 @@
  */
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -22,9 +22,9 @@ import javax.swing.JScrollPane;
  */
 public class FriendRequestWindow extends javax.swing.JPanel {
 
-   private ConnectHub connectHub;
+   private FriendsManagement connectHub;
 
-    public FriendRequestWindow(String currentUsername, ConnectHub connectHub) {
+    public FriendRequestWindow(String currentUsername, FriendsManagement connectHub) {
         this.connectHub = connectHub;
         initComponents(currentUsername);
     }

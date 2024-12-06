@@ -65,7 +65,7 @@ public class ContentDatabase {
     
     public ArrayList<Post> userFriendPosts(String userID){
         ArrayList<Post> friendsPostList = new ArrayList<>();
-        ConnectHub cH = new ConnectHub();
+        FriendsManagement cH = new FriendsManagement();
         List<String> friendsList = cH.getFriendsList(userID);
         for(int i=0;i<posts.size();i++){
             for(int j=0;j<friendsList.size();j++){
@@ -82,7 +82,7 @@ public class ContentDatabase {
     
      public ArrayList<Story> userFriendStories(String userID){
         ArrayList<Story> friendsStoryList = new ArrayList<>();
-        ConnectHub cH = new ConnectHub();
+        FriendsManagement cH = new FriendsManagement();
         List<String> friendsList = cH.getFriendsList(userID);
         for(int i=0;i<stories.size();i++){
             for(int j=0;j<friendsList.size();j++){

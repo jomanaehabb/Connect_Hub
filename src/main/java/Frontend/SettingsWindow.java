@@ -134,13 +134,13 @@ public class SettingsWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_blockFriendButtonActionPerformed
 
     private void friendRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendRequestsButtonActionPerformed
-        FriendRequestsWindow friendRequests = new FriendRequestsWindow();
-        friendRequests.setVisible(true);
+        //FriendRequestsWindow friendRequests = new FriendRequestsWindow();
+        //friendRequests.setVisible(true);
     }//GEN-LAST:event_friendRequestsButtonActionPerformed
 
     private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsButtonActionPerformed
-        FriendsListWindow friends = new FriendsListWindow();
-        friends.setVisible(true);
+        //FriendsListWindow friends = new FriendsListWindow();
+        //friends.setVisible(true);
     }//GEN-LAST:event_friendsButtonActionPerformed
 
     private void removeFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFriendButtonActionPerformed
