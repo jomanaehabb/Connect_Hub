@@ -35,14 +35,22 @@ public class NewsFeedWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        refreshButton.setBackground(new java.awt.Color(102, 153, 255));
+        refreshButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        refreshButton.setForeground(new java.awt.Color(255, 255, 255));
         refreshButton.setText("Refresh");
 
+        settingsButton.setBackground(new java.awt.Color(102, 153, 255));
+        settingsButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        settingsButton.setForeground(new java.awt.Color(255, 255, 255));
         settingsButton.setText("Settings");
         settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingsButtonActionPerformed(evt);
             }
         });
+
+        contentTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout postsPanelLayout = new javax.swing.GroupLayout(postsPanel);
         postsPanel.setLayout(postsPanelLayout);
@@ -79,6 +87,9 @@ public class NewsFeedWindow extends javax.swing.JFrame {
 
         contentTabbedPane.addTab("Stories", storiesPanel);
 
+        addButton.setBackground(new java.awt.Color(102, 153, 255));
+        addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Add Content");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

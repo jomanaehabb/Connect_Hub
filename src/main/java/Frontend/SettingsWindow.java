@@ -38,6 +38,9 @@ public class SettingsWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        profileButton.setBackground(new java.awt.Color(102, 153, 255));
+        profileButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        profileButton.setForeground(new java.awt.Color(255, 255, 255));
         profileButton.setText("Profile");
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,6 +48,9 @@ public class SettingsWindow extends javax.swing.JFrame {
             }
         });
 
+        friendsButton.setBackground(new java.awt.Color(102, 153, 255));
+        friendsButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        friendsButton.setForeground(new java.awt.Color(255, 255, 255));
         friendsButton.setText("Friends");
         friendsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +58,9 @@ public class SettingsWindow extends javax.swing.JFrame {
             }
         });
 
+        logoutButton.setBackground(new java.awt.Color(102, 153, 255));
+        logoutButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        logoutButton.setForeground(new java.awt.Color(255, 255, 255));
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +68,9 @@ public class SettingsWindow extends javax.swing.JFrame {
             }
         });
 
+        addFriendButton.setBackground(new java.awt.Color(102, 153, 255));
+        addFriendButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addFriendButton.setForeground(new java.awt.Color(255, 255, 255));
         addFriendButton.setText("Add Friend");
         addFriendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,7 +85,7 @@ public class SettingsWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addFriendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(addFriendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addComponent(friendsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(profileButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -84,13 +96,13 @@ public class SettingsWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(profileButton)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(friendsButton)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(addFriendButton)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(logoutButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
