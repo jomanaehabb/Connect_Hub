@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.Content;
+import Backend.ContentDatabase;
 import Backend.InternalContent;
 import Backend.Post;
 import Backend.ProfileManager;
@@ -13,10 +14,12 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     private User currentUser;
     private UserAccountManager userManager;
     private ProfileManager profileManager;
+    private ContentDatabase contentManager;
 
     public NewsFeedWindow(String email) {
         userManager = new UserAccountManager();
         profileManager = new ProfileManager();
+        contentManager = new ContentDatabase();
         this.currentUser = userManager.getUserByEmail(email);
         initComponents();
         setTitle("NewsFeed");
@@ -141,7 +144,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         InternalContent internalContent = new InternalContent(null, null); // Placeholder for actual content
         LocalDateTime timeStamp = LocalDateTime.now();
         Post post = new Post(currentUser.getUserId(), internalContent, timeStamp);
-        AddContentWindow addContentWindow = new AddContentWindow(currentUser, null);
+        AddContentWindow addContentWindow = new AddContentWindow(currentUser, contentManager);
         addContentWindow.setVisible(true);
         addContentWindow.pack();
         addContentWindow.setLocationRelativeTo(null);

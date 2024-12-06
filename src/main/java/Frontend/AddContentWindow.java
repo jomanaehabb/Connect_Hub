@@ -14,7 +14,7 @@ public class AddContentWindow extends javax.swing.JFrame {
     private Content post;
     private String textInput;
     private ContentDatabase contentDatabase;
-    private UserAccountManager userManager;
+    private UserAccountManager userManager = new UserAccountManager();
     private ProfileManager profileManager;
     
     public AddContentWindow(User currentUser, ContentDatabase contentDatabase) {
