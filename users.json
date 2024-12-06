@@ -24,5 +24,18 @@
     "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\photo_2024-10-10_20-49-23.jpg",
     "posts" : [ ],
     "friends" : [ ]
+  },
+  "malak@gmail.com" : {
+    "userId" : "3a62bd30-7222-4c3e-bb4c-42d8d5145848",
+    "email" : "malak@gmail.com",
+    "username" : "malak",
+    "hashedPassword" : "75014006529893194012d453fd36bbcb45a0e9e4dbb3a6cfb194fdc8f9e52d0a",
+    "dateOfBirth" : "2005-01-12",
+    "status" : "Online",
+    "bio" : "meow meow meow",
+    "profilePhotoPath" : "F:\\malak\\Photos\\Cursed pics\\IMG_20200817_210547_671.jpg",
+    "coverPhotoPath" : "F:\\malak\\Photos\\Cursed pics\\IMG_20200516_232201.jpg",
+    "posts" : [ ],
+    "friends" : [ ]
   }
 }
