@@ -27,14 +27,14 @@ public class AddContentWindow extends javax.swing.JFrame {
 private void addPost(String textInput) {
         InternalContent content = new InternalContent(textInput, null); // Assuming no image for now
         String userID = currentUser.getUserId(); // You should replace this with the actual user ID
-        contentDatabase.createPost(userID, content.getText(), content.getImage()); // Add Post to the database
+        contentDatabase.createPost(userID, content.getText(), content.getImagePath()); // Add Post to the database
         System.out.println("Post added: " + content.getText());
     }
 
     private void addStory(String textInput) {
         InternalContent content = new InternalContent(textInput, null); // Assuming no image for now
         String userID = "currentUserID"; // You should replace this with the actual user ID
-        contentDatabase.createStory(userID, content.getText(), content.getImage()); // Add Story to the database
+        contentDatabase.createStory(userID, content.getText(), content.getImagePath()); // Add Story to the database
         System.out.println("Story added: " + content.getText());
     }
 
