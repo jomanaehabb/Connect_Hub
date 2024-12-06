@@ -11,8 +11,13 @@ public class InternalContent {
     public InternalContent(String text, String imagePath) {
         this.text = text;
         this.imagePath = imagePath;
-        ImageIcon icon = new ImageIcon(imagePath);
-        this.image = icon.getImage();
+        if(imagePath!=null || !"null".equals(imagePath)){
+            ImageIcon icon = new ImageIcon(imagePath);
+            this.image = icon.getImage();
+        }
+        else{
+            imagePath = null;
+        }
     }
 
     public String getText() {

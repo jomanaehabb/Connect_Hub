@@ -41,7 +41,9 @@ public class ContentFileSaver {
 
             for (int i = 0; i < posts.size(); i++) {
                 Post post = posts.get(i);
-
+                if(post.getContent().getImagePath() == null){
+                    post.getContent().setImagePath("null");
+                }
                 jsonBuilder.append("    {\n")
                         .append("      \"text\": \"").append(post.getContent().getText()).append("\",\n")
                         .append("      \"imagePath\": \"").append(post.getContent().getImagePath()).append("\",\n")
