@@ -1,6 +1,7 @@
 # Connect Hub
 
 **Connect Hub** is a social media-like platform built with Java and Swing, designed to provide an engaging space for users to manage their profiles, create content (posts and stories), interact with friends, and stay updated through a newsfeed. The backend leverages a file-based database with JSON to store user data, posts, profiles, and friendships.
+![Screenshot 2024-12-06 202209](https://github.com/user-attachments/assets/fed25d93-a008-4472-a16f-4c42792106c2)
 
 ---
 
