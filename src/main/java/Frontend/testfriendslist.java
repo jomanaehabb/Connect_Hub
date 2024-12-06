@@ -4,7 +4,7 @@
  */
 package Frontend;
 
-import Backend.ConnectHub;
+import Backend.FriendsManagement;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -20,7 +20,7 @@ public class testfriendslist {
         frame.setSize(600, 400);
 
         // Replace with actual ConnectHub implementation
-        ConnectHub connectHub = new ConnectHub();
+        FriendsManagement connectHub = new FriendsManagement();
 
         String username="alice789";
         // Create FriendsList panel
