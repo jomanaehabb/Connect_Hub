@@ -51,7 +51,7 @@ public class NewsFeed extends javax.swing.JFrame {
         }
 
         homeLabel.setText("Welcome, " + currentUser.getUsername());
-        this.posts = content.userFriendPosts(userId);  // Retrieve posts for this user
+        this.posts = content.allPosts();  // Retrieve posts for this user
         this.stories = content.userFriendStories(userId);  // Retrieve stories for this user
         profileManager = new ProfileManager();
         this.showPost();
@@ -72,6 +72,10 @@ public class NewsFeed extends javax.swing.JFrame {
             this.postCounter++;
         } catch (NullPointerException e) {
 
+        }
+        catch (IndexOutOfBoundsException eX)
+        {
+            
         }
     }
 
