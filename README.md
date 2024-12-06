@@ -1,7 +1,7 @@
 # Connect Hub
 
 **Connect Hub** is a social media-like platform built with Java and Swing, designed to provide an engaging space for users to manage their profiles, create content (posts and stories), interact with friends, and stay updated through a newsfeed. The backend leverages a file-based database with JSON to store user data, posts, profiles, and friendships.
-![image](https://github.com/user-attachments/assets/f4383b2a-2198-4325-9719-46cff6b37139)
+
 ---
 
 ## Table of Contents
@@ -13,6 +13,7 @@
   - [Database Structure](#database-structure)
 - [Design Patterns](#design-patterns)
 - [SOLID Principles](#solid-principles)
+- [Workflow](#workflow)
 - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -146,6 +147,40 @@ This project adheres to the **SOLID principles** to ensure that the codebase is 
 
 5. **Dependency Inversion Principle (DIP)**:
    - High-level modules (such as user and profile management) depend on abstractions (interfaces) rather than concrete classes. This allows for easier testing and modification.
+
+---
+
+## Workflow
+
+The development of Connect Hub was organized into four main parts. Each member of the team focused on one part and was responsible for both the **frontend** and **backend** implementation for that section. After completing individual tasks, the team merged their work, fixed conflicts, and integrated the project to form the complete system.
+
+### The four parts of the project:
+
+1. **User and Profile Management (Account Management)**:
+   - Responsible for user registration, login, and profile management.
+   - Backend: Handled user authentication and session management.
+   - Frontend: Built the login and registration forms, and profile page for user interaction.
+
+2. **Content Creation (Posts and Stories)**:
+   - Responsible for creating, displaying, and interacting with posts and stories.
+   - Backend: Handled storing, retrieving, and updating posts and stories in the database.
+   - Frontend: Designed the UI for creating and viewing posts and stories.
+
+3. **Friend Management**:
+   - Responsible for handling friend requests, managing friendships, and the friends list.
+   - Backend: Implemented logic for sending, accepting, and rejecting friend requests.
+   - Frontend: Created the UI to send/accept requests and display the list of friends.
+
+4. **Newsfeed Page**:
+   - Responsible for displaying posts and stories from friends in a dynamic, real-time feed.
+   - Backend: Handled the fetching and displaying of content in the newsfeed.
+   - Frontend: Designed the UI to display posts, stories, and allow interaction (like, comment, share).
+
+### Integration and Merging:
+- After each part was completed, all work was merged into a central repository.
+- Conflicts were resolved, ensuring that features did not conflict with each other.
+- The project was thoroughly tested after integration to ensure smooth interaction between components.
+- After fixing any remaining bugs, the project was finalized and connected to work as a cohesive system.
 
 ---
 
