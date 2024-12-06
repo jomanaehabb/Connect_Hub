@@ -68,7 +68,7 @@ public class ContentFileSaver {
     
     public void savePostsToUserFile(String email, ArrayList<Post> posts) {
         try {
-            // Read the existing users.json file
+            // read the existing users.json file
             FileReader fileReader = new FileReader("users.json");
             StringBuilder jsonBuilder = new StringBuilder();
             int i;
@@ -77,20 +77,19 @@ public class ContentFileSaver {
             }
             fileReader.close();
 
-            // Parse JSON
             JSONObject usersJson = new JSONObject(jsonBuilder.toString());
 
-            // Find the user by email
+            // find the user by email
             if (!usersJson.has(email)) {
                 System.out.println("Error: User with email " + email + " not found.");
                 return;
             }
 
-            // Get the user's posts array
+            // get the user's posts array
             JSONObject userObject = usersJson.getJSONObject(email);
             JSONArray postsArray = userObject.getJSONArray("posts");
 
-            // Add new posts to the array
+            // add new posts to the array
             for (Post post : posts) {
                 JSONObject postJson = new JSONObject();
                 postJson.put("text", post.getContent().getText());
@@ -100,13 +99,13 @@ public class ContentFileSaver {
                 postsArray.put(postJson);
             }
 
-            // Update the user's posts in the JSON
+            // update the user's posts in the JSON
             userObject.put("posts", postsArray);
             usersJson.put(email, userObject);
 
-            // Write back the updated JSON to the file
+            // write the updated JSON to the file
             try (FileWriter fileWriter = new FileWriter("users.json")) {
-                fileWriter.write(usersJson.toString(4)); // 4 = Indentation for readability
+                fileWriter.write(usersJson.toString(4)); // indentation for readability
                 fileWriter.flush();
             }
 

@@ -10,7 +10,7 @@ public class ContentDatabase {
     private ArrayList<Story> stories;
 
     public ContentDatabase(){
-        ContentFileReader fR = new ContentFileReader();
+        ContentFileReader fR = new ContentFileReader(); // automatically reads file upon creation
         this.posts = fR.readPostsFile(this);
         this.stories = fR.readStoriesFile(this);
     }
@@ -46,7 +46,7 @@ public class ContentDatabase {
     }
 
     public Post findPost(String postID){
-        for(int i=0;i<posts.size();i++){
+        for(int i=0;i<posts.size();i++){ // loop method for looking for a post
             if(posts.get(i).getContentID().equals(postID)){
                 return posts.get(i);
             }
@@ -55,7 +55,7 @@ public class ContentDatabase {
     }
     
     public Story findStory(String storyID){
-        for(int i=0;i<stories.size();i++){
+        for(int i=0;i<stories.size();i++){ // loop method for looking for a story
             if(stories.get(i).getContentID().equals(storyID)){
                 return stories.get(i);
             }
@@ -75,14 +75,14 @@ public class ContentDatabase {
         ArrayList<Post> friendsPostList = new ArrayList<>();
         FriendsManagement cH = new FriendsManagement();
         List<String> friendsList = cH.getFriendsList(userID);
-        for(int i=0;i<posts.size();i++){
+        for(int i=0;i<posts.size();i++){ // looping through each post and each friend ID
             for(int j=0;j<friendsList.size();j++){
                 if(posts.get(i).getAuthorID().equals(friendsList.get(j))){
                     friendsPostList.add(posts.get(i));
                 }
             }
         }
-        if(!friendsPostList.isEmpty()){
+        if(!friendsPostList.isEmpty()){ // checks if empty before returning
             return friendsPostList;
         }
         return null;
@@ -92,14 +92,14 @@ public class ContentDatabase {
         ArrayList<Story> friendsStoryList = new ArrayList<>();
         FriendsManagement cH = new FriendsManagement();
         List<String> friendsList = cH.getFriendsList(userID);
-        for(int i=0;i<stories.size();i++){
+        for(int i=0;i<stories.size();i++){ // looping through each post and each friend ID
             for(int j=0;j<friendsList.size();j++){
                 if(stories.get(i).getAuthorID().equals(friendsList.get(j))){
                     friendsStoryList.add(stories.get(i));
                 }
             }
         }
-        if(!friendsStoryList.isEmpty()){
+        if(!friendsStoryList.isEmpty()){ // checks if empty before returning
             return friendsStoryList;
         }
         return null;
@@ -107,12 +107,12 @@ public class ContentDatabase {
 
     public ArrayList<Post> userPosts(String userID){
         ArrayList<Post> userContent = new ArrayList<>();
-        for(int i=0;i<posts.size();i++){
+        for(int i=0;i<posts.size();i++){ // making a new arrayList with looping through each post
             if(posts.get(i).getAuthorID().equals(userID)){
                 userContent.add(posts.get(i));
             }
         }
-        if(!userContent.isEmpty()){
+        if(!userContent.isEmpty()){ // checks if empty before returning
             return userContent;
         }
         return null;
@@ -120,7 +120,7 @@ public class ContentDatabase {
     
     public ArrayList<Story> userStories(String userID){
         ArrayList<Story> userContent = new ArrayList<>();
-        for(int i=0;i<stories.size();i++){
+        for(int i=0;i<stories.size();i++){ // making a new arrayList with looping through each story
             if(stories.get(i).getAuthorID().equals(userID)){
                 userContent.add(stories.get(i));
             }
@@ -133,7 +133,7 @@ public class ContentDatabase {
     
     public void saveToFiles(ArrayList<User> users){
         ContentFileSaver fS = new ContentFileSaver();
-        for(int i=0;i<users.size();i++){
+        for(int i=0;i<users.size();i++){ // saving each user's content separately
             fS.savePostsToUserFile(users.get(i).getEmail(), userPosts(users.get(i).getUserId()));
         }
         fS.savePostsToFile(posts);

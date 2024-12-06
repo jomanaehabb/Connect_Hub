@@ -11,12 +11,12 @@ public class InternalContent {
     public InternalContent(String text, String imagePath) {
         this.text = text;
         this.imagePath = imagePath;
-        if(imagePath!=null || !"null".equals(imagePath)){
+        if(imagePath!=null || !"null".equals(imagePath)){ // checking for "null" because of file reading
             ImageIcon icon = new ImageIcon(imagePath);
-            this.image = icon.getImage();
+            this.image = icon.getImage(); // turning save path to icon to image
         }
         else{
-            imagePath = null;
+            imagePath = null; // to prevent errors if imagePath is used elsewhere
         }
     }
     public String getImagePath() {

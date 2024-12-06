@@ -10,7 +10,7 @@ public class Content{
     private LocalDateTime timeStamp;
 
     public Content(String authorID, InternalContent content, LocalDateTime timeStamp) {
-        this.contentID = Integer.toString(counter);
+        this.contentID = Integer.toString(counter); // automatically created the content ID at creation
         counter++;
         this.authorID = authorID;
         this.content = content;

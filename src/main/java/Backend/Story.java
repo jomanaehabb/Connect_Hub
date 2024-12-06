@@ -7,7 +7,7 @@ public class Story extends Content{
 
     public Story(String authorID, InternalContent content, LocalDateTime timeStamp) {
         super(authorID, content, timeStamp);
-        endTime = timeStamp.plusDays(1);
+        endTime = timeStamp.plusDays(1); // automatically setting the end date to 24 hours
     }
 
 
