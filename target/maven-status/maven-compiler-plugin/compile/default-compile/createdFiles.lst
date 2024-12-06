@@ -56,5 +56,6 @@ Frontend\FriendsListWindow.class
 Frontend\SettingsWindow.class
 Frontend\FriendRequestWindow.class
 Backend\Manager.class
+Frontend\AddContentWindow$2.class
 Frontend\ProfileManagementWindow$1.class
 Frontend\SignUpWindow.class

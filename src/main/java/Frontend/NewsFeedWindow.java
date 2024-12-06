@@ -20,6 +20,9 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         this.currentUser = userManager.getUserByEmail(email);
         initComponents();
         setTitle("NewsFeed");
+                // Initialize homeLabel with user's name or email
+        homeLabel.setText("Welcome, " + currentUser.getUsername()); // Assuming getName() is available in User
+
     }
 
     @SuppressWarnings("unchecked")
@@ -135,14 +138,14 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        InternalContent internalContent = new InternalContent(null,null);
+        InternalContent internalContent = new InternalContent(null, null); // Placeholder for actual content
         LocalDateTime timeStamp = LocalDateTime.now();
-        Post post = new Post(currentUser.getUserId(),internalContent,timeStamp);
-        AddContentWindow addContentWindow = new AddContentWindow(post);
+        Post post = new Post(currentUser.getUserId(), internalContent, timeStamp);
+        AddContentWindow addContentWindow = new AddContentWindow(currentUser, null);
         addContentWindow.setVisible(true);
         addContentWindow.pack();
         addContentWindow.setLocationRelativeTo(null);
-        this.dispose();
+        this.dispose();  // Dispose the current window
     }//GEN-LAST:event_addButtonActionPerformed
 
     /*public static void main(String args[]) {

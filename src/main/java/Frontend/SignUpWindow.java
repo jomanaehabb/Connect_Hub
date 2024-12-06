@@ -155,13 +155,13 @@ public class SignUpWindow extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Username");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(70, 210, 63, 20);
+        jLabel5.setBounds(70, 210, 110, 20);
 
         jLabel6.setBackground(new java.awt.Color(102, 102, 102));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Email");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(70, 280, 34, 20);
+        jLabel6.setBounds(70, 280, 110, 20);
         jPanel1.add(usernameField);
         usernameField.setBounds(70, 240, 312, 34);
         jPanel1.add(emailField);
