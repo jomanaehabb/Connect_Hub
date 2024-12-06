@@ -10,7 +10,7 @@
     "profilePhotoPath" : "",
     "coverPhotoPath" : "",
     "posts" : [ ],
-    "friends" : [ ]
+    "friends" : [ "122@gmail.com", "malak@gmail.com" ]
   },
   "122@gmail.com" : {
     "userId" : "9c2920b5-dd17-4eb9-8f2f-5a8f5b355d64",
@@ -23,7 +23,7 @@
     "profilePhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\photo_2024-10-10_20-49-23.jpg",
     "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\photo_2024-10-10_20-49-23.jpg",
     "posts" : [ ],
-    "friends" : [ ]
+    "friends" : [ "12@gmail.com", "malak@gmail.com" ]
   },
   "malak@gmail.com" : {
     "userId" : "3a62bd30-7222-4c3e-bb4c-42d8d5145848",
@@ -36,7 +36,7 @@
     "profilePhotoPath" : "F:\\malak\\Photos\\Cursed pics\\IMG_20200817_210547_671.jpg",
     "coverPhotoPath" : "F:\\malak\\Photos\\Cursed pics\\IMG_20200516_232201.jpg",
     "posts" : [ ],
-    "friends" : [ ]
+    "friends" : [ "12@gmail.com", "122@gmail.com" ]
   },
   "123456@gmail.com" : {
     "userId" : "097ea0f2-9396-418c-9cc3-9ee32fa3c710",
@@ -49,7 +49,7 @@
     "profilePhotoPath" : "",
     "coverPhotoPath" : "",
     "posts" : [ ],
-    "friends" : [ ]
+    "friends" : [ "12@gmail.com", "jomana@gmail.com" ]
   },
   "jomana@gmail.com" : {
     "userId" : "2b35d369-c231-470f-9213-09551d9f4782",
@@ -62,7 +62,7 @@
     "profilePhotoPath" : "",
     "coverPhotoPath" : "",
     "posts" : [ ],
-    "friends" : [ ]
+    "friends" : [ "123456@gmail.com", "jomanaa@gmail.com" ]
   },
   "jomanaa@gmail.com" : {
     "userId" : "c87f8373-6153-41ed-93f0-f11e1f6a6298",
@@ -75,6 +75,6 @@
     "profilePhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\1705700278920.jpeg",
     "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\9178_9083_9095_9008\\State Diagram.png",
     "posts" : [ ],
-    "friends" : [ ]
+    "friends" : [ "jomana@gmail.com", "123456@gmail.com" ]
   }
 }
