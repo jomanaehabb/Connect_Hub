@@ -12,14 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author cf
+ * The FriendshipDatabase class is responsible for managing the friendships data
+ * and performing operations like creating, editing, and reading the
+ * "friendships.json" file. It handles storing and retrieving friendship
+ * relationships between users, where each friendship has a status (e.g.,
+ * Pending, Accepted).
  */
-// Class to manage the friendships data and the .json file to store it
-public class FriendshipData{
+public class FriendshipDatabase {
+
+    // List to store all friendships
     private List<Friendship> friendships;
 
-    // Getters and Setters
+    // Getter and Setter methods for the friendships list
     public void setFriendships(List<Friendship> friendships) {
         this.friendships = friendships;
     }
@@ -27,11 +31,14 @@ public class FriendshipData{
     public List<Friendship> getFriendships() {
         return friendships;
     }
-    
-    // Function to create the .json file if not created
+
+    /**
+     * Creates a new "friendships.json" file with a default friendship structure
+     * if it doesn't already exist.
+     */
     public static void createJSONFile() {
         try {
-            // Create the JSON content manually
+            // Default JSON content structure for the friendships file
             String jsonContent = """
                              {
                                "friendships": [
@@ -41,24 +48,30 @@ public class FriendshipData{
                                    "status": "Pending"
                                  }
                                ]
-                             }""";// File structure used
+                             }"""; // File structure template used
 
+            // Write the default JSON content to the file
             try (FileWriter file = new FileWriter("friendships.json")) {
                 file.write(jsonContent);
                 file.flush();
             }
-
             System.out.println("Friendships JSON file created successfully!");
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-    
-    // Function to edit(rewrite) the .json file
-    public static void editJSONFile(FriendshipData data) {
+
+    /**
+     * Edits (rewrites) the "friendships.json" file with the updated friendships
+     * list from the provided FriendshipDatabase object.
+     */
+    public static void editJSONFile(FriendshipDatabase data) {
         try (FileWriter fileWriter = new FileWriter("friendships.json")) {
+            // StringBuilder to build the new JSON content
             StringBuilder jsonBuilder = new StringBuilder();
             jsonBuilder.append("{\n  \"friendships\": [\n");
 
+            // Loop through the friendships list and add each friendship to the JSON structure
             for (int i = 0; i < data.getFriendships().size(); i++) {
                 Friendship friendship = data.getFriendships().get(i);
                 jsonBuilder.append("    {\n")
@@ -71,43 +84,47 @@ public class FriendshipData{
                 }
                 jsonBuilder.append("\n");
             }
-
             jsonBuilder.append("  ]\n}");
             fileWriter.write(jsonBuilder.toString());
             fileWriter.flush();
-
             System.out.println("Friendships JSON file updated successfully!");
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    // Function to read the .json file
-    public static FriendshipData readJSONFile() {
-        FriendshipData data = new FriendshipData();
+    /**
+     * Reads the "friendships.json" file and returns a FriendshipDatabase object
+     * containing all the friendships stored in the file.
+     *
+     * @return a FriendshipDatabase object with the loaded friendships
+     */
+    public static FriendshipDatabase readJSONFile() {
+        FriendshipDatabase data = new FriendshipDatabase();
         try {
+            // Read the entire file content
             BufferedReader reader = new BufferedReader(new FileReader("friendships.json"));
             StringBuilder jsonBuilder = new StringBuilder();
             String line;
-
             while ((line = reader.readLine()) != null) {
                 jsonBuilder.append(line);
             }
             reader.close();
 
+            // Parse the JSON content into a list of Friendship objects
             String jsonContent = jsonBuilder.toString();
-
             List<Friendship> friendships = new ArrayList<>();
             if (jsonContent.contains("\"friendships\": [")) {
                 int startIndex = jsonContent.indexOf("\"friendships\": [") + 15;
                 int endIndex = jsonContent.lastIndexOf("]");
                 String friendsArray = jsonContent.substring(startIndex, endIndex).trim();
 
-                // Split objects in the array
+                // Split the JSON array of friendships into individual objects
                 for (String friend : friendsArray.split("},")) {
                     String fullFriend = friend + (friend.endsWith("}") ? "" : "}");
                     Friendship friendship = new Friendship();
 
-                    // Extract fields from the JSON string
+                    // Extract fields from the JSON string and set them to the Friendship object
                     String user1Username = fullFriend.split("\"user1Username\": \"")[1].split("\"")[0];
                     String user2Username = fullFriend.split("\"user2Username\": \"")[1].split("\"")[0];
                     String status = fullFriend.split("\"status\": \"")[1].split("\"")[0];
@@ -121,8 +138,8 @@ public class FriendshipData{
             }
             data.setFriendships(friendships);
         } catch (IOException e) {
+            e.printStackTrace();
         }
         return data;
     }
 }
-

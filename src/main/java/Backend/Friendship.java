@@ -5,38 +5,46 @@
 package Backend;
 
 /**
- *
- * @author cf
+ * The Friendship class represents the relationship between two users. It
+ * contains the usernames of two users involved in a friendship and the status
+ * of their friendship. The status can indicate various stages like "Pending",
+ * "Accepted", or "Blocked".
  */
-// Class that manage the Friendships
 public class Friendship {
+
+    // Usernames of the two users involved in the friendship
     private String user1Username;
     private String user2Username;
+
+    // The status of the friendship (e.g., Pending, Accepted, Blocked)
     private String status;
 
-    // Getters and Setters
+    // Getter and Setter methods for user1Username
     public void setUser1Username(String user1Username) {
         this.user1Username = user1Username;
-    }
-
-    public void setUser2Username(String user2Username) {
-        this.user2Username = user2Username;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getUser1Username() {
         return user1Username;
     }
 
+    // Getter and Setter methods for user2Username
+    public void setUser2Username(String user2Username) {
+        this.user2Username = user2Username;
+    }
+
     public String getUser2Username() {
         return user2Username;
+    }
+
+    // Getter and Setter methods for status
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getStatus() {
         return status;
     }
-    // end of Getters and Setters
+
+    // End of Getters and Setters
 }

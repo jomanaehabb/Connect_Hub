@@ -11,13 +11,14 @@ import java.util.Set;
         return list;
     }
 }
-*/
+ */
 public class FriendsManagement {
+
     //Function to send request
     public void sendFriendRequest(String user1Id, String user2Id) {
 
         // Read current friendships to check if there is existing friend request
-        FriendshipData data = FriendshipData.readJSONFile();
+        FriendshipDatabase data = FriendshipDatabase.readJSONFile();
         List<Friendship> friendships = data.getFriendships();
 
         for (Friendship friendship : friendships) {
@@ -37,19 +38,18 @@ public class FriendsManagement {
 
             // Edit and Save the updated friendships.json file
             data.setFriendships(friendships);
-            FriendshipData.editJSONFile(data);
+            FriendshipDatabase.editJSONFile(data);
 
             System.out.println("Friend request sent successfully!");
         } catch (Exception e) {
         }
     }
-   
 
     // Function to handle responses (Accept/decline)
     public void respondToFriendRequest(String requesterUsername, String currentUsername, boolean accept) {
         try {
             // Read current friendships
-            FriendshipData data = FriendshipData.readJSONFile();
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
             List<Friendship> friendships = data.getFriendships();
 
             boolean isUpdated = false;
@@ -72,7 +72,7 @@ public class FriendsManagement {
             if (isUpdated) {
                 // Save the updated friendships to the .JSON file
                 data.setFriendships(friendships);
-                FriendshipData.editJSONFile(data); 
+                FriendshipDatabase.editJSONFile(data);
                 System.out.println("Friend request responded successfully!");
             } else {
                 System.out.println("No pending friend request found for the given IDs.");
@@ -81,36 +81,35 @@ public class FriendsManagement {
         }
     }
 
-
-
     //Function to block a friend
-    public void blockFriend(String user1Id,String user2Id){
-         try {
-        // Read current friendships from the json file
-        FriendshipData data = FriendshipData.readJSONFile();
-        List<Friendship> friendships = data.getFriendships();
+    public void blockFriend(String user1Id, String user2Id) {
+        try {
+            // Read current friendships from the json file
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
+            List<Friendship> friendships = data.getFriendships();
 
-        // Find and block the friend
-        for (Friendship friendship : friendships) {
-            if (friendship.getUser1Username().equals(user1Id) && friendship.getUser2Username().equals(user2Id)) {
-                friendship.setStatus("Blocked");
-                break;
+            // Find and block the friend
+            for (Friendship friendship : friendships) {
+                if (friendship.getUser1Username().equals(user1Id) && friendship.getUser2Username().equals(user2Id)) {
+                    friendship.setStatus("Blocked");
+                    break;
+                }
             }
+
+            // Save the updated friendships to the .json file
+            data.setFriendships(friendships);
+            FriendshipDatabase.editJSONFile(data);
+
+            System.out.println("Friend blocked successfully!");
+        } catch (Exception e) {
         }
-
-        // Save the updated friendships to the .json file
-        data.setFriendships(friendships);
-        FriendshipData.editJSONFile(data);
-
-        System.out.println("Friend blocked successfully!");
-    } catch (Exception e) {
     }
-    }
+
     //Function to remove a friend
     public void removeFriend(String user1Id, String user2Id) {
         try {
             // Read current friendships from the JSON file
-            FriendshipData data = FriendshipData.readJSONFile();
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
             List<Friendship> friendships = data.getFriendships();
 
             // Remove the friendship between user1Id and user2Id
@@ -121,62 +120,60 @@ public class FriendsManagement {
 
             // Save the updated friendships list back to the JSON file
             data.setFriendships(friendships);
-            FriendshipData.editJSONFile(data); 
+            FriendshipDatabase.editJSONFile(data);
 
             System.out.println("Friendship removed successfully between " + user1Id + " and " + user2Id);
         } catch (Exception e) {
             // Print exception for debugging
-            
+
         }
     }
 
-    
     public List<String> suggestFriends(String userId) {
-    List<String> suggestions = new ArrayList<>();
-    try {
-        // Read current friendships
-        FriendshipData data = FriendshipData.readJSONFile();
-        List<Friendship> friendships = data.getFriendships();
+        List<String> suggestions = new ArrayList<>();
+        try {
+            // Read current friendships
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
+            List<Friendship> friendships = data.getFriendships();
 
-        // Collect IDs of current friends and pending requests
-        Set<String> currentFriends = new HashSet<>();
-        for (Friendship friendship : friendships) {
-            if (friendship.getUser1Username().equals(userId)) {
-                if (!"Blocked".equals(friendship.getStatus())) {
-                    currentFriends.add(friendship.getUser2Username());
-                }
-            } else if (friendship.getUser2Username().equals(userId)) {
-                if (!"Blocked".equals(friendship.getStatus())) {
-                    currentFriends.add(friendship.getUser1Username());
+            // Collect IDs of current friends and pending requests
+            Set<String> currentFriends = new HashSet<>();
+            for (Friendship friendship : friendships) {
+                if (friendship.getUser1Username().equals(userId)) {
+                    if (!"Blocked".equals(friendship.getStatus())) {
+                        currentFriends.add(friendship.getUser2Username());
+                    }
+                } else if (friendship.getUser2Username().equals(userId)) {
+                    if (!"Blocked".equals(friendship.getStatus())) {
+                        currentFriends.add(friendship.getUser1Username());
+                    }
                 }
             }
+
+            // Use a Set to store suggestions to avoid duplicates
+            Set<String> uniqueSuggestions = new HashSet<>();
+
+            // Generate suggestions
+            for (Friendship friendship : friendships) {
+                if (!currentFriends.contains(friendship.getUser1Username()) && !friendship.getUser1Username().equals(userId)) {
+                    uniqueSuggestions.add(friendship.getUser1Username());
+                }
+                if (!currentFriends.contains(friendship.getUser2Username()) && !friendship.getUser2Username().equals(userId)) {
+                    uniqueSuggestions.add(friendship.getUser2Username());
+                }
+            }
+
+            // Convert the set back to a list
+            suggestions = new ArrayList<>(uniqueSuggestions);
+
+        } catch (Exception e) {
+            // Print any exception for debugging
+
         }
 
-        // Use a Set to store suggestions to avoid duplicates
-        Set<String> uniqueSuggestions = new HashSet<>();
+        return suggestions;
 
-        // Generate suggestions
-        for (Friendship friendship : friendships) {
-            if (!currentFriends.contains(friendship.getUser1Username()) && !friendship.getUser1Username().equals(userId)) {
-                uniqueSuggestions.add(friendship.getUser1Username());
-            }
-            if (!currentFriends.contains(friendship.getUser2Username()) && !friendship.getUser2Username().equals(userId)) {
-                uniqueSuggestions.add(friendship.getUser2Username());
-            }
-        }
-
-        // Convert the set back to a list
-        suggestions = new ArrayList<>(uniqueSuggestions);
-
-    } catch (Exception e) {
-        // Print any exception for debugging
-        
-    }
-
-    return suggestions;
-
-
-    
+        //draft
 //    List<String> suggestions = new ArrayList<>();
 //        FriendshipData data = FriendshipData.readJSONFile();
 //        List<Friendship> friendships = data.getFriendships();
@@ -202,11 +199,11 @@ public class FriendsManagement {
 //
 //        return suggestions;
     }
-    
+
     public List<String> getPendingFriendRequests(String userId) {
         List<String> pendingRequests = new ArrayList<>();//create a newlist containing the pending requests
         try {
-            FriendshipData data = FriendshipData.readJSONFile();
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
             List<Friendship> friendships = data.getFriendships();
 
             for (Friendship friendship : friendships) {
@@ -215,7 +212,7 @@ public class FriendsManagement {
                 }
             }
         } catch (Exception e) {
-            
+
         }
         return pendingRequests;
     }
@@ -225,13 +222,12 @@ public class FriendsManagement {
         respondToFriendRequest(user1Username, user2Username, true);
     }
 
-
     //Function to get FriendRequests
     public List<String[]> getFriendRequests(String currentUsername) {
         List<String[]> friendRequests = new ArrayList<>();
         try {
             // Read the friendships data from JSON
-            FriendshipData data = FriendshipData.readJSONFile();
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
             List<Friendship> friendships = data.getFriendships();
 
             // Loop through the friendships to find pending requests for the given user
@@ -250,13 +246,11 @@ public class FriendsManagement {
         return friendRequests;
     }
 
-    
-    
     public List<String> getFriendsList(String username) {
         List<String> friendsList = new ArrayList<>();
         try {
             // Read the friendships data from JSON
-            FriendshipData data = FriendshipData.readJSONFile();
+            FriendshipDatabase data = FriendshipDatabase.readJSONFile();
             List<Friendship> friendships = data.getFriendships();
 
             // Loop through the friendships to find friends for the given username
@@ -275,4 +269,3 @@ public class FriendsManagement {
         return friendsList;
     }
 }
-
