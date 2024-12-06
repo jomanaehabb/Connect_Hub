@@ -7,6 +7,7 @@ Backend\User.class
 Frontend\ProfileManagementWindow$3.class
 Backend\Friendship.class
 Backend\PasswordUtil.class
+Frontend\ProfileManagementWindow$7.class
 Backend\Manager$1.class
 Frontend\ProfileManagementWindow.class
 Frontend\SettingsWindow$1.class
@@ -20,6 +21,7 @@ Frontend\NewsFeedWindow.class
 Backend\UserUtils.class
 Backend\UserDatabase$1.class
 Frontend\LoginWindow$1.class
+Frontend\ProfileManagementWindow$6.class
 Backend\ContentDatabase.class
 Frontend\AddContentWindow.class
 Backend\FriendshipData.class
@@ -34,6 +36,7 @@ Backend\ProfileDatabase$1.class
 Frontend\RemoveFriendWindow.class
 Backend\ProfileManager.class
 Frontend\SettingsWindow$3.class
+Frontend\ProfileManagementWindow$8.class
 Frontend\ProfileManagementWindow$2.class
 Backend\Profile.class
 Backend\InternalContent.class
