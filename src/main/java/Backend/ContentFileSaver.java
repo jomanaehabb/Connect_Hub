@@ -15,6 +15,9 @@ public class ContentFileSaver {
 
             for (int i = 0; i < stories.size(); i++) {
                 Story story = stories.get(i);
+                if(story.getContent().getImagePath() == null){
+                    story.getContent().setImagePath("null");
+                }
 
                 jsonBuilder.append("    {\n")
                         .append("      \"text\": \"").append(story.getContent().getText()).append("\",\n")
@@ -44,10 +47,12 @@ public class ContentFileSaver {
 
             for (int i = 0; i < posts.size(); i++) {
                 Post post = posts.get(i);
-
+                if(post.getContent().getImagePath() == null){
+                    post.getContent().setImagePath("null");
+                }
                 jsonBuilder.append("    {\n")
                         .append("      \"text\": \"").append(post.getContent().getText()).append("\",\n")
-                        .append("      \"image\": \"").append(post.getContent().getImage().toString()).append("\",\n")
+                        .append("      \"imagePath\": \"").append(post.getContent().getImagePath()).append("\",\n")
                         .append("      \"authorID\": \"").append(post.getAuthorID()).append("\"\n")
                         .append("      \"date\": \"").append(post.getTimeStamp().toString()).append("\"\n")
                         .append("    }");
