@@ -57,7 +57,7 @@ public class FriendsManagementWindow extends javax.swing.JPanel {
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -123,13 +123,13 @@ public class FriendsManagementWindow extends javax.swing.JPanel {
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Friend Requests");
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
