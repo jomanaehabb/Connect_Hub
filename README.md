@@ -161,4 +161,4 @@ This project adheres to the **SOLID principles** to ensure that the codebase is 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/connect-hub.git
+   git clone https://github.com/jomanaehabb/Connect-Hub-Project.git
