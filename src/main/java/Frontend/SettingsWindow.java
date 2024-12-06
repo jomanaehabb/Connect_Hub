@@ -6,6 +6,7 @@ import Backend.UserAccountManager;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import Backend.User;
+import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.String;
 import javax.swing.JOptionPane;
 
 public class SettingsWindow extends javax.swing.JFrame {
@@ -19,6 +20,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         userManager = new UserAccountManager();
         profileManager = new ProfileManager();
         this.currentUser = userManager.getUserByEmail(email);
+        String userString = this.currentUser.toString();
         
         setTitle("Settings");
                 if (currentUser == null) {
@@ -28,7 +30,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         
     }
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         profileButton = new javax.swing.JButton();
@@ -106,20 +108,21 @@ public class SettingsWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
 
-    }//GEN-LAST:event_logoutButtonActionPerformed
+    }                                            
 
-    private void addFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFriendButtonActionPerformed
+    private void addFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
         AddFriendWindow addFriend = new AddFriendWindow();
         addFriend.setVisible(true);
-    }//GEN-LAST:event_addFriendButtonActionPerformed
+    }                                               
 
-    private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsButtonActionPerformed
+    private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 
-            FriendsManagementWindow friendsManagementPanel = new FriendsManagementWindow("123");
+            String username=currentUser.getUsername();
+            FriendsManagementWindow friendsManagementPanel = new FriendsManagementWindow(username);
             // Embed the panel in a JFrame for testing
             JFrame frame = new JFrame("Friends Management");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,21 +130,21 @@ public class SettingsWindow extends javax.swing.JFrame {
             frame.setLocationRelativeTo(null);
             frame.add(friendsManagementPanel);
             frame.setVisible(true);
-    }//GEN-LAST:event_friendsButtonActionPerformed
+    }                                             
 
-    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
         ProfileManagementWindow profileManagementWindow = new ProfileManagementWindow(currentUser.getEmail());
         profileManagementWindow.setVisible(true);
         profileManagementWindow.pack();
         profileManagementWindow.setLocationRelativeTo(null); 
         this.dispose();
-    }//GEN-LAST:event_profileButtonActionPerformed
+    }                                             
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton addFriendButton;
     private javax.swing.JButton friendsButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton profileButton;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
