@@ -1,9 +1,0 @@
-Backend\ContentFileReader.class
-Backend\Story.class
-Backend\InternalContent.class
-Backend\Post.class
-Backend\ConnectHub.class
-Backend\Content.class
-Backend\ContentFileSaver.class
-Backend\ContentDatabase.class
-Frontend\Main.class

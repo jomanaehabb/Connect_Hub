@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class ContentFileSaver {
     public void saveStoriesToFile(ArrayList<Story> stories){
@@ -86,7 +88,7 @@ public class ContentFileSaver {
                 return;
             }
 
-            // Get the user's "posts" array
+            // Get the user's posts array
             JSONObject userObject = usersJson.getJSONObject(email);
             JSONArray postsArray = userObject.getJSONArray("posts");
 
@@ -100,7 +102,7 @@ public class ContentFileSaver {
                 postsArray.put(postJson);
             }
 
-            // Update the user's "posts" in the JSON
+            // Update the user's posts in the JSON
             userObject.put("posts", postsArray);
             usersJson.put(email, userObject);
 

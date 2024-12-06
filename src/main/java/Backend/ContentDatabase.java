@@ -130,8 +130,12 @@ public class ContentDatabase {
         return null;
     }
     
-    public void saveToFiles(){
+    public void saveToFiles(ArrayList<User> users){
         ContentFileSaver fS = new ContentFileSaver();
+        for(int i=0;i<users.size();i++){
+            savePostsToUserFile(users.get(i).getEmail(), ArrayList<Post> posts);
+
+        }
         fS.savePostsToFile(posts);
         fS.saveStoriesToFile(stories);
     }
