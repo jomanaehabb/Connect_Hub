@@ -113,18 +113,18 @@ public class NewsFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        Content post = new Post();
-        AddContent addContent = new AddContent(post);
+        //send user in the constructor here
+        AddContent addContent = new AddContent("1");
         addContent.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
-    /*public static void main(String args[]) {
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewsFeed().setVisible(true);
             }
         });
-    }*/
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JTabbedPane contentTabbedPane;
