@@ -50,7 +50,7 @@ public class ContentFileReader {
     public ArrayList<Post> readPostsFile(ContentDatabase cD){
             ArrayList<Post> posts = new ArrayList<>();
             try {
-                BufferedReader reader = new BufferedReader(new java.io.FileReader("posts.json"));
+                BufferedReader reader = new BufferedReader(new java.io.FileReader("users.json"));
                 StringBuilder jsonBuilder = new StringBuilder();
                 String line;
 
