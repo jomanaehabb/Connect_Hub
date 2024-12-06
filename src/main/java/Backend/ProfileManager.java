@@ -26,6 +26,21 @@ public class ProfileManager extends Manager {
             saveUsers();
         }
     }
+    
+    public boolean changePassword(String email, String currentPassword, String newPassword) {
+    User user = users.get(email);
+    if (user != null) {
+        // Validate the current password
+        if (user.getHashedPassword().equals(User.hashPassword(currentPassword))) {
+            // Update with the new password (hash it)
+            user.setHashedPassword(User.hashPassword(newPassword));
+            saveUsers();  // Save the changes to the users list/database
+            return true;  // Password successfully changed
+        }
+    }
+    return false;  // Invalid current password or user not found
+}
+    
 
     /*public void createPost(String email, String content, String imagePath) {
         User user = users.get(email);
