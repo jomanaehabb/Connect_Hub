@@ -106,16 +106,23 @@ public class AddContent extends javax.swing.JFrame {
 
     private void addPostButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPostButtonActionPerformed
         textInput = textArea.getText();
-        if(!textInput.isEmpty()) {
+        if(textInput.isEmpty() && image == null)
+            //if the text area and image are empty
+            JOptionPane.showMessageDialog(null, "Failed to create post.");
+        else {
             ContentDatabase content = new ContentDatabase();
-            if(image != null)
-                content.createPost(userId, textInput, image);
-            else {
+            if(textInput.isEmpty()) {
+                content.createPost(userId, null, image);
+                content.saveToFiles();
+            }    
+            else if(image == null) {
                 content.createPost(userId, textInput, null);
-                //make sure it actually saves in a file
+                content.saveToFiles();
+            }    
+            else {
+                content.createPost(userId, textInput, image);
                 content.saveToFiles();
             }
-            //for testing
             System.out.println(content.findPost(userId).getAuthorID());
             System.out.println(content.findPost(userId).getContentID());
             System.out.println(content.findPost(userId).getTimeStamp());
@@ -123,9 +130,6 @@ public class AddContent extends javax.swing.JFrame {
             System.out.println(content.findPost(userId).getContent().getImage());
             JOptionPane.showMessageDialog(null, "Post has been successfully added!");
         }
-        else 
-            //if the text area is empty
-            JOptionPane.showMessageDialog(null, "Failed to create post.");
     }//GEN-LAST:event_addPostButtonActionPerformed
 
     private void addImageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addImageButtonActionPerformed
