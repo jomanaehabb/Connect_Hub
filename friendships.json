@@ -39,6 +39,26 @@
       "user1Username": "123",
       "user2Username": "john123",
       "status": "Pending"
+    },
+    {
+      "user1Username": "hello",
+      "user2Username": "omar123",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "123456",
+      "user2Username": "omar123",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "123456",
+      "user2Username": "hello",
+      "status": "Accepted"
+    },
+    {
+      "user1Username": "123456",
+      "user2Username": "alice789",
+      "status": "Accepted"
     }
   ]
 }

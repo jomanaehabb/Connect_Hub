@@ -15,7 +15,6 @@ Backend\Story.class
 Frontend\SuggestedFriendsWindow.class
 Frontend\SettingsWindow$2.class
 Frontend\LoginWindow$4.class
-Frontend\toTestFriendsManagementOnly.class
 Frontend\Main.class
 Frontend\NewsFeedWindow.class
 Backend\UserUtils.class
@@ -53,7 +52,6 @@ Backend\ProfileDatabase.class
 Backend\Content.class
 Frontend\SignUpWindow$1.class
 Backend\ContentFileSaver.class
-Frontend\testfriendslist.class
 Frontend\Main$1.class
 Frontend\FriendsListWindow.class
 Frontend\SettingsWindow.class

@@ -37,5 +37,18 @@
     "coverPhotoPath" : "F:\\malak\\Photos\\Cursed pics\\IMG_20200516_232201.jpg",
     "posts" : [ ],
     "friends" : [ ]
+  },
+  "123456@gmail.com" : {
+    "userId" : "097ea0f2-9396-418c-9cc3-9ee32fa3c710",
+    "email" : "123456@gmail.com",
+    "username" : "123456",
+    "hashedPassword" : "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "dateOfBirth" : "2000-02-02",
+    "status" : "Online",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ ]
   }
 }
