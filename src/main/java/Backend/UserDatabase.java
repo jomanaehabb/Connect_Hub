@@ -22,20 +22,27 @@ public class UserDatabase {
     }
 
     private void loadDatabase() {
-        File file = new File(databaseFile);
-        if (file.exists()) {
-            try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.registerModule(new JavaTimeModule());
-                objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    File file = new File(databaseFile);
+    if (file.exists()) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+            // Check if the file contains an array or an object
+            if (file.length() > 0) {
+                // Try to load the array of users
                 users = objectMapper.readValue(file, new TypeReference<ArrayList<User>>() {});
-            } catch (IOException e) {
-                System.err.println("Failed to load users: " + e.getMessage());
-                e.printStackTrace();
+            } else {
                 users = new ArrayList<>();
             }
+        } catch (IOException e) {
+            System.err.println("Failed to load users: " + e.getMessage());
+            e.printStackTrace();
+            users = new ArrayList<>();
         }
     }
+}
 
     private void saveDatabase() {
         try {
@@ -85,5 +92,14 @@ public class UserDatabase {
 
     public ArrayList<User> getAllUsers() {
         return users;
+    }
+    
+    public User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 }
