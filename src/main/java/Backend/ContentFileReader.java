@@ -33,10 +33,10 @@ public class ContentFileReader {
 
                     for (String story : storiesArray.split("},")) {
                         String fullStory = story + (story.endsWith("}") ? "" : "}");
-                        String text = fullStory.split(""text": "")[1].split(""")[0];
-                        String imagePath = fullStory.split(""imagePath": "")[1].split(""")[0];
-                        String authorID = fullStory.split(""authorID":"")[1].split(""")[0];
-                        String date = fullStory.split(""date":"")[1].split(""")[0];
+                        String text = fullStory.split("\"text\": \"")[1].split("\"")[0];
+                        String imagePath = fullStory.split("\"imagePath\": \"")[1].split("\"")[0];
+                        String authorID = fullStory.split("\"authorID\":\"")[1].split("\"")[0];
+                        String date = fullStory.split("\"date\":\"")[1].split("\"")[0];
                         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
                         LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
                         InternalContent content = new InternalContent(text, imagePath);
@@ -72,14 +72,12 @@ public class ContentFileReader {
                     for (String post : postsArray.split("},")) {
                         String fullPost = post + (post.endsWith("}") ? "" : "}");
                         String text = fullPost.split("\"text\": \"")[1].split("\"")[0];
-                        String imageString = fullPost.split("\"image\": \"")[1].split("\"")[0];
+                        String imagePath = fullPost.split("\"imagePath\": \"")[1].split("\"")[0];
                         String authorID = fullPost.split("\"authorID\":\"")[1].split("\"")[0];
                         String date = fullPost.split("\"date\":\"")[1].split("\"")[0];
-                        ImageIcon icon = new ImageIcon(imageString);
-                        Image image = icon.getImage(); //making an icon to turn the string to an image
                         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
                         LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
-                        InternalContent content = new InternalContent(text, image);
+                        InternalContent content = new InternalContent(text, imagePath);
                         Post postInstance = new Post(authorID, content, timeStamp);
                         posts.add(postInstance);
                     }
