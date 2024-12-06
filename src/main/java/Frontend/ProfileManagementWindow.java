@@ -232,7 +232,7 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
                         .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +335,7 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
 
     private void viewNewsFeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewNewsFeedActionPerformed
         // TODO add your handling code here:
-        NewsFeedWindow newsFeedWindow = new NewsFeedWindow(currentUser.getEmail());
+        NewsFeed newsFeedWindow = new NewsFeed(currentUser.getEmail());
         newsFeedWindow.setVisible(true);
         newsFeedWindow.pack();
         newsFeedWindow.setLocationRelativeTo(null); 

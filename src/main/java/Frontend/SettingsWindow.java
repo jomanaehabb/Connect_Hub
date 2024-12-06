@@ -10,7 +10,7 @@ import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.String;
 import javax.swing.JOptionPane;
 
 public class SettingsWindow extends javax.swing.JFrame {
-        private User currentUser;
+    private User currentUser;
     private UserAccountManager userManager;
     private ProfileManager profileManager;
 

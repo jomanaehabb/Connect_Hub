@@ -3,7 +3,10 @@ package Frontend;
 import Backend.Content;
 import Backend.ContentDatabase;
 import Backend.Post;
+import Backend.ProfileManager;
 import Backend.Story;
+import Backend.User;
+import Backend.UserAccountManager;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -11,24 +14,41 @@ import javax.swing.JOptionPane;
 
 public class NewsFeed extends javax.swing.JFrame {
 
+    private UserAccountManager userManager;
+    private ProfileManager profileManager;
     private String userId;
+    private String email;  // Store email as an instance variable
     private ContentDatabase content = new ContentDatabase();
     private ArrayList<Post> posts;
     private ArrayList<Story> stories;
-    private static int postCounter = 0;
-    private static int storyCounter = 0;
+    private int postCounter = 0;
+    private int storyCounter = 0;
+    private User currentUser;
 
-    public NewsFeed(String userId) {
-        initComponents();
+    public NewsFeed(String email) {
         setTitle("NewsFeed");
-        homeLabel.setText("Welcome, " +userId);
-        this.userId = userId;
-        this.posts = content.userFriendPosts(userId);
-        this.stories = content.userFriendStories(userId);
+        initComponents();
+        this.email = email;  // Assign the email to the instance variable
+        this.userManager = new UserAccountManager();
+        this.currentUser = userManager.getUserByEmail(email);  // Retrieve the current user by email
+
+        if (currentUser != null) {
+            this.userId = currentUser.getUserId();  // Assuming 'getUserId' exists in the User class
+        } else {
+            // Handle case where user is not found
+            JOptionPane.showMessageDialog(null, "User not found");
+            this.dispose();  // Close the window if the user is not found
+            return;
+        }
+
+        homeLabel.setText("Welcome, " + this.userId);
+        this.posts = content.userFriendPosts(userId);  // Retrieve posts for this user
+        this.stories = content.userFriendStories(userId);  // Retrieve stories for this user
+        profileManager = new ProfileManager();
         this.showPost();
         this.showStory();
     }
-    
+
     private void showPost() {
         try {
             postUserLabel.setText(((Content) posts.get(this.postCounter)).getAuthorID());
@@ -36,16 +56,16 @@ public class NewsFeed extends javax.swing.JFrame {
             String formattedDateTime = ((Content) posts.get(this.postCounter)).getTimeStamp().format(formatter);
             postDateLabel.setText(formattedDateTime);
             postTextLabel.setText(((Content) posts.get(this.postCounter)).getContent().getText());
-            if(((Content) posts.get(this.postCounter)).getContent().getImage() != null) {
+            if (((Content) posts.get(this.postCounter)).getContent().getImage() != null) {
                 ImageIcon imageIcon = new ImageIcon(((Content) posts.get(this.postCounter)).getContent().getImage());
                 postImageLabel.setIcon(imageIcon);
             }
             this.postCounter++;
         } catch (NullPointerException e) {
-            
-        } 
+
+        }
     }
-    
+
     private void showStory() {
         try {
             storyUserLabel.setText(((Content) stories.get(this.storyCounter)).getAuthorID());
@@ -53,13 +73,13 @@ public class NewsFeed extends javax.swing.JFrame {
             String formattedDateTime = ((Content) stories.get(this.storyCounter)).getTimeStamp().format(formatter);
             storyDateLabel.setText(formattedDateTime);
             storyTextLabel.setText(((Content) stories.get(this.storyCounter)).getContent().getText());
-            if(((Content) stories.get(this.storyCounter)).getContent().getImage() != null) {
+            if (((Content) stories.get(this.storyCounter)).getContent().getImage() != null) {
                 ImageIcon imageIcon = new ImageIcon(((Content) stories.get(this.storyCounter)).getContent().getImage());
                 storyImageLabel.setIcon(imageIcon);
             }
             this.storyCounter++;
         } catch (NullPointerException e) {
-            
+
         }
     }
 
@@ -272,7 +292,7 @@ public class NewsFeed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        Settings settings = new Settings();
+        SettingsWindow settings = new SettingsWindow(email);  // Use the instance variable email
         settings.setVisible(true);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
@@ -284,18 +304,19 @@ public class NewsFeed extends javax.swing.JFrame {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         try {
-            if(contentTabbedPane.getSelectedIndex() == 0) {
-                if(postCounter < posts.size())
+            if (contentTabbedPane.getSelectedIndex() == 0) {
+                if (postCounter < posts.size()) {
                     this.showPost();
-                else 
+                } else {
                     JOptionPane.showMessageDialog(null, "There are no new posts, try again later!");
-            }
-            else if(contentTabbedPane.getSelectedIndex() == 1) {
-                if(storyCounter < stories.size())
+                }
+            } else if (contentTabbedPane.getSelectedIndex() == 1) {
+                if (storyCounter < stories.size()) {
                     this.showStory();
-                else 
+                } else {
                     JOptionPane.showMessageDialog(null, "There are no new stories, try again later!");
-            } 
+                }
+            }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "hello world!");
         }

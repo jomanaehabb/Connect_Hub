@@ -65,7 +65,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="profilePhotoLabel" min="-2" pref="151" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                   </Group>

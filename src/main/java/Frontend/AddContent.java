@@ -11,8 +11,8 @@ public class AddContent extends javax.swing.JFrame {
 
     private String userId;
     private String textInput;
-    private Image image;
-    
+    //private Image image;
+    private String imagePath;
     public AddContent(String userId) {
         initComponents();
         setTitle("Add Content");
@@ -33,8 +33,12 @@ public class AddContent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        writeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         writeLabel.setText("Write what's on your mind! :3");
 
+        addPostButton.setBackground(new java.awt.Color(102, 153, 255));
+        addPostButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addPostButton.setForeground(new java.awt.Color(255, 255, 255));
         addPostButton.setText("Add as Post");
         addPostButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,6 +46,9 @@ public class AddContent extends javax.swing.JFrame {
             }
         });
 
+        addStoryButton.setBackground(new java.awt.Color(102, 153, 255));
+        addStoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addStoryButton.setForeground(new java.awt.Color(255, 255, 255));
         addStoryButton.setText("Add as Story");
         addStoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,11 +57,15 @@ public class AddContent extends javax.swing.JFrame {
         });
 
         textArea.setColumns(5);
+        textArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textArea.setRows(10);
         jScrollPane1.setViewportView(textArea);
 
         imageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        addImageButton.setBackground(new java.awt.Color(102, 153, 255));
+        addImageButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        addImageButton.setForeground(new java.awt.Color(255, 255, 255));
         addImageButton.setText("Add Image");
         addImageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,14 +85,14 @@ public class AddContent extends javax.swing.JFrame {
                             .addComponent(imageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(addPostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(addStoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                            .addComponent(writeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addStoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(writeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                             .addComponent(jScrollPane1))
                         .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(addImageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139))))
+                        .addComponent(addImageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +103,9 @@ public class AddContent extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addImageButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addPostButton)
                     .addComponent(addStoryButton))
@@ -106,21 +117,21 @@ public class AddContent extends javax.swing.JFrame {
 
     private void addPostButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPostButtonActionPerformed
         textInput = textArea.getText();
-        if(textInput.isEmpty() && image == null)
+        if(textInput.isEmpty() && imagePath == null)
             //if the text area and image are empty
             JOptionPane.showMessageDialog(null, "Failed to create post.");
         else {
             ContentDatabase content = new ContentDatabase();
             if(textInput.isEmpty()) {
-                content.createPost(userId, null, image);
+                content.createPost(userId, null, imagePath);
                 content.saveToFiles();
             }    
-            else if(image == null) {
+            else if(imagePath == null) {
                 content.createPost(userId, textInput, null);
                 content.saveToFiles();
             }    
             else {
-                content.createPost(userId, textInput, image);
+                content.createPost(userId, textInput, imagePath);
                 content.saveToFiles();
             }
             //for testing
@@ -141,8 +152,8 @@ public class AddContent extends javax.swing.JFrame {
         if(file != null) {
             //get image from file and scale it to fit the label properly
             ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-            image = icon.getImage().getScaledInstance(imageLabel.getSize().width, imageLabel.getSize().height, imageLabel.getSize().width);
-            ImageIcon imageIcon = new ImageIcon(image);
+            //imagePath = icon.getImage().getScaledInstance(imageLabel.getSize().width, imageLabel.getSize().height, imageLabel.getSize().width);
+            ImageIcon imageIcon = new ImageIcon(imagePath);
             imageLabel.setIcon(imageIcon);
         }
         else
@@ -152,21 +163,21 @@ public class AddContent extends javax.swing.JFrame {
 
     private void addStoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStoryButtonActionPerformed
         textInput = textArea.getText();
-        if(textInput.isEmpty() && image == null)
+        if(textInput.isEmpty() && imagePath == null)
             //if the text area and image are empty
             JOptionPane.showMessageDialog(null, "Failed to create story.");
         else {
             ContentDatabase content = new ContentDatabase();
             if(textInput.isEmpty()) {
-                content.createStory(userId, null, image);
+                content.createStory(userId, null, imagePath);
                 content.saveToFiles();
             }    
-            else if(image == null) {
+            else if(imagePath == null) {
                 content.createStory(userId, textInput, null);
                 content.saveToFiles();
             }    
             else {
-                content.createStory(userId, textInput, image);
+                content.createStory(userId, textInput, imagePath);
                 content.saveToFiles();
             }
             //for testing
