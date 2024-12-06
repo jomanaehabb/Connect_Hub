@@ -110,7 +110,10 @@ public class SettingsWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        currentUser.setStatus("offline");
+        JOptionPane.showMessageDialog(this, "You have been logged out.", "Logout", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
 
     }                                            
 
