@@ -63,5 +63,18 @@
     "coverPhotoPath" : "",
     "posts" : [ ],
     "friends" : [ "new1212", "omar" ]
+  },
+  "omar123@gmail.com" : {
+    "userId" : "1aaa8764-e50c-49ea-9b65-b5cb0b3e1658",
+    "email" : "omar123@gmail.com",
+    "username" : "omar123",
+    "hashedPassword" : "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+    "dateOfBirth" : "2004-03-01",
+    "status" : "Offline",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ ]
   }
 }
