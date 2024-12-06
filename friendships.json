@@ -1,18 +1,18 @@
 {
   "friendships": [
     {
-      "user1Username": "john123",
-      "user2Username": "alice789",
+      "user1Username": "omar",
+      "user2Username": "new1212",
+      "status": "Blocked"
+    },
+    {
+      "user1Username": "new01",
+      "user2Username": "new1212",
       "status": "Accepted"
     },
     {
-      "user1Username": "john123",
-      "user2Username": "bob101",
-      "status": "Accepted"
-    },
-    {
-      "user1Username": "alice789",
-      "user2Username": "bob101",
+      "user1Username": "new01",
+      "user2Username": "omar",
       "status": "Accepted"
     }
   ]

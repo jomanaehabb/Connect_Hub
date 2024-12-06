@@ -1,58 +1,67 @@
-[
-    {
-        "email": "john@example.com",
-        "username": "john123",
-        "password": "hashedpassword123",
-        "dateOfBirth": "1990-01-01",
-        "status": "offline"
-    },
-    {
-        "email": "jane@example.com",
-        "username": "jane456",
-        "password": "hashedpassword456",
-        "dateOfBirth": "1985-05-15",
-        "status": "offline"
-    },
-    {
-        "email": "alice@example.com",
-        "username": "alice789",
-        "password": "hashedpassword789",
-        "dateOfBirth": "1995-08-25",
-        "status": "offline"
-    },
-    {
-        "email": "bob@example.com",
-        "username": "bob101",
-        "password": "hashedpassword101",
-        "dateOfBirth": "1988-12-12",
-        "status": "offline"
-    },
-    {
-        "email": "charlie@example.com",
-        "username": "charlie202",
-        "password": "hashedpassword202",
-        "dateOfBirth": "1993-03-18",
-        "status": "offline"
-    },
-    {
-        "email": "david@example.com",
-        "username": "david303",
-        "password": "hashedpassword303",
-        "dateOfBirth": "1992-07-11",
-        "status": "offline"
-    },
-    {
-        "email": "eve@example.com",
-        "username": "eve404",
-        "password": "hashedpassword404",
-        "dateOfBirth": "1996-11-05",
-        "status": "offline"
-    },
-    {
-        "email": "frank@example.com",
-        "username": "frank505",
-        "password": "hashedpassword505",
-        "dateOfBirth": "1989-09-09",
-        "status": "offline"
-    }
-]
+{
+  "12@gmail.com" : {
+    "userId" : "37cd9398-f4e2-4b75-9d80-b25ac00ab7ff",
+    "email" : "12@gmail.com",
+    "username" : "hello",
+    "hashedPassword" : "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "dateOfBirth" : "2000-02-10",
+    "status" : "Online",
+    "bio" : "hellloo hi hi hello",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ ]
+  },
+  "122@gmail.com" : {
+    "userId" : "9c2920b5-dd17-4eb9-8f2f-5a8f5b355d64",
+    "email" : "122@gmail.com",
+    "username" : "123",
+    "hashedPassword" : "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "dateOfBirth" : "2000-02-02",
+    "status" : "Offline",
+    "bio" : "123",
+    "profilePhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\photo_2024-10-10_20-49-23.jpg",
+    "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\photo_2024-10-10_20-49-23.jpg",
+    "posts" : [ ],
+    "friends" : [ ]
+  },
+  "omar@gmail.com" : {
+    "userId" : "b263a4a8-c167-47d6-a8a2-429abafb8760",
+    "email" : "omar@gmail.com",
+    "username" : "omar",
+    "hashedPassword" : "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+    "dateOfBirth" : "2004-03-01",
+    "status" : "Online",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ "new01" ]
+  },
+  "new@gmail.com" : {
+    "userId" : "17d81a0d-8487-47c0-81cf-3bd90adc90c1",
+    "email" : "new@gmail.com",
+    "username" : "new1212",
+    "hashedPassword" : "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+    "dateOfBirth" : "2004-03-01",
+    "status" : "Online",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ "new01" ]
+  },
+  "new01@gmail.com" : {
+    "userId" : "7a4f13fd-742c-48e4-9f5c-3d07bbaf41d5",
+    "email" : "new01@gmail.com",
+    "username" : "new01",
+    "hashedPassword" : "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+    "dateOfBirth" : "2000-01-02",
+    "status" : "Online",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ "new1212", "omar" ]
+  }
+}
