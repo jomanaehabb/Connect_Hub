@@ -15,28 +15,34 @@ public class ContentDatabase {
         this.stories = fR.readStoriesFile(this);
     }
 
-    public Post createPost(String userID, String text, Image image){
-        InternalContent content = new InternalContent(text, image);
+    public Post createPost(String userID, String text, String imagePath){
+        InternalContent content = new InternalContent(text, imagePath);
         Post post = new Post(userID, content, LocalDateTime.now());
         posts.add(post);
-        saveToFiles(); 
         return post;
     }
 
-    public Story createStory(String userID, String text, Image image){
-        InternalContent content = new InternalContent(text, image);
+    public Story createStory(String userID, String text, String imagePath){
+        InternalContent content = new InternalContent(text, imagePath);
         Story story = new Story(userID, content, LocalDateTime.now());
         stories.add(story);
-        saveToFiles(); 
         return story;
     }
-    
+
     public void deletePost(String postID){
         posts.remove(findPost(postID));
     }
-    
+
     public void deleteStory(String storyID){
         stories.remove(findStory(storyID));
+    }
+
+    public void deletePost(Post post){
+        posts.remove(post);
+    }
+
+    public void deleteStory(Story story){
+        stories.remove(story);
     }
 
     public Post findPost(String postID){

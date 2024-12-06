@@ -10,57 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class ContentFileReader {
-    public void saveStoriesToFile(ArrayList<Story> stories){
-        try (FileWriter fileWriter = new FileWriter("stories.json")) {
-            StringBuilder jsonBuilder = new StringBuilder();
-            jsonBuilder.append("{\n  \"stories\": [\n");
-            for (int i = 0; i < stories.size(); i++) {
-                Story story = stories.get(i);
-                jsonBuilder.append("    {\n")
-                        .append("      \"text\": \"").append(story.getContent().getText()).append("\",\n")
-                        .append("      \"image\": \"").append(story.getContent().getImage().toString()).append("\",\n")
-                        .append("      \"authorID\": \"").append(story.getAuthorID()).append("\",\n")
-                        .append("      \"date\": \"").append(story.getTimeStamp().toString()).append("\"\n")
-                        .append("    }");
-                if (i < stories.size() - 1) {
-                    jsonBuilder.append(",");
-                }
-                jsonBuilder.append("\n");
-            }
-            jsonBuilder.append("  ]\n}");
-            fileWriter.write(jsonBuilder.toString());
-            fileWriter.flush();
-            System.out.println("Stories JSON file updated successfully!");
-        } catch (IOException e) {
-            System.err.println("Error saving stories to file: " + e.getMessage());
-        }
-    }
-    // Save Posts to posts.json
-    public void savePostsToFile(ArrayList<Post> posts){
-        try (FileWriter fileWriter = new FileWriter("posts.json")) {
-            StringBuilder jsonBuilder = new StringBuilder();
-            jsonBuilder.append("{\n  \"posts\": [\n");
-            for (int i = 0; i < posts.size(); i++) {
-                Post post = posts.get(i);
-                jsonBuilder.append("    {\n")
-                        .append("      \"text\": \"").append(post.getContent().getText()).append("\",\n")
-                        .append("      \"image\": \"").append(post.getContent().getImage().toString()).append("\",\n")
-                        .append("      \"authorID\": \"").append(post.getAuthorID()).append("\",\n")
-                        .append("      \"date\": \"").append(post.getTimeStamp().toString()).append("\"\n")
-                        .append("    }");
-                if (i < posts.size() - 1) {
-                    jsonBuilder.append(",");
-                }
-                jsonBuilder.append("\n");
-            }
-            jsonBuilder.append("  ]\n}");
-            fileWriter.write(jsonBuilder.toString());
-            fileWriter.flush();
-            System.out.println("Posts JSON file updated successfully!");
-        } catch (IOException e) {
-            System.err.println("Error saving posts to file: " + e.getMessage());
-        }
-    }
+    
     public ArrayList<Story> readStoriesFile(ContentDatabase cD){
             ArrayList<Story> stories = new ArrayList<>();
             try {
@@ -83,15 +33,13 @@ public class ContentFileReader {
 
                     for (String story : storiesArray.split("},")) {
                         String fullStory = story + (story.endsWith("}") ? "" : "}");
-                        String text = fullStory.split("\"text\": \"")[1].split("\"")[0];
-                        String imageString = fullStory.split("\"image\": \"")[1].split("\"")[0];
-                        String authorID = fullStory.split("\"authorID\":\"")[1].split("\"")[0];
-                        String date = fullStory.split("\"date\":\"")[1].split("\"")[0];
-                        ImageIcon icon = new ImageIcon(imageString);
-                        Image image = icon.getImage(); //making an icon to turn the string to an image
+                        String text = fullStory.split(""text": "")[1].split(""")[0];
+                        String imagePath = fullStory.split(""imagePath": "")[1].split(""")[0];
+                        String authorID = fullStory.split(""authorID":"")[1].split(""")[0];
+                        String date = fullStory.split(""date":"")[1].split(""")[0];
                         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
                         LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
-                        InternalContent content = new InternalContent(text, image);
+                        InternalContent content = new InternalContent(text, imagePath);
                         Story storyInstance = new Story(authorID, content, timeStamp);
                         stories.add(storyInstance);
                     }
