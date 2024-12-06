@@ -11,14 +11,15 @@ public class AddContent extends javax.swing.JFrame {
 
     private String userId;
     private String textInput;
-    //private Image image;
+    private Image image;
     private String imagePath;
     public AddContent(String userId) {
         initComponents();
         setTitle("Add Content");
         this.userId = userId;
     }
-
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -117,7 +118,7 @@ public class AddContent extends javax.swing.JFrame {
 
     private void addPostButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPostButtonActionPerformed
         textInput = textArea.getText();
-        if(textInput.isEmpty() && imagePath == null)
+        if(textInput.isEmpty() && image == null)
             //if the text area and image are empty
             JOptionPane.showMessageDialog(null, "Failed to create post.");
         else {
@@ -126,7 +127,7 @@ public class AddContent extends javax.swing.JFrame {
                 content.createPost(userId, null, imagePath);
                 content.saveToFiles();
             }    
-            else if(imagePath == null) {
+            else if(image == null) {
                 content.createPost(userId, textInput, null);
                 content.saveToFiles();
             }    
@@ -152,9 +153,10 @@ public class AddContent extends javax.swing.JFrame {
         if(file != null) {
             //get image from file and scale it to fit the label properly
             ImageIcon icon = new ImageIcon(file.getAbsolutePath());
-            //imagePath = icon.getImage().getScaledInstance(imageLabel.getSize().width, imageLabel.getSize().height, imageLabel.getSize().width);
-            ImageIcon imageIcon = new ImageIcon(imagePath);
+            image = icon.getImage().getScaledInstance(imageLabel.getSize().width, imageLabel.getSize().height, imageLabel.getSize().width);
+            ImageIcon imageIcon = new ImageIcon(image);
             imageLabel.setIcon(imageIcon);
+            imagePath = file.getAbsolutePath();
         }
         else
             //if failed to open file or the user clicked cancel
@@ -163,7 +165,7 @@ public class AddContent extends javax.swing.JFrame {
 
     private void addStoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStoryButtonActionPerformed
         textInput = textArea.getText();
-        if(textInput.isEmpty() && imagePath == null)
+        if(textInput.isEmpty() && image == null)
             //if the text area and image are empty
             JOptionPane.showMessageDialog(null, "Failed to create story.");
         else {
@@ -172,7 +174,7 @@ public class AddContent extends javax.swing.JFrame {
                 content.createStory(userId, null, imagePath);
                 content.saveToFiles();
             }    
-            else if(imagePath == null) {
+            else if(image == null) {
                 content.createStory(userId, textInput, null);
                 content.saveToFiles();
             }    

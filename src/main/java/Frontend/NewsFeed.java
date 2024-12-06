@@ -11,19 +11,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import Backend.Content;
+import Backend.ContentDatabase;
+import Backend.InternalContent;
+import Backend.Post;
+import Backend.ProfileManager;
+import Backend.User;
+import Backend.UserAccountManager;
+import java.time.LocalDateTime;
 
 public class NewsFeed extends javax.swing.JFrame {
 
     private UserAccountManager userManager;
-    private ProfileManager profileManager;
+    private ProfileManager profileManager;    
+    private User currentUser;
+    private ContentDatabase contentManager;
     private String userId;
     private String email;  // Store email as an instance variable
     private ContentDatabase content = new ContentDatabase();
     private ArrayList<Post> posts;
     private ArrayList<Story> stories;
-    private int postCounter = 0;
-    private int storyCounter = 0;
-    private User currentUser;
+    private static int postCounter = 0;
+    private static int storyCounter = 0;
 
     public NewsFeed(String email) {
         setTitle("NewsFeed");
@@ -41,7 +50,7 @@ public class NewsFeed extends javax.swing.JFrame {
             return;
         }
 
-        homeLabel.setText("Welcome, " + this.userId);
+        homeLabel.setText("Welcome, " + currentUser.getUsername());
         this.posts = content.userFriendPosts(userId);  // Retrieve posts for this user
         this.stories = content.userFriendStories(userId);  // Retrieve stories for this user
         profileManager = new ProfileManager();
@@ -318,7 +327,6 @@ public class NewsFeed extends javax.swing.JFrame {
                 }
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "hello world!");
         }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
