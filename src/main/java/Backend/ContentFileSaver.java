@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class ContentFileSaver {
     public void saveStoriesToFile(ArrayList<Story> stories){
-        try (FileWriter fileWriter = new FileWriter("users.json")) {
+        try (FileWriter fileWriter = new FileWriter("stories.json")) {
             StringBuilder jsonBuilder = new StringBuilder();
             jsonBuilder.append("{\n  \"stories\": [\n");
 
