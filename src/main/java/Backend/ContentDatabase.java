@@ -105,8 +105,8 @@ public class ContentDatabase {
         return null;
     }
 
-    public ArrayList<Content> userPosts(String userID){
-        ArrayList<Content> userContent = new ArrayList<>();
+    public ArrayList<Post> userPosts(String userID){
+        ArrayList<Post> userContent = new ArrayList<>();
         for(int i=0;i<posts.size();i++){
             if(posts.get(i).getAuthorID().equals(userID)){
                 userContent.add(posts.get(i));
@@ -118,8 +118,8 @@ public class ContentDatabase {
         return null;
     }
     
-    public ArrayList<Content> userStories(String userID){
-        ArrayList<Content> userContent = new ArrayList<>();
+    public ArrayList<Story> userStories(String userID){
+        ArrayList<Story> userContent = new ArrayList<>();
         for(int i=0;i<stories.size();i++){
             if(stories.get(i).getAuthorID().equals(userID)){
                 userContent.add(stories.get(i));
@@ -131,8 +131,11 @@ public class ContentDatabase {
         return null;
     }
     
-    public void saveToFiles(){
+    public void saveToFiles(ArrayList<User> users){
         ContentFileSaver fS = new ContentFileSaver();
+        for(int i=0;i<users.size();i++){
+            fS.savePostsToUserFile(users.get(i).getEmail(), userPosts(users.get(i).getUserId()));
+        }
         fS.savePostsToFile(posts);
         fS.saveStoriesToFile(stories);
     }
