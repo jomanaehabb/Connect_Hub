@@ -2,13 +2,22 @@ package Frontend;
 
 import Backend.Content;
 import Backend.Post;
+import Backend.ProfileManager;
+import Backend.User;
+import Backend.UserAccountManager;
 
 public class NewsFeedWindow extends javax.swing.JFrame {
+        private User currentUser;
+    private UserAccountManager userManager;
+    private ProfileManager profileManager;
 
-    public NewsFeedWindow() {
+
+    public NewsFeedWindow(String email) {
+                userManager = new UserAccountManager();
+        profileManager = new ProfileManager();
+        this.currentUser = userManager.getUserByEmail(email);
         initComponents();
         setTitle("NewsFeed");
-        homeLabel.setText("Welcome, ");
     }
 
     @SuppressWarnings("unchecked")
@@ -108,7 +117,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        SettingsWindow settings = new SettingsWindow();
+        SettingsWindow settings = new SettingsWindow(currentUser.getEmail());
         settings.setVisible(true);
     }//GEN-LAST:event_settingsButtonActionPerformed
 

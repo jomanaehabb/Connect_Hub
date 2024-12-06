@@ -43,12 +43,12 @@ Backend\InternalContent.class
 Frontend\BlockFriendWindow.class
 Frontend\OnlineOfflineStatusWindow.class
 Backend\UserAccountManager.class
+Backend\FriendsManagement.class
 Frontend\LoginWindow$2.class
 Frontend\ProfileManagementWindow$4.class
 Frontend\NewsFeedWindow$2.class
 Frontend\LoginWindow.class
 Frontend\SettingsWindow$4.class
-Backend\ConnectHub.class
 Backend\ProfileDatabase.class
 Backend\Content.class
 Frontend\SettingsWindow$7.class

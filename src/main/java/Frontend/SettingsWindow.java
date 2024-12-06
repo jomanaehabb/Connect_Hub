@@ -1,10 +1,31 @@
 package Frontend;
 
-public class SettingsWindow extends javax.swing.JFrame {
+import Backend.ProfileManager;
+import Backend.User;
+import Backend.UserAccountManager;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import Backend.User;
+import javax.swing.JOptionPane;
 
-    public SettingsWindow() {
+public class SettingsWindow extends javax.swing.JFrame {
+        private User currentUser;
+    private UserAccountManager userManager;
+    private ProfileManager profileManager;
+
+    public SettingsWindow(String email) {
         initComponents();
+        setLocationRelativeTo(null);
+        userManager = new UserAccountManager();
+        profileManager = new ProfileManager();
+        this.currentUser = userManager.getUserByEmail(email);
+        
         setTitle("Settings");
+                if (currentUser == null) {
+                    JOptionPane.showMessageDialog(this, "User not found", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -12,28 +33,22 @@ public class SettingsWindow extends javax.swing.JFrame {
 
         profileButton = new javax.swing.JButton();
         friendsButton = new javax.swing.JButton();
-        friendsSuggestionsButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         addFriendButton = new javax.swing.JButton();
-        blockFriendButton = new javax.swing.JButton();
-        friendRequestsButton = new javax.swing.JButton();
-        removeFriendButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         profileButton.setText("Profile");
+        profileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileButtonActionPerformed(evt);
+            }
+        });
 
         friendsButton.setText("Friends");
         friendsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 friendsButtonActionPerformed(evt);
-            }
-        });
-
-        friendsSuggestionsButton.setText("Friends Suggestions");
-        friendsSuggestionsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friendsSuggestionsButtonActionPerformed(evt);
             }
         });
 
@@ -51,27 +66,6 @@ public class SettingsWindow extends javax.swing.JFrame {
             }
         });
 
-        blockFriendButton.setText("Block Friend");
-        blockFriendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                blockFriendButtonActionPerformed(evt);
-            }
-        });
-
-        friendRequestsButton.setText("Friend Requests");
-        friendRequestsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friendRequestsButtonActionPerformed(evt);
-            }
-        });
-
-        removeFriendButton.setText("Remove Friend");
-        removeFriendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeFriendButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,11 +73,7 @@ public class SettingsWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(removeFriendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addFriendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(blockFriendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(friendRequestsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(friendsSuggestionsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addFriendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                     .addComponent(friendsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(profileButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -92,32 +82,19 @@ public class SettingsWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addComponent(profileButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addComponent(friendsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(friendsSuggestionsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(friendRequestsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(addFriendButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removeFriendButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(blockFriendButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(29, 29, 29)
                 .addComponent(logoutButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void friendsSuggestionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsSuggestionsButtonActionPerformed
-        SuggestFriendsWindow suggestions = new SuggestFriendsWindow();
-        suggestions.setVisible(true);
-    }//GEN-LAST:event_friendsSuggestionsButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
 
@@ -128,34 +105,31 @@ public class SettingsWindow extends javax.swing.JFrame {
         addFriend.setVisible(true);
     }//GEN-LAST:event_addFriendButtonActionPerformed
 
-    private void blockFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockFriendButtonActionPerformed
-        BlockFriendWindow blockFriend = new BlockFriendWindow();
-        blockFriend.setVisible(true);
-    }//GEN-LAST:event_blockFriendButtonActionPerformed
-
-    private void friendRequestsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendRequestsButtonActionPerformed
-        //FriendRequestsWindow friendRequests = new FriendRequestsWindow();
-        //friendRequests.setVisible(true);
-    }//GEN-LAST:event_friendRequestsButtonActionPerformed
-
     private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsButtonActionPerformed
-        //FriendsListWindow friends = new FriendsListWindow();
-        //friends.setVisible(true);
+
+            FriendsManagementWindow friendsManagementPanel = new FriendsManagementWindow("123");
+            // Embed the panel in a JFrame for testing
+            JFrame frame = new JFrame("Friends Management");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 400);
+            frame.setLocationRelativeTo(null);
+            frame.add(friendsManagementPanel);
+            frame.setVisible(true);
     }//GEN-LAST:event_friendsButtonActionPerformed
 
-    private void removeFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFriendButtonActionPerformed
-        RemoveFriendWindow removeFriend = new RemoveFriendWindow();
-        removeFriend.setVisible(true);
-    }//GEN-LAST:event_removeFriendButtonActionPerformed
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
+        // TODO add your handling code here:
+        ProfileManagementWindow profileManagementWindow = new ProfileManagementWindow(currentUser.getEmail());
+        profileManagementWindow.setVisible(true);
+        profileManagementWindow.pack();
+        profileManagementWindow.setLocationRelativeTo(null); 
+        this.dispose();
+    }//GEN-LAST:event_profileButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addFriendButton;
-    private javax.swing.JButton blockFriendButton;
-    private javax.swing.JButton friendRequestsButton;
     private javax.swing.JButton friendsButton;
-    private javax.swing.JButton friendsSuggestionsButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton profileButton;
-    private javax.swing.JButton removeFriendButton;
     // End of variables declaration//GEN-END:variables
 }

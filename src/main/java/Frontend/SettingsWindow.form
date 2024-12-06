@@ -26,11 +26,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="removeFriendButton" max="32767" attributes="0"/>
-                  <Component id="addFriendButton" max="32767" attributes="0"/>
-                  <Component id="blockFriendButton" max="32767" attributes="0"/>
-                  <Component id="friendRequestsButton" max="32767" attributes="0"/>
-                  <Component id="friendsSuggestionsButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="addFriendButton" pref="135" max="32767" attributes="0"/>
                   <Component id="friendsButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="profileButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="logoutButton" alignment="1" max="32767" attributes="0"/>
@@ -42,21 +38,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="profileButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="friendsButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="friendsSuggestionsButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="friendRequestsButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Component id="addFriendButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="removeFriendButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="blockFriendButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -68,6 +56,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Profile"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="friendsButton">
       <Properties>
@@ -75,14 +66,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="friendsButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="friendsSuggestionsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Friends Suggestions"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="friendsSuggestionsButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logoutButton">
@@ -99,30 +82,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addFriendButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="blockFriendButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Block Friend"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="blockFriendButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="friendRequestsButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Friend Requests"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="friendRequestsButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="removeFriendButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Remove Friend"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeFriendButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

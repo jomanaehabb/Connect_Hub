@@ -259,7 +259,7 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
 
     private void viewNewsFeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewNewsFeedActionPerformed
         // TODO add your handling code here:
-        NewsFeedWindow newsFeedWindow = new NewsFeedWindow();
+        NewsFeedWindow newsFeedWindow = new NewsFeedWindow(currentUser.getEmail());
         newsFeedWindow.setVisible(true);
         newsFeedWindow.pack();
         newsFeedWindow.setLocationRelativeTo(null); 
