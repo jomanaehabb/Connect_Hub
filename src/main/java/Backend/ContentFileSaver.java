@@ -15,7 +15,7 @@ public class ContentFileSaver {
 
                 jsonBuilder.append("    {\n")
                         .append("      \"text\": \"").append(story.getContent().getText()).append("\",\n")
-                        .append("      \"image\": \"").append(story.getContent().getImage().toString()).append("\",\n")
+                        .append("      \"imagePath\": \"").append(story.getContent().getImagePath()).append("\",\n")
                         .append("      \"authorID\": \"").append(story.getAuthorID()).append("\"\n")
                         .append("      \"date\": \"").append(story.getTimeStamp().toString()).append("\"\n")
                         .append("    }");
