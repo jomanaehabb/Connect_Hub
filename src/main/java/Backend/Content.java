@@ -2,7 +2,7 @@ package Backend;
 
 import java.time.LocalDateTime;
 
-public class Content{
+public abstract class Content{
     private static int counter = 1;
     private String contentID;
     String authorID;
