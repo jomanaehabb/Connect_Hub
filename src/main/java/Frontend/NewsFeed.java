@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class NewsFeed extends javax.swing.JFrame {
 
     private UserAccountManager userManager;
-    private ProfileManager profileManager;    
+    private ProfileManager profileManager;
     private User currentUser;
     private ContentDatabase contentManager;
     private String userId;
@@ -72,10 +72,8 @@ public class NewsFeed extends javax.swing.JFrame {
             this.postCounter++;
         } catch (NullPointerException e) {
 
-        }
-        catch (IndexOutOfBoundsException eX)
-        {
-            
+        } catch (IndexOutOfBoundsException eX) {
+
         }
     }
 
