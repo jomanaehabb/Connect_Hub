@@ -50,5 +50,31 @@
     "coverPhotoPath" : "",
     "posts" : [ ],
     "friends" : [ ]
+  },
+  "jomana@gmail.com" : {
+    "userId" : "2b35d369-c231-470f-9213-09551d9f4782",
+    "email" : "jomana@gmail.com",
+    "username" : "Joman.0.a",
+    "hashedPassword" : "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "dateOfBirth" : "2020-02-02",
+    "status" : "Offline",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ ]
+  },
+  "jomanaa@gmail.com" : {
+    "userId" : "c87f8373-6153-41ed-93f0-f11e1f6a6298",
+    "email" : "jomanaa@gmail.com",
+    "username" : "jomana",
+    "hashedPassword" : "773377450f28ef23c98b81f8a568b8f4bfacf61efdd7ef8da8f3e11a1d9fdb44",
+    "dateOfBirth" : "2020-02-02",
+    "status" : "Offline",
+    "bio" : "",
+    "profilePhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\1705700278920.jpeg",
+    "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\9178_9083_9095_9008\\State Diagram.png",
+    "posts" : [ ],
+    "friends" : [ ]
   }
 }
