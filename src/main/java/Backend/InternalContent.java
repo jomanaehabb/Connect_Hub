@@ -28,14 +28,6 @@ public class InternalContent {
     public InternalContent(String text, String imagePath) {
         this.text = text;
         this.imagePath = imagePath;
-<<<<<<< Updated upstream
-        if(imagePath!=null || !"null".equals(imagePath)){ // checking for "null" because of file reading
-            ImageIcon icon = new ImageIcon(imagePath);
-            this.image = icon.getImage(); // turning save path to icon to image
-        }
-        else{
-            imagePath = null; // to prevent errors if imagePath is used elsewhere
-=======
 
         // If the imagePath is valid, load the image from the path
         if (imagePath != null && !"null".equals(imagePath)) {
@@ -44,7 +36,6 @@ public class InternalContent {
         } else {
             // If imagePath is null or "null", set imagePath to null and no image will be loaded
             this.image = null;
->>>>>>> Stashed changes
         }
     }
 
