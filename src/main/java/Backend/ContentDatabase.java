@@ -19,6 +19,7 @@ public class ContentDatabase {
         InternalContent content = new InternalContent(text, image);
         Post post = new Post(userID, content, LocalDateTime.now());
         posts.add(post);
+        saveToFiles(); 
         return post;
     }
 
@@ -26,6 +27,7 @@ public class ContentDatabase {
         InternalContent content = new InternalContent(text, image);
         Story story = new Story(userID, content, LocalDateTime.now());
         stories.add(story);
+        saveToFiles(); 
         return story;
     }
     

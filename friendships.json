@@ -19,6 +19,16 @@
       "user1Username": "omar123",
       "user2Username": "bob101",
       "status": "Pending"
+    },
+    {
+      "user1Username": "123",
+      "user2Username": "omar123",
+      "status": "Pending"
+    },
+    {
+      "user1Username": "123",
+      "user2Username": "alice789",
+      "status": "Pending"
     }
   ]
 }

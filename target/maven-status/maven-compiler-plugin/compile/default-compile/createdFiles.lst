@@ -15,12 +15,11 @@ Frontend\SuggestedFriendsWindow.class
 Frontend\SettingsWindow$2.class
 Frontend\LoginWindow$4.class
 Frontend\toTestFriendsManagementOnly.class
+Frontend\Main.class
 Frontend\NewsFeedWindow.class
-Frontend\SuggestFriendsWindow.class
 Backend\UserUtils.class
 Backend\UserDatabase$1.class
 Frontend\LoginWindow$1.class
-Frontend\SettingsWindow$5.class
 Backend\ContentDatabase.class
 Frontend\AddContentWindow.class
 Backend\FriendshipData.class
@@ -28,7 +27,6 @@ Backend\UserActivity.class
 Frontend\NewsFeedWindow$1.class
 Frontend\SignUpWindow$2.class
 Frontend\AddFriendWindow.class
-Frontend\FriendRequests.class
 Frontend\ProfileManagementWindow$5.class
 Frontend\AddContentWindow$1.class
 Frontend\FriendsManagementWindow.class
@@ -37,7 +35,6 @@ Frontend\RemoveFriendWindow.class
 Backend\ProfileManager.class
 Frontend\SettingsWindow$3.class
 Frontend\ProfileManagementWindow$2.class
-Frontend\SettingsWindow$6.class
 Backend\Profile.class
 Backend\InternalContent.class
 Frontend\BlockFriendWindow.class
@@ -51,10 +48,10 @@ Frontend\LoginWindow.class
 Frontend\SettingsWindow$4.class
 Backend\ProfileDatabase.class
 Backend\Content.class
-Frontend\SettingsWindow$7.class
 Frontend\SignUpWindow$1.class
 Backend\ContentFileSaver.class
 Frontend\testfriendslist.class
+Frontend\Main$1.class
 Frontend\FriendsListWindow.class
 Frontend\SettingsWindow.class
 Frontend\FriendRequestWindow.class
