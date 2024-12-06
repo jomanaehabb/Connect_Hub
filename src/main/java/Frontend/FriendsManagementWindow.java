@@ -1,207 +1,133 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
 
+import Backend.ConnectHub;
+import Frontend.FriendRequestWindow;
+import Frontend.FriendsListWindow;
+import Frontend.SuggestedFriendsWindow;
+
 /**
  *
- * @author cf
+ * @author Lenovo
  */
+public class FriendsManagementWindow extends javax.swing.JPanel {
+    private ConnectHub connectHub; // Backend connection
+    private String currentUsername; // Current logged-in username
 
-
-import Backend.ConnectHub;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-
-public class FriendsManagementWindow extends JFrame {
-    private ConnectHub connectHub; 
-    private String currentUsername; 
-
+    /**
+     * Constructor for FriendsManagementWindow
+     * @param username The username of the logged-in user
+     */
     public FriendsManagementWindow(String username) {
         this.currentUsername = username;
-        this.connectHub = new ConnectHub(); 
+        this.connectHub = new ConnectHub(); // Initialize backend connection
 
-        setTitle("Friends Management");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
-        setLocationRelativeTo(null);
-
-        // Create tabs for easy access to each part of the 
-        JTabbedPane tabbedPane = new JTabbedPane();
-
-        // Add the three tabs (Friend Requests, Friends List, Suggested Friends)
-        tabbedPane.addTab("Friend Requests", createFriendRequestsPanel());
-        tabbedPane.addTab("Friends List", createFriendsListPanel());
-        tabbedPane.addTab("Suggested Friends", createSuggestedFriendsPanel());
-
-        add(tabbedPane);
-
-        setVisible(true);
+        initComponents();   // Initialize GUI components (auto-generated)
+        initializeTabs(username);   // Load dynamic content into the tabs
     }
 
-    // Tab 1: Friend Requests
-    public JPanel createFriendRequestsPanel() {
-        // get the list of friend requests for the current user
-        List<String[]> friendRequests = connectHub.getFriendRequests(currentUsername);
+    /**
+     * NetBeans auto-generated method to initialize GUI components.
+     * This method cannot be changed.
+     */
+    private void initializeTabs(String username) {
+        // Tab 1: Friend Requests
+        FriendRequestWindow friendRequestsPanel = new FriendRequestWindow(username, connectHub);
+        jTabbedPane1.setComponentAt(0, friendRequestsPanel);
 
-        // display the requests
-        JPanel friendRequestsPanel = new JPanel();
-        friendRequestsPanel.setLayout(new BoxLayout(friendRequestsPanel, BoxLayout.Y_AXIS));
+        // Tab 2: Friends List
+        FriendsListWindow friendsListPanel = new FriendsListWindow(username,connectHub);
+        jTabbedPane1.setComponentAt(1, friendsListPanel);
 
-        // get the requester username for the respond to request function
-        for (String[] request : friendRequests) {
-            if (request.length == 1) {  
-                String requesterUsername = request[0];
-
-                JLabel requesterLabel = new JLabel("Friend request from: " + requesterUsername);
-
-                // Accept button
-                JButton acceptButton = new JButton("Accept");
-                acceptButton.addActionListener(e -> {
-                    // Action for the Accept button
-                    connectHub.respondToFriendRequest(requesterUsername, currentUsername, true);
-                    refreshFriendRequestsPanel(friendRequestsPanel);  // Refresh panel after action (doesn't work)
-                });
-
-                // Decline button
-                JButton declineButton = new JButton("Decline");
-                declineButton.addActionListener(e -> {
-                    // Action for the decline button
-                    connectHub.respondToFriendRequest(requesterUsername, currentUsername, false);
-                    refreshFriendRequestsPanel(friendRequestsPanel);  // Refresh panel after action(doesn't work)
-                });
-
-                
-                JPanel requestPanel = new JPanel();
-                requestPanel.add(requesterLabel);
-                requestPanel.add(acceptButton);
-                requestPanel.add(declineButton);
-
-               
-                friendRequestsPanel.add(requestPanel);
-            } else {
-                System.out.println("Invalid friend request: missing username");
-            }
-        }
-
-        // Scroll panel incase of alot of requests
-        JScrollPane scrollPane = new JScrollPane(friendRequestsPanel);
-        scrollPane.setPreferredSize(new Dimension(400, 300));  
-
-        
-        this.add(scrollPane, BorderLayout.CENTER);  
-        this.revalidate();  // Refresh the frame(not working)
-        this.repaint();  // Repaint the frame to display updated content(not working)
-
-        return friendRequestsPanel;  
+        // Tab 3: Suggested Friends
+        SuggestedFriendsWindow suggestFriendsPanel = new SuggestedFriendsWindow(username, connectHub);
+        jTabbedPane1.setComponentAt(2, suggestFriendsPanel);
     }
 
-    // Tab 2: Friends List
-    private JPanel createFriendsListPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
-        JLabel header = new JLabel("Friends List for: " + currentUsername, JLabel.CENTER);
-        panel.add(header, BorderLayout.NORTH);
-
-        // Get a list of friends from the backend
-        List<String> friends = connectHub.getFriendsList(currentUsername); // Assume this returns a list of usernames
-
-        // Panel to display friends
-        JPanel friendsPanel = new JPanel(new GridLayout(friends.size(), 1, 5, 5));
-        for (String friend : friends) {
-            JPanel friendRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-            // Display the friend's username
-            JLabel friendLabel = new JLabel(friend);
-            friendRow.add(friendLabel);
-
-            // Add Block button
-            JButton blockButton = new JButton("Block");
-            blockButton.addActionListener(e -> {
-                connectHub.blockFriend(currentUsername, friend); // Call blockFriend in backend
-                JOptionPane.showMessageDialog(this, friend + " has been blocked.");
-            });
-            friendRow.add(blockButton);
-
-            // Add Remove button
-            JButton removeButton = new JButton("Remove");
-            removeButton.addActionListener(e -> {
-                connectHub.removeFriend(currentUsername, friend); // Call removeFriend in backend
-                JOptionPane.showMessageDialog(this, friend + " has been removed from your friends list.");
-            });
-            friendRow.add(removeButton);
-
-            // Add the row to the panel
-            friendsPanel.add(friendRow);
-        }
-
-        JScrollPane scrollPane = new JScrollPane(friendsPanel);
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        return panel;
-    }
+    /**
+     * Custom initialization method to load dynamic content into the tabs.
+     * This method allows dynamic updates based on the logged-in username.
+     * @param username The username of the logged-in user
+     */
+    
 
 
-    // Tab 3: Suggested Friends
-    private JPanel createSuggestedFriendsPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
-        JLabel header = new JLabel("Suggested Friends for: " + currentUsername, JLabel.CENTER);
-        panel.add(header, BorderLayout.NORTH);
 
-        // get a list of suggested friends from the backend
-        List<String> suggestedFriends = connectHub.suggestFriends(currentUsername);
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        JPanel suggestionsPanel = new JPanel(new GridLayout(suggestedFriends.size(), 1, 5, 5));
-        for (String suggestion : suggestedFriends) {
-            JPanel suggestionRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            JLabel suggestionLabel = new JLabel(suggestion);
-            JButton addButton = new JButton("Add");
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
-            // Action of Add button
-            addButton.addActionListener(e -> {
-                connectHub.sendFriendRequest(currentUsername, suggestion);
-                JOptionPane.showMessageDialog(this, "Friend request sent to " + suggestion + "!");
-                refreshSuggestedFriendsPanel(panel); // Refresh the panel after action(not working)
-            });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 394, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
 
-            suggestionRow.add(suggestionLabel);
-            suggestionRow.add(addButton);
-            suggestionsPanel.add(suggestionRow);
-        }
+        jTabbedPane1.addTab("Friend Requests", jPanel1);
 
-        JScrollPane scrollPane = new JScrollPane(suggestionsPanel);
-        panel.add(scrollPane, BorderLayout.CENTER);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 394, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
 
-        return panel;
-    }
+        jTabbedPane1.addTab("Friends List", jPanel2);
 
-    // Refresh methods to reload data(not working)
-    private void refreshFriendRequestsPanel(JPanel panel) {
-        getContentPane().remove(panel);
-        add(createFriendRequestsPanel());
-        revalidate();
-        repaint();
-    }
-    // not working
-    private void refreshSuggestedFriendsPanel(JPanel panel) {
-        getContentPane().remove(panel);
-        add(createSuggestedFriendsPanel());
-        revalidate();
-        repaint();
-    }
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 394, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
 
-    /*public static void main(String[] args) {
-        // Replace this with the actuall Login logic(for now use this simple login window)
-        String username = JOptionPane.showInputDialog("Enter your username:");
-        if (username != null && !username.isEmpty()) {
-            new MainGUI(username);
-        } else {
-            System.out.println("Username is required!");
-        }
-    }
-*/
+        jTabbedPane1.addTab("Suggested Friends", jPanel3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Friend Requests");
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    // End of variables declaration//GEN-END:variables
 }
-
