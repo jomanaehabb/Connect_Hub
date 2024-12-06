@@ -123,4 +123,14 @@ public class User implements Serializable {
         // Use a real hashing library like BCrypt or SHA-256 for production
         return Integer.toHexString(password.hashCode());
     }
+    
+    // Setter for friends list
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
+    }
+    
+    @Override
+    public String toString() {
+        return username;
+    }
 }
