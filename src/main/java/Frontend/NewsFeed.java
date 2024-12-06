@@ -52,7 +52,7 @@ public class NewsFeed extends javax.swing.JFrame {
 
         homeLabel.setText("Welcome, " + currentUser.getUsername());
         this.posts = content.allPosts();  // Retrieve posts for this user
-        this.stories = content.userFriendStories(userId);  // Retrieve stories for this user
+        this.stories = content.allStories();  // Retrieve stories for this user
         profileManager = new ProfileManager();
         this.showPost();
         this.showStory();
@@ -60,16 +60,18 @@ public class NewsFeed extends javax.swing.JFrame {
 
     private void showPost() {
         try {
-            postUserLabel.setText(((Content) posts.get(this.postCounter)).getAuthorID());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = ((Content) posts.get(this.postCounter)).getTimeStamp().format(formatter);
-            postDateLabel.setText(formattedDateTime);
-            postTextLabel.setText(((Content) posts.get(this.postCounter)).getContent().getText());
-            if (((Content) posts.get(this.postCounter)).getContent().getImage() != null) {
-                ImageIcon imageIcon = new ImageIcon(((Content) posts.get(this.postCounter)).getContent().getImage());
-                postImageLabel.setIcon(imageIcon);
+            if(posts!=null){
+                postUserLabel.setText(((Content) posts.get(this.postCounter)).getAuthorID());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDateTime = ((Content) posts.get(this.postCounter)).getTimeStamp().format(formatter);
+                postDateLabel.setText(formattedDateTime);
+                postTextLabel.setText(((Content) posts.get(this.postCounter)).getContent().getText());
+                if (((Content) posts.get(this.postCounter)).getContent().getImage() != null) {
+                    ImageIcon imageIcon = new ImageIcon(((Content) posts.get(this.postCounter)).getContent().getImage());
+                    postImageLabel.setIcon(imageIcon);
+                }
+                this.postCounter++;
             }
-            this.postCounter++;
         } catch (NullPointerException e) {
 
         } catch (IndexOutOfBoundsException eX) {
@@ -79,16 +81,18 @@ public class NewsFeed extends javax.swing.JFrame {
 
     private void showStory() {
         try {
-            storyUserLabel.setText(((Content) stories.get(this.storyCounter)).getAuthorID());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = ((Content) stories.get(this.storyCounter)).getTimeStamp().format(formatter);
-            storyDateLabel.setText(formattedDateTime);
-            storyTextLabel.setText(((Content) stories.get(this.storyCounter)).getContent().getText());
-            if (((Content) stories.get(this.storyCounter)).getContent().getImage() != null) {
-                ImageIcon imageIcon = new ImageIcon(((Content) stories.get(this.storyCounter)).getContent().getImage());
-                storyImageLabel.setIcon(imageIcon);
+            if(stories!=null){
+                 storyUserLabel.setText(((Content) stories.get(this.storyCounter)).getAuthorID());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDateTime = ((Content) stories.get(this.storyCounter)).getTimeStamp().format(formatter);
+                storyDateLabel.setText(formattedDateTime);
+                storyTextLabel.setText(((Content) stories.get(this.storyCounter)).getContent().getText());
+                if (((Content) stories.get(this.storyCounter)).getContent().getImage() != null) {
+                    ImageIcon imageIcon = new ImageIcon(((Content) stories.get(this.storyCounter)).getContent().getImage());
+                    storyImageLabel.setIcon(imageIcon);
+                }
+                this.storyCounter++;
             }
-            this.storyCounter++;
         } catch (NullPointerException e) {
 
         }
