@@ -12,6 +12,7 @@ import java.util.Map;
  * It uses JSON file storage for saving and loading profile information.
  */
 public class ProfileDatabase {
+    private static ProfileDatabase instance;
     private static final String PROFILE_DB = "profiles.json";  // Path to the JSON file storing profile data
     private Map<String, Profile> profiles = new HashMap<>();   // A map to store profiles by userId
     private final ObjectMapper objectMapper = new ObjectMapper();  // Jackson ObjectMapper for JSON serialization and deserialization
@@ -19,8 +20,15 @@ public class ProfileDatabase {
     /**
      * Constructor to initialize ProfileDatabase and load existing data.
      */
-    public ProfileDatabase() {
+    private ProfileDatabase() {
         loadDatabase();
+    }
+    
+    public ProfileDatabase getInstance(){
+        if(instance == null){
+            instance = new ProfileDatabase();
+        }
+        return instance;
     }
 
     /**

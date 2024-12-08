@@ -5,13 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContentDatabase {
+    private static ContentDatabase instance;
     private ArrayList<Post> posts;
     private ArrayList<Story> stories;
 
-    public ContentDatabase(){
+    private ContentDatabase(){
         ContentFileReader fR = new ContentFileReader(); // automatically reads file upon creation
         this.posts = fR.readPostsFile(this);
         this.stories = fR.readStoriesFile(this);
+    }
+    
+    public ContentDatabase getInstance(){
+        if(instance == null){
+            instance = new ContentDatabase();
+        }
+        return instance;
     }
 
     public Post createPost(String userID, String text, String imagePath){

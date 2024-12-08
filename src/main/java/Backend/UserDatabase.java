@@ -8,13 +8,21 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class UserDatabase {
+    private static UserDatabase instance;
     private ArrayList<User> users;  // List to hold the user objects
     private final String databaseFile = "users.json";  // Path to the file that stores user data
 
     // Constructor: Initializes the list of users and loads the database from the file
-    public UserDatabase() {
+    private UserDatabase() {
         users = new ArrayList<>();
         loadDatabase();
+    }
+    
+    public UserDatabase getInstance(){
+        if(instance == null){
+            instance = new UserDatabase();
+        }
+        return instance;
     }
 
     // Loads the user data from the JSON file into the 'users' list
