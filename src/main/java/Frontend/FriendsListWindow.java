@@ -10,7 +10,6 @@ import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *

@@ -1,12 +1,9 @@
 package Frontend;
 
 import Backend.ProfileManager;
-import Backend.User;
 import Backend.UserAccountManager;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import Backend.User;
-import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.String;
 import javax.swing.JOptionPane;
 
 public class SettingsWindow extends javax.swing.JFrame {

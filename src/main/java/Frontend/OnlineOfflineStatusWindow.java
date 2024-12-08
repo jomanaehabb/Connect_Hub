@@ -11,7 +11,6 @@ package Frontend;
   // Use the MainGUI.java instead
   // This should be handled through the loggin page not here but incase it didn't we can do it here
 import Backend.UserActivity;
-
 import java.awt.event.*;
 import javax.swing.*;
 

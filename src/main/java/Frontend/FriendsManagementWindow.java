@@ -5,9 +5,6 @@
 package Frontend;
 
 import Backend.FriendsManagement;
-import Frontend.FriendRequestWindow;
-import Frontend.FriendsListWindow;
-import Frontend.SuggestedFriendsWindow;
 
 /**
  *

@@ -4,7 +4,6 @@
  */
 package Frontend;
 
-import Backend.FriendsManagement;
 import java.awt.BorderLayout;
 import Backend.FriendsManagement;
 import javax.swing.*;

@@ -1,6 +1,5 @@
 package Frontend;
 
-import Backend.Content;
 import Backend.ContentDatabase;
 import Backend.InternalContent;
 import Backend.Post;

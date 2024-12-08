@@ -1,24 +1,16 @@
 package Frontend;
 
-import Backend.Content;
-import Backend.ContentDatabase;
-import Backend.Post;
-import Backend.ProfileManager;
 import Backend.Story;
-import Backend.User;
-import Backend.UserAccountManager;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import Backend.Content;
 import Backend.ContentDatabase;
-import Backend.InternalContent;
 import Backend.Post;
 import Backend.ProfileManager;
 import Backend.User;
 import Backend.UserAccountManager;
-import java.time.LocalDateTime;
 
 public class NewsFeed extends javax.swing.JFrame {
 

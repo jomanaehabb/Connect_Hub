@@ -4,8 +4,6 @@
  */
 package Frontend;
 
-import Backend.FriendsManagement;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**

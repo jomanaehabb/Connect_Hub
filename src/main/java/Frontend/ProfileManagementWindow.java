@@ -4,7 +4,6 @@ import Backend.ProfileManager;
 import Backend.User;
 import Backend.UserAccountManager;
 import java.awt.Image;
-import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
