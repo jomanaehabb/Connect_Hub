@@ -18,7 +18,7 @@ public class ProfileManagementWindow extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Managing profile");
-        userManager = new UserAccountManager();
+        userManager = UserAccountManager.getInstance();
         profileManager = new ProfileManager();
         this.currentUser = userManager.getUserByEmail(email);
         

@@ -24,7 +24,7 @@ public class ProfileDatabase {
         loadDatabase();
     }
     
-    public ProfileDatabase getInstance(){
+    public static ProfileDatabase getInstance(){
         if(instance == null){
             instance = new ProfileDatabase();
         }

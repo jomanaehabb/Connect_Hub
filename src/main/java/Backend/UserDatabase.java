@@ -18,7 +18,7 @@ public class UserDatabase {
         loadDatabase();
     }
     
-    public UserDatabase getInstance(){
+    public static UserDatabase getInstance(){
         if(instance == null){
             instance = new UserDatabase();
         }

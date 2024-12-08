@@ -15,7 +15,7 @@ public class ContentDatabase {
         this.stories = fR.readStoriesFile(this);
     }
     
-    public ContentDatabase getInstance(){
+    public static ContentDatabase getInstance(){
         if(instance == null){
             instance = new ContentDatabase();
         }

@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.ContentDatabase;
+import Backend.User;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -13,10 +14,10 @@ public class AddContent extends javax.swing.JFrame {
     private String textInput;
     private Image image;
     private String imagePath;
-    public AddContent(String userId) {
+    public AddContent(User currentUser) {
         initComponents();
         setTitle("Add Content");
-        this.userId = userId;
+        this.userId = currentUser.getUserId();
     }
     
     
@@ -122,7 +123,7 @@ public class AddContent extends javax.swing.JFrame {
             //if the text area and image are empty
             JOptionPane.showMessageDialog(null, "Failed to create post.");
         else {
-            ContentDatabase content = new ContentDatabase();
+            ContentDatabase content = ContentDatabase.getInstance();
             if(textInput.isEmpty()) {
                 content.createPost(userId, null, imagePath);
                 content.saveToFiles();
@@ -169,7 +170,7 @@ public class AddContent extends javax.swing.JFrame {
             //if the text area and image are empty
             JOptionPane.showMessageDialog(null, "Failed to create story.");
         else {
-            ContentDatabase content = new ContentDatabase();
+            ContentDatabase content = ContentDatabase.getInstance();
             if(textInput.isEmpty()) {
                 content.createStory(userId, null, imagePath);
                 content.saveToFiles();

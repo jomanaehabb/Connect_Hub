@@ -201,7 +201,7 @@ public class LoginWindow extends javax.swing.JFrame {
         // Get input values
         String email = emailField.getText();
         String password = String.valueOf(passwordField.getPassword());
-        UserAccountManager userAccountManager = new UserAccountManager();
+        UserAccountManager userAccountManager = UserAccountManager.getInstance();
         if (email.isEmpty() || password.isEmpty()) {
     JOptionPane.showMessageDialog(this, "Email and Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
     return;

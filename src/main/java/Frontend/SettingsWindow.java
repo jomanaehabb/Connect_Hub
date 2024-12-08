@@ -14,10 +14,9 @@ public class SettingsWindow extends javax.swing.JFrame {
     public SettingsWindow(String email) {
         initComponents();
         setLocationRelativeTo(null);
-        userManager = new UserAccountManager();
+        userManager = UserAccountManager.getInstance();
         profileManager = new ProfileManager();
         this.currentUser = userManager.getUserByEmail(email);
-        String userString = this.currentUser.toString();
         
         setTitle("Settings");
                 if (currentUser == null) {

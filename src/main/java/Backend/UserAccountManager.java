@@ -4,10 +4,17 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class UserAccountManager extends Manager {
-
+    private static UserAccountManager instance;
     // Constructor loads the users from the database when an instance is created
-    public UserAccountManager() {
+    private UserAccountManager() {
         loadUsers();
+    }
+    
+    public static UserAccountManager getInstance(){
+        if(instance == null){
+            instance = new UserAccountManager();
+        }
+        return instance;
     }
 
     /**

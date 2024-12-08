@@ -231,7 +231,7 @@ public class SignUpWindow extends javax.swing.JFrame {
         }
             try {
         LocalDate registrationDate = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        UserAccountManager userAccountManager = new UserAccountManager();
+        UserAccountManager userAccountManager = UserAccountManager.getInstance();
         if (userAccountManager.signUp(email, username, password, registrationDate)) {
             JOptionPane.showMessageDialog(this, "Sign Up Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
             new ProfileManagementWindow(email).setVisible(true);

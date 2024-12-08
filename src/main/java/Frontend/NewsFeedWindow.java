@@ -1,24 +1,18 @@
 package Frontend;
 
 import Backend.ContentDatabase;
-import Backend.InternalContent;
-import Backend.Post;
-import Backend.ProfileManager;
 import Backend.User;
 import Backend.UserAccountManager;
-import java.time.LocalDateTime;
 
 public class NewsFeedWindow extends javax.swing.JFrame {
 
     private User currentUser;
     private UserAccountManager userManager;
-    private ProfileManager profileManager;
     private ContentDatabase contentManager;
 
     public NewsFeedWindow(String email) {
-        userManager = new UserAccountManager();
-        profileManager = new ProfileManager();
-        contentManager = new ContentDatabase();
+        userManager = UserAccountManager.getInstance();
+        contentManager = ContentDatabase.getInstance();
         this.currentUser = userManager.getUserByEmail(email);
         initComponents();
         setTitle("NewsFeed");
@@ -140,10 +134,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        InternalContent internalContent = new InternalContent(null, null); // Placeholder for actual content
-        LocalDateTime timeStamp = LocalDateTime.now();
-        Post post = new Post(currentUser.getUserId(), internalContent, timeStamp);
-        AddContentWindow addContentWindow = new AddContentWindow(currentUser, contentManager);
+        AddContent addContentWindow = new AddContent(currentUser);
         addContentWindow.setVisible(true);
         addContentWindow.pack();
         addContentWindow.setLocationRelativeTo(null);

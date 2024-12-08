@@ -8,19 +8,14 @@ import javax.swing.JOptionPane;
 import Backend.Content;
 import Backend.ContentDatabase;
 import Backend.Post;
-import Backend.ProfileManager;
 import Backend.User;
 import Backend.UserAccountManager;
 
 public class NewsFeed extends javax.swing.JFrame {
 
     private UserAccountManager userManager;
-    private ProfileManager profileManager;
-    private User currentUser;
     private ContentDatabase contentManager;
-    private String userId;
-    private String email;  // Store email as an instance variable
-    private ContentDatabase content = new ContentDatabase();
+    private User currentUser;
     private ArrayList<Post> posts;
     private ArrayList<Story> stories;
     private static int postCounter = 0;
@@ -29,13 +24,11 @@ public class NewsFeed extends javax.swing.JFrame {
     public NewsFeed(String email) {
         setTitle("NewsFeed");
         initComponents();
-        this.email = email;  // Assign the email to the instance variable
-        this.userManager = new UserAccountManager();
+        this.userManager = UserAccountManager.getInstance();
         this.currentUser = userManager.getUserByEmail(email);  // Retrieve the current user by email
+        this.contentManager = ContentDatabase.getInstance();
 
-        if (currentUser != null) {
-            this.userId = currentUser.getUserId();  // Assuming 'getUserId' exists in the User class
-        } else {
+        if (currentUser == null) {
             // Handle case where user is not found
             JOptionPane.showMessageDialog(null, "User not found");
             this.dispose();  // Close the window if the user is not found
@@ -43,30 +36,27 @@ public class NewsFeed extends javax.swing.JFrame {
         }
 
         homeLabel.setText("Welcome, " + currentUser.getUsername());
-        this.posts = content.allPosts();  // Retrieve posts for this user
-        this.stories = content.allStories();  // Retrieve stories for this user
-        profileManager = new ProfileManager();
+        this.posts = contentManager.allPosts();  // Retrieve posts for this user
+        this.stories = contentManager.allStories();  // Retrieve stories for this user
         this.showPost();
         this.showStory();
     }
 
     private void showPost() {
         try {
-            if(posts!=null){
-                postUserLabel.setText(((Content) posts.get(this.postCounter)).getAuthorID());
+            if(posts!=null && postCounter<posts.size()){
+                postUserLabel.setText(posts.get(this.postCounter).getAuthorID());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formattedDateTime = ((Content) posts.get(this.postCounter)).getTimeStamp().format(formatter);
+                String formattedDateTime = posts.get(this.postCounter).getTimeStamp().format(formatter);
                 postDateLabel.setText(formattedDateTime);
-                postTextLabel.setText(((Content) posts.get(this.postCounter)).getContent().getText());
-                if (((Content) posts.get(this.postCounter)).getContent().getImage() != null) {
+                postTextLabel.setText(posts.get(this.postCounter).getContent().getText());
+                if (posts.get(this.postCounter).getContent().getImage() != null) {
                     ImageIcon imageIcon = new ImageIcon(((Content) posts.get(this.postCounter)).getContent().getImage());
                     postImageLabel.setIcon(imageIcon);
                 }
                 this.postCounter++;
             }
-        } catch (NullPointerException e) {
-
-        } catch (IndexOutOfBoundsException eX) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
 
         }
     }
@@ -74,18 +64,18 @@ public class NewsFeed extends javax.swing.JFrame {
     private void showStory() {
         try {
             if(stories!=null){
-                 storyUserLabel.setText(((Content) stories.get(this.storyCounter)).getAuthorID());
+                 storyUserLabel.setText(stories.get(this.storyCounter).getAuthorID());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formattedDateTime = ((Content) stories.get(this.storyCounter)).getTimeStamp().format(formatter);
+                String formattedDateTime = stories.get(this.storyCounter).getTimeStamp().format(formatter);
                 storyDateLabel.setText(formattedDateTime);
-                storyTextLabel.setText(((Content) stories.get(this.storyCounter)).getContent().getText());
-                if (((Content) stories.get(this.storyCounter)).getContent().getImage() != null) {
+                storyTextLabel.setText(stories.get(this.storyCounter).getContent().getText());
+                if (stories.get(this.storyCounter).getContent().getImage() != null) {
                     ImageIcon imageIcon = new ImageIcon(((Content) stories.get(this.storyCounter)).getContent().getImage());
                     storyImageLabel.setIcon(imageIcon);
                 }
                 this.storyCounter++;
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
 
         }
     }
@@ -299,13 +289,13 @@ public class NewsFeed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        SettingsWindow settings = new SettingsWindow(email);  // Use the instance variable email
+        SettingsWindow settings = new SettingsWindow(currentUser.getEmail());  // Use the instance variable email
         settings.setVisible(true);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         //send user in the constructor here
-        AddContent addContent = new AddContent("1");
+        AddContent addContent = new AddContent(currentUser);
         addContent.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
