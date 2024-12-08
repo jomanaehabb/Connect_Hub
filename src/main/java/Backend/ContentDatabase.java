@@ -1,6 +1,5 @@
 package Backend;
 
-import java.awt.Image;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public abstract class Content{
     private static int counter = 1;
     private String contentID;
-    String authorID;
+    private String authorID;
     private InternalContent content;
     private LocalDateTime timeStamp;
 
