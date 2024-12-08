@@ -1,13 +1,11 @@
 package Backend;
 
-import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 
 public class ContentFileReader {
 
@@ -38,9 +36,9 @@ public class ContentFileReader {
                         try {
                             String text = fullStory.split("\"text\": \"")[1].split("\"")[0];
                             String imagePath = fullStory.split("\"imagePath\": \"")[1].split("\"")[0];
-                            String authorID = fullStory.split("\"authorID\":\"")[1].split("\"")[0];
-                            String date = fullStory.split("\"date\":\"")[1].split("\"")[0];
-                            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                            String authorID = fullStory.split("\"authorID\": \"")[1].split("\"")[0];
+                            String date = fullStory.split("\"date\": \"")[1].split("\"")[0];
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                             LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
                             InternalContent content = new InternalContent(text, imagePath);
                             Story storyInstance = new Story(authorID, content, timeStamp);
@@ -84,9 +82,9 @@ public class ContentFileReader {
                         try {
                             String text = fullPost.split("\"text\": \"")[1].split("\"")[0];
                             String imagePath = fullPost.split("\"imagePath\": \"")[1].split("\"")[0];
-                            String authorID = fullPost.split("\"authorID\":\"")[1].split("\"")[0];
-                            String date = fullPost.split("\"date\":\"")[1].split("\"")[0];
-                            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                            String authorID = fullPost.split("\"authorID\": \"")[1].split("\"")[0];
+                            String date = fullPost.split("\"date\": \"")[1].split("\"")[0];
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                             LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
                             InternalContent content = new InternalContent(text, imagePath);
                             Post postInstance = new Post(authorID, content, timeStamp);

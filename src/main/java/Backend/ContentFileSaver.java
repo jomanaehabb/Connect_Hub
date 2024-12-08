@@ -1,11 +1,9 @@
 package Backend;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class ContentFileSaver {
     public void saveStoriesToFile(ArrayList<Story> stories){
@@ -18,12 +16,12 @@ public class ContentFileSaver {
                 if(story.getContent().getImagePath() == null){
                     story.getContent().setImagePath("null");
                 }
-
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                 jsonBuilder.append("    {\n")
                         .append("      \"text\": \"").append(story.getContent().getText()).append("\",\n")
                         .append("      \"imagePath\": \"").append(story.getContent().getImagePath()).append("\",\n")
                         .append("      \"authorID\": \"").append(story.getAuthorID()).append("\"\n")
-                        .append("      \"date\": \"").append(story.getTimeStamp().toString()).append("\"\n")
+                        .append("      \"date\": \"").append(story.getTimeStamp().format(formatter)).append("\"\n")
                         .append("    }");
                 if (i < stories.size() - 1) {
                     jsonBuilder.append(",");
@@ -50,11 +48,13 @@ public class ContentFileSaver {
                 if(post.getContent().getImagePath() == null){
                     post.getContent().setImagePath("null");
                 }
+                
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                 jsonBuilder.append("    {\n")
                         .append("      \"text\": \"").append(post.getContent().getText()).append("\",\n")
                         .append("      \"imagePath\": \"").append(post.getContent().getImagePath()).append("\",\n")
                         .append("      \"authorID\": \"").append(post.getAuthorID()).append("\"\n")
-                        .append("      \"date\": \"").append(post.getTimeStamp().toString()).append("\"\n")
+                        .append("      \"date\": \"").append(post.getTimeStamp().format(formatter)).append("\"\n")
                         .append("    }");
                 if (i < posts.size() - 1) {
                     jsonBuilder.append(",");
@@ -68,57 +68,6 @@ public class ContentFileSaver {
 
             System.out.println("Posts JSON file updated successfully!");
         } catch (IOException e) {
-        }
-    }
-    
-    public void savePostsToUserFile(String email, ArrayList<Post> posts) {
-        try {
-            // read the existing users.json file
-            FileReader fileReader = new FileReader("users.json");
-            StringBuilder jsonBuilder = new StringBuilder();
-            int i;
-            while ((i = fileReader.read()) != -1) {
-                jsonBuilder.append((char) i);
-            }
-            fileReader.close();
-
-            JSONObject usersJson = new JSONObject(jsonBuilder.toString());
-
-            // find the user by email
-            if (!usersJson.has(email)) {
-                System.out.println("Error: User with email " + email + " not found.");
-                return;
-            }
-
-            // get the user's posts array
-            JSONObject userObject = usersJson.getJSONObject(email);
-            JSONArray postsArray = userObject.getJSONArray("posts");
-
-            // add new posts to the array
-            for (Post post : posts) {
-                JSONObject postJson = new JSONObject();
-                postJson.put("text", post.getContent().getText());
-                postJson.put("imagePath", post.getContent().getImagePath() == null ? "null" : post.getContent().getImagePath());
-                postJson.put("authorID", post.getAuthorID());
-                postJson.put("date", post.getTimeStamp().toString());
-                postsArray.put(postJson);
-            }
-
-            // update the user's posts in the JSON
-            userObject.put("posts", postsArray);
-            usersJson.put(email, userObject);
-
-            // write the updated JSON to the file
-            try (FileWriter fileWriter = new FileWriter("users.json")) {
-                fileWriter.write(usersJson.toString(4)); // indentation for readability
-                fileWriter.flush();
-            }
-
-            System.out.println("Posts added successfully to user: " + email);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
