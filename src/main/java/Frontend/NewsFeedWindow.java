@@ -12,7 +12,7 @@ import Backend.User;
 import Backend.UserAccountManager;
 import Backend.UserDatabase;
 
-public class NewsFeed extends javax.swing.JFrame {
+public class NewsFeedWindow extends javax.swing.JFrame {
 
     private UserAccountManager userManager;
     private ContentDatabase contentManager;
@@ -23,7 +23,7 @@ public class NewsFeed extends javax.swing.JFrame {
     private static int postCounter = 0;
     private static int storyCounter = 0;
 
-    public NewsFeed(String email) {
+    public NewsFeedWindow(String email) {
         setTitle("NewsFeed");
         initComponents();
         this.userManager = UserAccountManager.getInstance();
@@ -298,7 +298,7 @@ public class NewsFeed extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         //send user in the constructor here
-        AddContent addContent = new AddContent(currentUser);
+        AddContentWindow addContent = new AddContentWindow(currentUser);
         addContent.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
