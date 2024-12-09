@@ -185,14 +185,6 @@ The development of Connect Hub was organized into four main parts. Each member o
 
 ---
 
-## Setup
-
-### Prerequisites
-
-- Java 11 or higher.
-- A suitable IDE (e.g., IntelliJ IDEA, Eclipse).
-- Basic understanding of Java, Swing, and JSON handling.
-
 ### Installation
 
 1. **Clone the repository**:
