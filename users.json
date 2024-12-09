@@ -76,5 +76,31 @@
     "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\9178_9083_9095_9008\\State Diagram.png",
     "posts" : [ ],
     "friends" : [ "jomana@gmail.com", "123456@gmail.com" ]
+  },
+  "1212@gmail.com" : {
+    "userId" : "edc4458f-4820-44ea-9c39-531570ecfde8",
+    "email" : "1212@gmail.com",
+    "username" : "12344",
+    "hashedPassword" : "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "dateOfBirth" : "2020-02-02",
+    "status" : "Offline",
+    "bio" : "",
+    "profilePhotoPath" : "",
+    "coverPhotoPath" : "",
+    "posts" : [ ],
+    "friends" : [ ]
+  },
+  "123@gmail.com" : {
+    "userId" : "756b765f-544c-4da1-ada8-d98a7a9440b4",
+    "email" : "123@gmail.com",
+    "username" : "1122",
+    "hashedPassword" : "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "dateOfBirth" : "2020-02-02",
+    "status" : "Online",
+    "bio" : "hi hi hiii :3 meoww",
+    "profilePhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\1705700278920.jpeg",
+    "coverPhotoPath" : "C:\\Users\\DELL-G3\\OneDrive\\Desktop\\1705700278920.jpeg",
+    "posts" : [ ],
+    "friends" : [ ]
   }
 }

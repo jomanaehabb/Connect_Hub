@@ -113,6 +113,7 @@ public class UserAccountManager extends Manager {
     public User getUserByEmail(String email) {
         return users.get(email);
     }
+    
 
     /**
      * Method to log a user out by setting their status to "Offline".

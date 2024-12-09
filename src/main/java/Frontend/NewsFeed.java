@@ -10,11 +10,13 @@ import Backend.ContentDatabase;
 import Backend.Post;
 import Backend.User;
 import Backend.UserAccountManager;
+import Backend.UserDatabase;
 
 public class NewsFeed extends javax.swing.JFrame {
 
     private UserAccountManager userManager;
     private ContentDatabase contentManager;
+    private UserDatabase userDatabase;
     private User currentUser;
     private ArrayList<Post> posts;
     private ArrayList<Story> stories;
@@ -27,6 +29,7 @@ public class NewsFeed extends javax.swing.JFrame {
         this.userManager = UserAccountManager.getInstance();
         this.currentUser = userManager.getUserByEmail(email);  // Retrieve the current user by email
         this.contentManager = ContentDatabase.getInstance();
+        this.userDatabase = UserDatabase.getInstance();
 
         if (currentUser == null) {
             // Handle case where user is not found
@@ -45,7 +48,7 @@ public class NewsFeed extends javax.swing.JFrame {
     private void showPost() {
         try {
             if(posts!=null && postCounter<posts.size()){
-                postUserLabel.setText(posts.get(this.postCounter).getAuthorID());
+                postUserLabel.setText(userDatabase.getUserNameByID(posts.get(this.postCounter).getAuthorID()));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = posts.get(this.postCounter).getTimeStamp().format(formatter);
                 postDateLabel.setText(formattedDateTime);
@@ -64,7 +67,7 @@ public class NewsFeed extends javax.swing.JFrame {
     private void showStory() {
         try {
             if(stories!=null){
-                 storyUserLabel.setText(stories.get(this.storyCounter).getAuthorID());
+                 storyUserLabel.setText(userDatabase.getUserNameByID(stories.get(this.storyCounter).getAuthorID()));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = stories.get(this.storyCounter).getTimeStamp().format(formatter);
                 storyDateLabel.setText(formattedDateTime);
