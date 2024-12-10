@@ -19,8 +19,12 @@ public class UserDatabase {
     }
     
     public static UserDatabase getInstance(){
-        if(instance == null){
-            instance = new UserDatabase();
+         if(instance == null){
+             synchronized (UserDatabase.class){
+                if(instance == null){
+                    instance = new UserDatabase();
+                }
+            }
         }
         return instance;
     }

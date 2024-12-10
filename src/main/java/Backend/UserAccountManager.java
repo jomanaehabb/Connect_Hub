@@ -11,8 +11,12 @@ public class UserAccountManager extends Manager {
     }
     
     public static UserAccountManager getInstance(){
-        if(instance == null){
-            instance = new UserAccountManager();
+         if(instance == null){
+             synchronized (UserAccountManager.class){
+                if(instance == null){
+                    instance = new UserAccountManager();
+                }
+            }
         }
         return instance;
     }
