@@ -116,6 +116,7 @@ public class NewsFeed extends javax.swing.JFrame {
         refreshButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         refreshButton.setForeground(new java.awt.Color(255, 255, 255));
         refreshButton.setText("Refresh");
+        refreshButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
@@ -126,6 +127,7 @@ public class NewsFeed extends javax.swing.JFrame {
         settingsButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         settingsButton.setForeground(new java.awt.Color(255, 255, 255));
         settingsButton.setText("Settings");
+        settingsButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingsButtonActionPerformed(evt);
@@ -135,14 +137,20 @@ public class NewsFeed extends javax.swing.JFrame {
         homeLabel.setBackground(new java.awt.Color(255, 255, 255));
         homeLabel.setForeground(new java.awt.Color(255, 255, 255));
 
+        contentTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
         contentTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        postsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        postsFramePanel.setBackground(new java.awt.Color(255, 255, 255));
         postsFramePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         postDateLabel.setText(" ");
 
         postUserLabel.setText(" ");
 
+        postTextLabel.setBackground(new java.awt.Color(255, 255, 255));
+        postTextLabel.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(postTextLabel);
 
         postImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -183,7 +191,7 @@ public class NewsFeed extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(postImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout postsPanelLayout = new javax.swing.GroupLayout(postsPanel);
@@ -263,7 +271,7 @@ public class NewsFeed extends javax.swing.JFrame {
             .addGroup(storiesPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(postsFramePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         contentTabbedPane.addTab("Stories", storiesPanel);
@@ -272,6 +280,7 @@ public class NewsFeed extends javax.swing.JFrame {
         addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Add Content");
+        addButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
