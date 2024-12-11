@@ -8,13 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-public class AddContent extends javax.swing.JFrame {
+public class AddContentWindow extends javax.swing.JFrame {
 
     private String userId;
     private String textInput;
     private Image image;
     private String imagePath;
-    public AddContent(User currentUser) {
+    public AddContentWindow(User currentUser) {
         initComponents();
         setTitle("Add Content");
         this.userId = currentUser.getUserId();
