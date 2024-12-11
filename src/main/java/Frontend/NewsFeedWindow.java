@@ -98,6 +98,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         postTextLabel = new javax.swing.JLabel();
         postImageLabel = new javax.swing.JLabel();
+        profilePhotoLabel1 = new javax.swing.JLabel();
         storiesPanel = new javax.swing.JPanel();
         postsFramePanel1 = new javax.swing.JPanel();
         storyDateLabel = new javax.swing.JLabel();
@@ -105,14 +106,17 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         storyTextLabel = new javax.swing.JLabel();
         storyImageLabel = new javax.swing.JLabel();
+        profilePhotoLabel2 = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         refreshButton.setBackground(new java.awt.Color(102, 153, 255));
         refreshButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         refreshButton.setForeground(new java.awt.Color(255, 255, 255));
         refreshButton.setText("Refresh");
+        refreshButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
@@ -123,53 +127,71 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         settingsButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         settingsButton.setForeground(new java.awt.Color(255, 255, 255));
         settingsButton.setText("Settings");
+        settingsButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingsButtonActionPerformed(evt);
             }
         });
 
+        homeLabel.setBackground(new java.awt.Color(255, 255, 255));
+        homeLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        contentTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
         contentTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        postsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        postsFramePanel.setBackground(new java.awt.Color(255, 255, 255));
         postsFramePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         postDateLabel.setText(" ");
 
         postUserLabel.setText(" ");
 
+        postTextLabel.setBackground(new java.awt.Color(255, 255, 255));
+        postTextLabel.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(postTextLabel);
 
         postImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        profilePhotoLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout postsFramePanelLayout = new javax.swing.GroupLayout(postsFramePanel);
         postsFramePanel.setLayout(postsFramePanelLayout);
         postsFramePanelLayout.setHorizontalGroup(
             postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postsFramePanelLayout.createSequentialGroup()
-                .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postsFramePanelLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(postUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postsFramePanelLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(postDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(postImageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(postImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(postsFramePanelLayout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profilePhotoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(postUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(postDateLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(postsFramePanelLayout.createSequentialGroup()
+                            .addGap(103, 103, 103)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         postsFramePanelLayout.setVerticalGroup(
             postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postsFramePanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(postUserLabel)
+                .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postsFramePanelLayout.createSequentialGroup()
+                        .addComponent(postUserLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postDateLabel))
+                    .addComponent(profilePhotoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(postDateLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(postImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout postsPanelLayout = new javax.swing.GroupLayout(postsPanel);
@@ -177,16 +199,16 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         postsPanelLayout.setHorizontalGroup(
             postsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postsPanelLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(postsFramePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap())
         );
         postsPanelLayout.setVerticalGroup(
             postsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postsPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(postsFramePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addComponent(postsFramePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         contentTabbedPane.addTab("Posts", postsPanel);
@@ -201,30 +223,33 @@ public class NewsFeedWindow extends javax.swing.JFrame {
 
         storyImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        profilePhotoLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout postsFramePanel1Layout = new javax.swing.GroupLayout(postsFramePanel1);
         postsFramePanel1.setLayout(postsFramePanel1Layout);
         postsFramePanel1Layout.setHorizontalGroup(
             postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postsFramePanel1Layout.createSequentialGroup()
-                .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postsFramePanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(storyUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(postsFramePanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                            .addComponent(storyDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(storyImageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(profilePhotoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                    .addComponent(storyDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(storyImageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(storyUserLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         postsFramePanel1Layout.setVerticalGroup(
             postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postsFramePanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(storyUserLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(storyDateLabel)
+                .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postsFramePanel1Layout.createSequentialGroup()
+                        .addComponent(storyUserLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(storyDateLabel))
+                    .addComponent(profilePhotoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -237,7 +262,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         storiesPanelLayout.setHorizontalGroup(
             storiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, storiesPanelLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(postsFramePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -246,7 +271,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
             .addGroup(storiesPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(postsFramePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         contentTabbedPane.addTab("Stories", storiesPanel);
@@ -255,6 +280,7 @@ public class NewsFeedWindow extends javax.swing.JFrame {
         addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Add Content");
+        addButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
@@ -334,6 +360,8 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     private javax.swing.JPanel postsFramePanel;
     private javax.swing.JPanel postsFramePanel1;
     private javax.swing.JPanel postsPanel;
+    private javax.swing.JLabel profilePhotoLabel1;
+    private javax.swing.JLabel profilePhotoLabel2;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton settingsButton;
     private javax.swing.JPanel storiesPanel;

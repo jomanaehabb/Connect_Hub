@@ -26,7 +26,11 @@ public class ProfileDatabase {
     
     public static ProfileDatabase getInstance(){
         if(instance == null){
-            instance = new ProfileDatabase();
+             synchronized (ProfileDatabase.class){
+                if(instance == null){
+                    instance = new ProfileDatabase();
+                }
+            }
         }
         return instance;
     }
