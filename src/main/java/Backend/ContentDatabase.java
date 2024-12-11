@@ -13,8 +13,14 @@ public class ContentDatabase {
     private ContentDatabase(){
         userDatabase = UserDatabase.getInstance();
         ContentFileReader fR = new ContentFileReader(); // automatically reads file upon creation
-        this.posts = fR.readPostsFile(this);
-        this.stories = fR.readStoriesFile(this);
+        this.posts = fR.readPostsFromUsersFile(instance);
+        this.stories = fR.readStoriesFromUsersFile(instance);
+        storyChecker();
+    }
+    
+    private static void storyChecker(){
+        Thread storyChecker = new Thread();
+        storyChecker.start();
     }
     
     public static ContentDatabase getInstance(){
@@ -152,7 +158,7 @@ public class ContentDatabase {
     
     public void saveToFiles(){
         ContentFileSaver fS = new ContentFileSaver();
-        fS.savePostsToFile(posts);
-        fS.saveStoriesToFile(stories);
+        fS.saveStoriesToUsersFile(stories);
+        fS.savePostsToUsersFile(posts);
     }
 }

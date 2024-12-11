@@ -5,15 +5,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ContentFileReader {
 
     // Method to read stories from a file
-    public ArrayList<Story> readStoriesFile(ContentDatabase cD) {
+    public ArrayList<Story> readStoriesFromUsersFile(ContentDatabase cD) {
         ArrayList<Story> stories = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("stories.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("users.json"));
             StringBuilder jsonBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -22,44 +26,47 @@ public class ContentFileReader {
             reader.close();
 
             String jsonContent = jsonBuilder.toString();
-            // Check if the content has a valid JSON structure for stories
-            if (jsonContent.contains("[") && jsonContent.contains("]")) {
-                String storiesArray = jsonContent.substring(
-                        jsonContent.indexOf("[") + 1,
-                        jsonContent.lastIndexOf("]")
-                ).trim();
+            JSONObject usersJson = new JSONObject(jsonContent);
 
-                // Ensure the array is not empty
-                if (!storiesArray.isEmpty()) {
-                    for (String story : storiesArray.split("},\n?")) { // Account for new lines
-                        String fullStory = story + (story.endsWith("}") ? "" : "}");
+            for (String email : usersJson.keySet()) {
+                JSONObject userObject = usersJson.getJSONObject(email);
+
+                if (userObject.has("stories")) {
+                    JSONArray storiesArray = userObject.getJSONArray("stories");
+
+                    for (int i = 0; i < storiesArray.length(); i++) {
+                        JSONObject storyObject = storiesArray.getJSONObject(i);
+
                         try {
-                            String text = fullStory.split("\"text\": \"")[1].split("\"")[0];
-                            String imagePath = fullStory.split("\"imagePath\": \"")[1].split("\"")[0];
-                            String authorID = fullStory.split("\"authorID\": \"")[1].split("\"")[0];
-                            String date = fullStory.split("\"date\": \"")[1].split("\"")[0];
+                            String text = storyObject.getString("text");
+                            String imagePath = storyObject.getString("imagePath");
+                            String authorID = storyObject.getString("authorID");
+                            String date = storyObject.getString("date");
+
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                             LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
+
                             InternalContent content = new InternalContent(text, imagePath);
                             Story storyInstance = new Story(authorID, content, timeStamp);
                             stories.add(storyInstance);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.err.println("Error parsing story data: " + fullStory);
+                        } catch (JSONException | DateTimeParseException e) {
+                            System.err.println("Error parsing story data for user " + email + ": " + e.getMessage());
                         }
                     }
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Error reading stories file: " + e.getMessage());
+        } catch (IOException | JSONException e) {
+            System.err.println("Error reading users file: " + e.getMessage());
         }
+
         return stories;
     }
 
     // Method to read posts from a file
-    public ArrayList<Post> readPostsFile(ContentDatabase cD) {
+    public ArrayList<Post> readPostsFromUsersFile(ContentDatabase cD) {
         ArrayList<Post> posts = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("posts.json"));
+            BufferedReader reader = new BufferedReader(new FileReader("users.json"));
             StringBuilder jsonBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -68,36 +75,39 @@ public class ContentFileReader {
             reader.close();
 
             String jsonContent = jsonBuilder.toString();
-            // Check if the content has a valid JSON structure for posts
-            if (jsonContent.contains("[") && jsonContent.contains("]")) {
-                String postsArray = jsonContent.substring(
-                        jsonContent.indexOf("[") + 1,
-                        jsonContent.lastIndexOf("]")
-                ).trim();
+            JSONObject usersJson = new JSONObject(jsonContent);
 
-                // Ensure the array is not empty
-                if (!postsArray.isEmpty()) {
-                    for (String post : postsArray.split("},\n?")) { // Account for new lines
-                        String fullPost = post + (post.endsWith("}") ? "" : "}");
+            for (String email : usersJson.keySet()) {
+                JSONObject userObject = usersJson.getJSONObject(email);
+
+                if (userObject.has("posts")) {
+                    JSONArray postsArray = userObject.getJSONArray("posts");
+
+                    for (int i = 0; i < postsArray.length(); i++) {
+                        JSONObject storyObject = postsArray.getJSONObject(i);
+
                         try {
-                            String text = fullPost.split("\"text\": \"")[1].split("\"")[0];
-                            String imagePath = fullPost.split("\"imagePath\": \"")[1].split("\"")[0];
-                            String authorID = fullPost.split("\"authorID\": \"")[1].split("\"")[0];
-                            String date = fullPost.split("\"date\": \"")[1].split("\"")[0];
+                            String text = storyObject.getString("text");
+                            String imagePath = storyObject.getString("imagePath");
+                            String authorID = storyObject.getString("authorID");
+                            String date = storyObject.getString("date");
+
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                             LocalDateTime timeStamp = LocalDateTime.parse(date, formatter);
+
                             InternalContent content = new InternalContent(text, imagePath);
                             Post postInstance = new Post(authorID, content, timeStamp);
                             posts.add(postInstance);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.err.println("Error parsing post data: " + fullPost);
+                        } catch (JSONException | DateTimeParseException e) {
+                            System.err.println("Error parsing story data for user " + email + ": " + e.getMessage());
                         }
                     }
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Error reading posts file: " + e.getMessage());
+        } catch (IOException | JSONException e) {
+            System.err.println("Error reading users file: " + e.getMessage());
         }
+
         return posts;
     }
 }
