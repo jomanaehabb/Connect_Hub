@@ -8,8 +8,10 @@ public class ContentDatabase {
     private static ContentDatabase instance;
     private ArrayList<Post> posts;
     private ArrayList<Story> stories;
+    private UserDatabase userDatabase;
 
     private ContentDatabase(){
+        userDatabase = UserDatabase.getInstance();
         ContentFileReader fR = new ContentFileReader(); // automatically reads file upon creation
         this.posts = fR.readPostsFile(this);
         this.stories = fR.readStoriesFile(this);
@@ -30,6 +32,7 @@ public class ContentDatabase {
         InternalContent content = new InternalContent(text, imagePath);
         Post post = new Post(userID, content, LocalDateTime.now());
         posts.add(post);
+        saveToFiles();
         return post;
     }
 
@@ -37,23 +40,28 @@ public class ContentDatabase {
         InternalContent content = new InternalContent(text, imagePath);
         Story story = new Story(userID, content, LocalDateTime.now());
         stories.add(story);
+        saveToFiles();
         return story;
     }
 
     public void deletePost(String postID){
         posts.remove(findPost(postID));
+        saveToFiles();
     }
 
     public void deleteStory(String storyID){
         stories.remove(findStory(storyID));
+        saveToFiles();
     }
 
     public void deletePost(Post post){
         posts.remove(post);
+        saveToFiles();
     }
 
     public void deleteStory(Story story){
         stories.remove(story);
+        saveToFiles();
     }
 
     public Post findPost(String postID){

@@ -34,6 +34,7 @@ public class AddContent extends javax.swing.JFrame {
         addImageButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         writeLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         writeLabel.setText("Write what's on your mind! :3");
@@ -63,6 +64,7 @@ public class AddContent extends javax.swing.JFrame {
         textArea.setRows(10);
         jScrollPane1.setViewportView(textArea);
 
+        imageLabel.setBackground(new java.awt.Color(255, 255, 255));
         imageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         addImageButton.setBackground(new java.awt.Color(102, 153, 255));
