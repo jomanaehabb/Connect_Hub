@@ -1,30 +1,52 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package Backend;
 
-import Backend.User;
-import java.io.IOException;
-import java.util.List;
-
+/**
+ *
+ * @author DELL-G3
+ */
+import Validation.Validator;
 
 public class ProfileManager {
-private final ProfileDatabase database;
-    private final UserDatabase userDatabase;
+    private User user;
 
-    public ProfileManager() throws IOException {
-        this.database = new ProfileDatabase();
-        this.userDatabase = new UserDatabase(); // Initialize UserDatabase
+    public ProfileManager(User user) {
+        this.user = user;
     }
-
-    public void updateProfile(String userId, String bio, String profilePhotoPath, String coverPhotoPath) throws IOException {
-        Profile profile = database.getProfile(userId);
-        profile.setBio(bio);
-        profile.setProfilePhotoPath(profilePhotoPath);
-        profile.setCoverPhotoPath(coverPhotoPath);
-        database.saveProfile(userId, profile);
-        System.out.println("Profile updated successfully!");
+//    public boolean changeEmail (String email){
+//        boolean isVaildEmail = Validator.isEmail(email);
+//        if(isVaildEmail){
+//        user.setEmail(email);
+//        return true;
+//        }
+//        return false;
+//    }
+//    public boolean changeUserName (String userName){
+//        user.setUserName(userName);
+//        return true;
+//    }
+    public boolean changePassword(String password){
+        boolean isValidPassword = Validator.isPassword(password);
+        if(isValidPassword){
+        user.setPassword(password);
+        return true;
+        }
+        return false;
     }
-
-    public List<String> getUserFriends(String email) {
-        User user = userDatabase.getUser(email); // Access UserDatabase
-        return (user != null) ? user.getFriends() : null;
+    public boolean changeProfilePhoto(String profilePhoto){
+        user.setProfilePhoto(profilePhoto);
+        return true;
+    }
+    public boolean changeCoverPhoto(String CoverPhoto) {
+        user.setCoverPhoto(CoverPhoto);
+        return true;
+    }
+    public boolean changeBio (String bio){
+        user.setBio(bio);
+        return true;
     }
 }

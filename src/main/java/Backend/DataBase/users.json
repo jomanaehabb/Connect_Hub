@@ -1,0 +1,35 @@
+[
+  {
+    "userId": "U1",
+    "email": "user1@gmail.com",
+    "userName": "testUser",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "12,12,2020",
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
+  },
+  {
+    "userId": "U2",
+    "email": "newuser@gmail.com",
+    "userName": "newuser",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "12,12,1998",
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
+  }
+]
