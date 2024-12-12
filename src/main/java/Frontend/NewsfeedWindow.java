@@ -203,6 +203,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
+        status.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         status.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
