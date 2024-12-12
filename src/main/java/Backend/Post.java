@@ -1,34 +1,37 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package Backend;
+
+/**
+ *
+ * @author DELL-G3
+ */
 
 import java.time.LocalDateTime;
 
-public class Post extends Content {
-    private String postContent; // Renamed to avoid conflict with Content class
-    private LocalDateTime postTimestamp; // Renamed for clarity
-    private String imagePath;
 
-    // Corrected constructor
-    public Post(String postContent, LocalDateTime postTimestamp, String imagePath, String authorID) {
-        super(authorID, null, postTimestamp); // Assuming InternalContent is null for now
-        this.postContent = postContent;
-        this.postTimestamp = postTimestamp;
-        this.imagePath = imagePath;
+public class Post extends Content{
+    private static int id;
+
+    public Post(String photo, String contentID, String authorID, String text, LocalDateTime timePosted) {
+        super(photo, contentID, authorID, text, timePosted);
     }
 
-    // Default constructor
-    public Post() {
-        super(null, null, null); // Placeholder values for superclass constructor
-        this.postContent = "";
-        this.postTimestamp = LocalDateTime.now();
-        this.imagePath = "";
+    public Post(String photo, String authorID, String text) {//optional photo
+
+        /*null should be sent from the front end*/
+        super(photo, "P-"+id++, authorID, text, LocalDateTime.now());
+    }
+    public Post(String photo,String contentID, String authorID, String text) {//optional photo
+
+        /*null should be sent from the front end*/
+        super(photo, contentID, authorID, text,LocalDateTime.now());
     }
 
-
-    public LocalDateTime getTimestamp() {
-        return postTimestamp;
-    }
-
-    public String getImagePath() {
-        return imagePath;
+    public static void setId(int id) {
+        Post.id = id;
     }
 }
