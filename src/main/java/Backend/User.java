@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String coverPhotoPath;
     private LocalDate dateOfBirth;
     private List<Post> posts;
+    private List<Story> stories;
     private List<String> friends;
 
     /**
@@ -137,6 +138,26 @@ public class User implements Serializable {
     // Setter for friends list
     public void setFriends(List<String> friends) {
         this.friends = friends;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public void setStories(List<Story> stories) {
+        this.stories = stories;
+    }
+
+    public List<Story> getStories() {
+        return stories;
     }
 
     @Override
