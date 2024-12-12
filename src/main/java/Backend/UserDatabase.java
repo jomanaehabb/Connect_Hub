@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class UserDatabase {
     private static UserDatabase instance;
@@ -16,6 +17,7 @@ public class UserDatabase {
     private UserDatabase() {
         users = new ArrayList<>();
         loadDatabase();
+        loadUsersFromFile();//used to search for users
     }
     
     public static UserDatabase getInstance(){
@@ -134,4 +136,41 @@ public class UserDatabase {
         }
         return null;
     }
+  
+    //function to load users from the users.json file. used in searching users 
+    private void loadUsersFromFile() {
+        File file = new File(databaseFile);
+
+        if (file.exists()) {
+            System.out.println("Database file found: " + databaseFile);
+
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new JavaTimeModule());
+                objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+                if (file.length() > 0) {
+                    Map<String, User> userMap = objectMapper.readValue(file, new TypeReference<Map<String, User>>() {
+                    });
+                    users = new ArrayList<>(userMap.values()); // Extract values (user objects) into the list
+                    System.out.println("Users loaded: " + users.size());
+
+                    for (User user : users) {
+                        System.out.println("Loaded user: " + user.getUsername() + " (" + user.getEmail() + ")");
+                    }
+                } else {
+                    System.out.println("Database file is empty.");
+                    users = new ArrayList<>(); // Initialize an empty list
+                }
+            } catch (IOException e) {
+                System.err.println("Failed to load users: " + e.getMessage());
+                e.printStackTrace();
+                users = new ArrayList<>(); // Initialize empty list in case of error
+            }
+        } else {
+            System.out.println("Database file not found: " + databaseFile);
+            users = new ArrayList<>(); // Initialize empty list if file doesn't exist
+        }
+    }
+
 }
