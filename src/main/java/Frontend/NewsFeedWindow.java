@@ -1,373 +1,557 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package Frontend;
 
-import Backend.Story;
-import java.time.format.DateTimeFormatter;
+import Backend.Manager;
+import Backend.FriendManagement.PostString;
+import Backend.GroupString;
+import Backend.Online;
+import Frontend.Group.MyGroups;
+import Frontend.Group.MyGroupsCreator;
+import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import Backend.Content;
-import Backend.ContentDatabase;
-import Backend.Post;
-import Backend.User;
-import Backend.UserAccountManager;
-import Backend.UserDatabase;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
-public class NewsFeedWindow extends javax.swing.JFrame {
+/**
+ *
+ * @author carls
+ */
+public class NewsfeedWindow extends javax.swing.JFrame {
 
-    private UserAccountManager userManager;
-    private ContentDatabase contentManager;
-    private UserDatabase userDatabase;
-    private User currentUser;
-    private ArrayList<Post> posts;
-    private ArrayList<Story> stories;
-    private static int postCounter = 0;
-    private static int storyCounter = 0;
-
-    public NewsFeedWindow(String email) {
-        setTitle("NewsFeed");
+    /**
+     * Creates new form NewsfeedWindow
+     */
+    private Manager a ;
+    public NewsfeedWindow(Manager a) {
         initComponents();
-        this.userManager = UserAccountManager.getInstance();
-        this.currentUser = userManager.getUserByEmail(email);  // Retrieve the current user by email
-        this.contentManager = ContentDatabase.getInstance();
-        this.userDatabase = UserDatabase.getInstance();
-
-        if (currentUser == null) {
-            // Handle case where user is not found
-            JOptionPane.showMessageDialog(null, "User not found");
-            this.dispose();  // Close the window if the user is not found
-            return;
-        }
-
-        homeLabel.setText("Welcome, " + currentUser.getUsername());
-        this.posts = contentManager.allPosts();  // Retrieve posts for this user
-        this.stories = contentManager.allStories();  // Retrieve stories for this user
-        this.showPost();
-        this.showStory();
-    }
-
-    private void showPost() {
-        try {
-            if(posts!=null && postCounter<posts.size()){
-                ImageIcon image = new ImageIcon(userDatabase.getUserByID(posts.get(this.postCounter).getAuthorID()).getProfilePhotoPath());
-                profilePhotoLabel1.setIcon(image);
-                postUserLabel.setText(userDatabase.getUserByID(posts.get(this.postCounter).getAuthorID()).getUsername());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formattedDateTime = posts.get(this.postCounter).getTimeStamp().format(formatter);
-                postDateLabel.setText(formattedDateTime);
-                postTextLabel.setText(posts.get(this.postCounter).getContent().getText());
-                if (posts.get(this.postCounter).getContent().getImage() != null) {
-                    ImageIcon imageIcon = new ImageIcon(posts.get(this.postCounter).getContent().getImage());
-                    postImageLabel.setIcon(imageIcon);
-                }
-                this.postCounter++;
+        this.a = a;
+         postPanel.setLayout(new javax.swing.BoxLayout(postPanel, javax.swing.BoxLayout.Y_AXIS));
+         ImageIcon imageIcon = new ImageIcon(a.getProfilePhoto());
+            Image image = imageIcon.getImage().getScaledInstance(
+                223, 
+                85, 
+                Image.SCALE_SMOOTH
+            );
+            photoLabel.setIcon(new ImageIcon(image));
+            photoLabel.setText("");
+            ArrayList<Online> o = a.getOnline();
+            DefaultTableModel model = (DefaultTableModel) status.getModel();
+            model.setRowCount(0);
+        for(Online on : o){
+            //DefaultTableModel model = new DefaultTableModel();
+            
+            String user  = on.getUser();
+            String status;
+            if(on.getStatus()){
+                status = "online";
             }
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-
-        }
-    }
-
-    private void showStory() {
-        try {
-            if(stories!=null){
-                ImageIcon image = new ImageIcon(userDatabase.getUserByID(posts.get(this.postCounter).getAuthorID()).getProfilePhotoPath());
-                profilePhotoLabel2.setIcon(image);
-                 storyUserLabel.setText(userDatabase.getUserByID(stories.get(this.storyCounter).getAuthorID()).getUsername());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String formattedDateTime = stories.get(this.storyCounter).getTimeStamp().format(formatter);
-                storyDateLabel.setText(formattedDateTime);
-                storyTextLabel.setText(stories.get(this.storyCounter).getContent().getText());
-                if (stories.get(this.storyCounter).getContent().getImage() != null) {
-                    ImageIcon imageIcon = new ImageIcon(((Content) stories.get(this.storyCounter)).getContent().getImage());
-                    storyImageLabel.setIcon(imageIcon);
-                }
-                this.storyCounter++;
+            else{
+                status = "offline";
             }
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-
+            model.addRow(new Object[]{user, status});    
+           
         }
+        ArrayList<PostString> postString = a.getPosts();
+        for(PostString p : postString){
+            String date = p.getDate();
+            String photo = p.getPhoto();
+            String name = p.getAuthor();
+            String text = p.getText();
+            if(photo.equals("No file selected")){
+                PostText pt = new PostText(text, name, date);
+                postPanel.add(pt);
+            }
+            else{
+                PostImage pi = new PostImage(text, photo, name, date);
+                postPanel.add(pi);
+            }
+            postPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 100));
+            postPanel.revalidate();
+            postPanel.repaint(); 
+        }
+        ArrayList<PostString> storyString = a.getStories();
+        for(PostString s : storyString){
+            String date = s.getDate();
+            String photo = s.getPhoto();
+            String name = s.getAuthor();
+            String text = s.getText();
+            if(photo.equals("No file selected")){
+                PostText pt = new PostText(text, name, date);
+                storyPanel.add(pt);
+            }
+            else{
+                StoryImage si = new StoryImage(text, text, date, name);
+                storyPanel.add(si);
+            }
+            storyPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            storyPanel.revalidate();
+            storyPanel.repaint(); 
+        }
+        ArrayList<GroupString> groupString = a.getMyGroups();
+        for(GroupString g : groupString){
+            if(g.getRule().equalsIgnoreCase("owner")){
+                System.out.println("carl");
+                String groupPhoto = g.getPhoto();
+                String groupName = g.getName();
+                String groupID = g.getId();
+                MyGroupsCreator myGroup = new MyGroupsCreator(a,groupID,groupPhoto,groupName);
+                GroupPanel1.add(myGroup);
+            }
+            else{
+                System.out.println("mina");
+                String groupPhoto = g.getPhoto();
+                String groupName = g.getName();
+                String groupID = g.getId();
+                MyGroups myGroup = new MyGroups(a,groupID,groupPhoto,groupName);
+                GroupPanel1.add(myGroup);
+            }
+        }
+        GroupPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        GroupPanel1.revalidate();
+        GroupPanel1.repaint();
     }
 
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        refreshButton = new javax.swing.JButton();
-        settingsButton = new javax.swing.JButton();
-        homeLabel = new javax.swing.JLabel();
-        contentTabbedPane = new javax.swing.JTabbedPane();
-        postsPanel = new javax.swing.JPanel();
-        postsFramePanel = new javax.swing.JPanel();
-        postDateLabel = new javax.swing.JLabel();
-        postUserLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        postTextLabel = new javax.swing.JLabel();
-        postImageLabel = new javax.swing.JLabel();
-        profilePhotoLabel1 = new javax.swing.JLabel();
-        storiesPanel = new javax.swing.JPanel();
-        postsFramePanel1 = new javax.swing.JPanel();
-        storyDateLabel = new javax.swing.JLabel();
-        storyUserLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        storyPanel = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        postPanel = new javax.swing.JPanel();
+        photoLabel = new javax.swing.JLabel();
+        RefreshButton = new javax.swing.JButton();
+        profileMangmentButton = new javax.swing.JButton();
+        LogoutButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        storyTextLabel = new javax.swing.JLabel();
-        storyImageLabel = new javax.swing.JLabel();
-        profilePhotoLabel2 = new javax.swing.JLabel();
-        addButton = new javax.swing.JButton();
+        status = new javax.swing.JTable();
+        friendManagement_btn = new javax.swing.JButton();
+        jSearchField = new javax.swing.JTextField();
+        SearchUserBtn = new javax.swing.JButton();
+        MyGroupsLabel = new javax.swing.JLabel();
+        MyGroupsPane = new javax.swing.JScrollPane();
+        GroupPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        GroupSuggestPane = new javax.swing.JScrollPane();
+        NotificitionButton = new javax.swing.JButton();
+        SearchGroupButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        refreshButton.setBackground(new java.awt.Color(102, 153, 255));
-        refreshButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        refreshButton.setForeground(new java.awt.Color(255, 255, 255));
-        refreshButton.setText("Refresh");
-        refreshButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
+        jScrollPane3.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        storyPanel.setLayout(new javax.swing.BoxLayout(storyPanel, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane3.setViewportView(storyPanel);
+
+        jScrollPane4.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jScrollPane4ComponentAdded(evt);
+            }
+        });
+        jScrollPane4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jScrollPane4FocusGained(evt);
             }
         });
 
-        settingsButton.setBackground(new java.awt.Color(102, 153, 255));
-        settingsButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        settingsButton.setForeground(new java.awt.Color(255, 255, 255));
-        settingsButton.setText("Settings");
-        settingsButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+        postPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        postPanel.setAutoscrolls(true);
+        postPanel.setLayout(new javax.swing.BoxLayout(postPanel, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane4.setViewportView(postPanel);
+
+        photoLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        photoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        photoLabel.setText("photo");
+
+        RefreshButton.setBackground(new java.awt.Color(0, 153, 255));
+        RefreshButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RefreshButton.setForeground(new java.awt.Color(255, 255, 255));
+        RefreshButton.setText("Refresh");
+        RefreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsButtonActionPerformed(evt);
+                RefreshButtonActionPerformed(evt);
             }
         });
 
-        homeLabel.setBackground(new java.awt.Color(255, 255, 255));
-
-        contentTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
-        contentTabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        postsPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        postsFramePanel.setBackground(new java.awt.Color(255, 255, 255));
-        postsFramePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        postDateLabel.setText(" ");
-
-        postUserLabel.setText(" ");
-
-        postTextLabel.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(postTextLabel);
-
-        postImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        profilePhotoLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout postsFramePanelLayout = new javax.swing.GroupLayout(postsFramePanel);
-        postsFramePanel.setLayout(postsFramePanelLayout);
-        postsFramePanelLayout.setHorizontalGroup(
-            postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postsFramePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(profilePhotoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(postImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                    .addComponent(postUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(postDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        postsFramePanelLayout.setVerticalGroup(
-            postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postsFramePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(postsFramePanelLayout.createSequentialGroup()
-                        .addComponent(postUserLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(postDateLabel))
-                    .addComponent(profilePhotoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(postImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout postsPanelLayout = new javax.swing.GroupLayout(postsPanel);
-        postsPanel.setLayout(postsPanelLayout);
-        postsPanelLayout.setHorizontalGroup(
-            postsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postsPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(postsFramePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        postsPanelLayout.setVerticalGroup(
-            postsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postsPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(postsFramePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        contentTabbedPane.addTab("Posts", postsPanel);
-
-        storiesPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        postsFramePanel1.setBackground(new java.awt.Color(255, 255, 255));
-        postsFramePanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        storyDateLabel.setText(" ");
-
-        storyUserLabel.setText(" ");
-
-        jScrollPane2.setViewportView(storyTextLabel);
-
-        storyImageLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        profilePhotoLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout postsFramePanel1Layout = new javax.swing.GroupLayout(postsFramePanel1);
-        postsFramePanel1.setLayout(postsFramePanel1Layout);
-        postsFramePanel1Layout.setHorizontalGroup(
-            postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postsFramePanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(profilePhotoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(storyDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(storyUserLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(storyImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        postsFramePanel1Layout.setVerticalGroup(
-            postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(postsFramePanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(postsFramePanel1Layout.createSequentialGroup()
-                        .addComponent(storyUserLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(storyDateLabel))
-                    .addComponent(profilePhotoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(storyImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout storiesPanelLayout = new javax.swing.GroupLayout(storiesPanel);
-        storiesPanel.setLayout(storiesPanelLayout);
-        storiesPanelLayout.setHorizontalGroup(
-            storiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(storiesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(postsFramePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        storiesPanelLayout.setVerticalGroup(
-            storiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(storiesPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(postsFramePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        contentTabbedPane.addTab("Stories", storiesPanel);
-
-        addButton.setBackground(new java.awt.Color(102, 153, 255));
-        addButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Add Content");
-        addButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        profileMangmentButton.setBackground(new java.awt.Color(0, 153, 255));
+        profileMangmentButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        profileMangmentButton.setForeground(new java.awt.Color(255, 255, 255));
+        profileMangmentButton.setText("My profile");
+        profileMangmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                profileMangmentButtonActionPerformed(evt);
             }
         });
+
+        LogoutButton.setBackground(new java.awt.Color(0, 153, 255));
+        LogoutButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LogoutButton.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
+            }
+        });
+
+        status.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "User", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(status);
+        if (status.getColumnModel().getColumnCount() > 0) {
+            status.getColumnModel().getColumn(0).setPreferredWidth(120);
+            status.getColumnModel().getColumn(0).setMaxWidth(120);
+            status.getColumnModel().getColumn(1).setPreferredWidth(121);
+            status.getColumnModel().getColumn(1).setMaxWidth(121);
+        }
+
+        friendManagement_btn.setBackground(new java.awt.Color(102, 153, 255));
+        friendManagement_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        friendManagement_btn.setForeground(new java.awt.Color(255, 255, 255));
+        friendManagement_btn.setText("Friend Settings");
+        friendManagement_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                friendManagement_btnActionPerformed(evt);
+            }
+        });
+
+        jSearchField.setText("Search...");
+
+        SearchUserBtn.setBackground(new java.awt.Color(0, 153, 255));
+        SearchUserBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SearchUserBtn.setText("Search User");
+
+        MyGroupsLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        MyGroupsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MyGroupsLabel.setText("My Groups");
+
+        MyGroupsPane.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        GroupPanel1.setLayout(new javax.swing.BoxLayout(GroupPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        MyGroupsPane.setViewportView(GroupPanel1);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Group Suggestions");
+
+        NotificitionButton.setBackground(new java.awt.Color(0, 153, 255));
+        NotificitionButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        NotificitionButton.setForeground(new java.awt.Color(255, 255, 255));
+        NotificitionButton.setText("Notifications");
+        NotificitionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NotificitionButtonActionPerformed(evt);
+            }
+        });
+
+        SearchGroupButton1.setBackground(new java.awt.Color(51, 153, 255));
+        SearchGroupButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SearchGroupButton1.setText("Search Group");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(homeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(settingsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton))
-            .addComponent(contentTabbedPane)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(GroupSuggestPane)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(MyGroupsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(MyGroupsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 1, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(SearchUserBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(SearchGroupButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profileMangmentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LogoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(friendManagement_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(photoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(NotificitionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refreshButton)
-                    .addComponent(settingsButton)
-                    .addComponent(homeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentTabbedPane))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(photoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RefreshButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(profileMangmentButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LogoutButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(friendManagement_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NotificitionButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchUserBtn)
+                            .addComponent(SearchGroupButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(MyGroupsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MyGroupsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(GroupSuggestPane))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        SettingsWindow settings = new SettingsWindow(currentUser.getEmail());  // Use the instance variable email
-        settings.setVisible(true);
-    }//GEN-LAST:event_settingsButtonActionPerformed
+    private void RefreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshButtonActionPerformed
+        // TODO add your handling code here:
+        //status.removeAll();
+        storyPanel.removeAll();
+        DefaultTableModel model = (DefaultTableModel) status.getModel();
+        model.setRowCount(0);
+        
+        postPanel.setLayout(new javax.swing.BoxLayout(postPanel, javax.swing.BoxLayout.Y_AXIS));
+         ImageIcon imageIcon = new ImageIcon(a.getProfilePhoto());
+            Image image = imageIcon.getImage().getScaledInstance(
+                223, 
+                85, 
+                Image.SCALE_SMOOTH
+            );
+            photoLabel.setIcon(new ImageIcon(image));
+            photoLabel.setText("");
+        ArrayList<Online> o = a.getOnline();
+        for(Online on : o){
+            //DefaultTableModel model = new DefaultTableModel();
+            
+            String user  = on.getUser();
+            String status;
+            if(on.getStatus()){
+                status = "online";
+            }
+            else{
+                status = "offline";
+            }
+            model.addRow(new Object[]{user, status});    
+        }
+        ArrayList<PostString> postString = a.getPosts();
+        for(PostString p : postString){
+            String date = p.getDate();
+            String photo = p.getPhoto();
+            String name = p.getAuthor();
+            String text = p.getText();
+            if(photo.equals("No file selected")){
+                PostText pt = new PostText(text, name, date);
+            }
+            else{
+                PostImage pi = new PostImage(text, photo, name, date);
+            }
+            postPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 100));
+            postPanel.revalidate();
+            postPanel.repaint(); 
+        }
+        ArrayList<PostString> storyString = a.getStories();
+        for(PostString s : storyString){
+            String date = s.getDate();
+            String photo = s.getPhoto();
+            String name = s.getAuthor();
+            String text = s.getText();
+            if(photo.equals("No file selected")){
+                PostText pt = new PostText(text, name, date);
+                storyPanel.add(pt);
+            }
+            else{
+                StoryImage si = new StoryImage(text, text, date, name);
+                storyPanel.add(si);
+            }
+            storyPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            storyPanel.revalidate();
+            storyPanel.repaint(); 
+        }
+        status.repaint();
+        ArrayList<GroupString> groupString = a.getMyGroups();
+        for(GroupString g : groupString){
+            if(g.getRule().equalsIgnoreCase("owner")){
+                                System.out.println("carl");
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        //send user in the constructor here
-        AddContentWindow addContent = new AddContentWindow(currentUser);
-        addContent.setVisible(true);
-    }//GEN-LAST:event_addButtonActionPerformed
+                String groupPhoto = g.getPhoto();
+                String groupName = g.getName();
+                String groupID = g.getId();
+                MyGroupsCreator myGroup = new MyGroupsCreator(a,groupID,groupPhoto,groupName);
+                GroupPanel1.add(myGroup);
+            }
+            else{
+                                System.out.println("mina");
 
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+                String groupPhoto = g.getPhoto();
+                String groupName = g.getName();
+                String groupID = g.getId();
+                MyGroups myGroup = new MyGroups(a,groupID,groupPhoto,groupName);
+                GroupPanel1.add(myGroup);
+            }
+        }
+        GroupPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        GroupPanel1.revalidate();
+        GroupPanel1.repaint();
+    
+    }//GEN-LAST:event_RefreshButtonActionPerformed
+
+    private void profileMangmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileMangmentButtonActionPerformed
+        // TODO add your handling code here:
+        ProfileDetails profileDetails = new ProfileDetails(a);
+        profileDetails.setVisible(true);
+    }//GEN-LAST:event_profileMangmentButtonActionPerformed
+
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        // TODO add your handling code here:
+        a.LogoutUser();
+        this.dispose();
+        LoginWindow l = new LoginWindow();
+        l.setVisible(true);
+    }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private void jScrollPane4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jScrollPane4FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane4FocusGained
+
+    private void jScrollPane4ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane4ComponentAdded
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jScrollPane4ComponentAdded
+
+    private void friendManagement_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendManagement_btnActionPerformed
+        // TODO add your handling code here:
+         
+              JFrame frame = new JFrame("Friend Management");
+              frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close on exit
+               frame.setSize(1176, 615); // Set the frame size
+             frame.add(new FriendManagement(a)); // Add your panel
+             frame.setVisible(true); // Make the frame visible
+        
+    }//GEN-LAST:event_friendManagement_btnActionPerformed
+
+    private void NotificitionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotificitionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NotificitionButtonActionPerformed
+    
+
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
-            if (contentTabbedPane.getSelectedIndex() == 0) {
-                if (postCounter < posts.size()) {
-                    this.showPost();
-                } else {
-                    JOptionPane.showMessageDialog(null, "There are no new posts, try again later!");
-                }
-            } else if (contentTabbedPane.getSelectedIndex() == 1) {
-                if (storyCounter < stories.size()) {
-                    this.showStory();
-                } else {
-                    JOptionPane.showMessageDialog(null, "There are no new stories, try again later!");
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
             }
-        } catch (NullPointerException e) {
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_refreshButtonActionPerformed
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            //    new NewsfeedWindow(a).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
-    private javax.swing.JTabbedPane contentTabbedPane;
-    private javax.swing.JLabel homeLabel;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel GroupPanel1;
+    private javax.swing.JScrollPane GroupSuggestPane;
+    private javax.swing.JButton LogoutButton;
+    private javax.swing.JLabel MyGroupsLabel;
+    private javax.swing.JScrollPane MyGroupsPane;
+    private javax.swing.JButton NotificitionButton;
+    private javax.swing.JButton RefreshButton;
+    private javax.swing.JButton SearchGroupButton1;
+    private javax.swing.JButton SearchUserBtn;
+    private javax.swing.JButton friendManagement_btn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel postDateLabel;
-    private javax.swing.JLabel postImageLabel;
-    private javax.swing.JLabel postTextLabel;
-    private javax.swing.JLabel postUserLabel;
-    private javax.swing.JPanel postsFramePanel;
-    private javax.swing.JPanel postsFramePanel1;
-    private javax.swing.JPanel postsPanel;
-    private javax.swing.JLabel profilePhotoLabel1;
-    private javax.swing.JLabel profilePhotoLabel2;
-    private javax.swing.JButton refreshButton;
-    private javax.swing.JButton settingsButton;
-    private javax.swing.JPanel storiesPanel;
-    private javax.swing.JLabel storyDateLabel;
-    private javax.swing.JLabel storyImageLabel;
-    private javax.swing.JLabel storyTextLabel;
-    private javax.swing.JLabel storyUserLabel;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jSearchField;
+    private javax.swing.JLabel photoLabel;
+    private javax.swing.JPanel postPanel;
+    private javax.swing.JButton profileMangmentButton;
+    private javax.swing.JTable status;
+    private javax.swing.JPanel storyPanel;
     // End of variables declaration//GEN-END:variables
 }
