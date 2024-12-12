@@ -48,6 +48,7 @@ public class User implements Serializable {
         this.bio = "";
         this.profilePhotoPath = "";
         this.coverPhotoPath = "";
+        this.stories = new ArrayList<>();
         this.posts = new ArrayList<>();
         this.friends = new ArrayList<>();
     }
@@ -124,6 +125,10 @@ public class User implements Serializable {
     public List<Post> getPosts() {
         return posts;
     }
+
+    public List<Story> getStories() {
+        return stories;
+    }
     
     public List<String> getFriends() {
         return friends;
@@ -156,9 +161,6 @@ public class User implements Serializable {
         this.stories = stories;
     }
 
-    public List<Story> getStories() {
-        return stories;
-    }
 
     @Override
     public String toString() {

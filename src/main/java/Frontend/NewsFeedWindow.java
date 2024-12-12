@@ -48,13 +48,15 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     private void showPost() {
         try {
             if(posts!=null && postCounter<posts.size()){
-                postUserLabel.setText(userDatabase.getUserNameByID(posts.get(this.postCounter).getAuthorID()));
+                ImageIcon image = new ImageIcon(userDatabase.getUserByID(posts.get(this.postCounter).getAuthorID()).getProfilePhotoPath());
+                profilePhotoLabel1.setIcon(image);
+                postUserLabel.setText(userDatabase.getUserByID(posts.get(this.postCounter).getAuthorID()).getUsername());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = posts.get(this.postCounter).getTimeStamp().format(formatter);
                 postDateLabel.setText(formattedDateTime);
                 postTextLabel.setText(posts.get(this.postCounter).getContent().getText());
                 if (posts.get(this.postCounter).getContent().getImage() != null) {
-                    ImageIcon imageIcon = new ImageIcon(((Content) posts.get(this.postCounter)).getContent().getImage());
+                    ImageIcon imageIcon = new ImageIcon(posts.get(this.postCounter).getContent().getImage());
                     postImageLabel.setIcon(imageIcon);
                 }
                 this.postCounter++;
@@ -67,7 +69,9 @@ public class NewsFeedWindow extends javax.swing.JFrame {
     private void showStory() {
         try {
             if(stories!=null){
-                 storyUserLabel.setText(userDatabase.getUserNameByID(stories.get(this.storyCounter).getAuthorID()));
+                ImageIcon image = new ImageIcon(userDatabase.getUserByID(posts.get(this.postCounter).getAuthorID()).getProfilePhotoPath());
+                profilePhotoLabel2.setIcon(image);
+                 storyUserLabel.setText(userDatabase.getUserByID(stories.get(this.storyCounter).getAuthorID()).getUsername());
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String formattedDateTime = stories.get(this.storyCounter).getTimeStamp().format(formatter);
                 storyDateLabel.setText(formattedDateTime);
@@ -177,12 +181,12 @@ public class NewsFeedWindow extends javax.swing.JFrame {
                 .addGroup(postsFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(postsFramePanelLayout.createSequentialGroup()
                         .addComponent(postUserLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(postDateLabel))
                     .addComponent(profilePhotoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(postImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -243,12 +247,12 @@ public class NewsFeedWindow extends javax.swing.JFrame {
                 .addGroup(postsFramePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(postsFramePanel1Layout.createSequentialGroup()
                         .addComponent(storyUserLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(storyDateLabel))
                     .addComponent(profilePhotoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(storyImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );

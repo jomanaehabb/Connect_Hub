@@ -126,10 +126,10 @@ public class UserDatabase {
         return null;  // Return null if no user matches the username
     }
     
-    public String getUserNameByID(String userID){
+    public User getUserByID(String userID){
         for(int i=0;i<users.size();i++){
             if(users.get(i).getUserId().equals(userID)){
-                return users.get(i).getUsername();
+                return users.get(i);
             }
         }
         return null;
