@@ -1,21 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package Backend;
+
+/**
+ *
+ * @author DELL-G3
+ */
 
 import java.time.LocalDateTime;
 
 public class Story extends Content{
-    private LocalDateTime endTime;
-
-    public Story(String authorID, InternalContent content, LocalDateTime timeStamp) {
-        super(authorID, content, timeStamp);
-        endTime = timeStamp.plusDays(1);
+    public Story(String photo, String contentID, String authorID, String text, LocalDateTime timePosted) {
+        super(photo, contentID, authorID, text, timePosted);
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
+    private static int id;
+    public Story(String photo, String authorID, String text) {
 
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+        super(photo, "S-"+id++, authorID, text, LocalDateTime.now());
     }
-
+    public Story(String photo, String contentID,String authorID, String text) {
+        super(photo, contentID, authorID, text,LocalDateTime.now());
+    }
+    public static void setId(int id) {
+        Story.id = id;
+    }
 }
