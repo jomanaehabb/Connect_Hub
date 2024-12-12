@@ -2,17 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Backend;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+package Backend;
 
 /**
  *
  * @author DELL-G3
  */
-public class Group {
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import Backend.DataBase.Database;
+
+public class Group implements Database {
 
     private String groupName;
     private String groupID;

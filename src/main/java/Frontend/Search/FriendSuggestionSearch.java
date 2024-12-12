@@ -5,12 +5,13 @@
 package Frontend.Search;
 
 import Frontend.*;
+import Backend.Manager;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
  *
- * @author DELL-G3
+ * @author User
  */
 
 public class FriendSuggestionSearch extends javax.swing.JPanel {
@@ -18,14 +19,14 @@ public class FriendSuggestionSearch extends javax.swing.JPanel {
     /**
      * Creates new form FriendSuggestion
      */
-
+    private Manager a;
     private String id;
     private String name;
     private String photo;
-    public FriendSuggestionSearch(String id, String name, String photo) {
+    public FriendSuggestionSearch(String id, String name, String photo ,Manager a) {
         initComponents();
         this.id=id;
-        
+        this.a = a;
         nameText.setText(name);
         ImageIcon imageIcon = new ImageIcon(photo);
             Image image = imageIcon.getImage().getScaledInstance(
@@ -53,8 +54,6 @@ public class FriendSuggestionSearch extends javax.swing.JPanel {
         add1 = new javax.swing.JButton();
         add2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
         photoLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         nameText.setEnabled(false);
@@ -65,9 +64,6 @@ public class FriendSuggestionSearch extends javax.swing.JPanel {
             }
         });
 
-        add.setBackground(new java.awt.Color(102, 153, 255));
-        add.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        add.setForeground(new java.awt.Color(255, 255, 255));
         add.setText("Add");
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,9 +73,6 @@ public class FriendSuggestionSearch extends javax.swing.JPanel {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
 
-        add1.setBackground(new java.awt.Color(102, 153, 255));
-        add1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        add1.setForeground(new java.awt.Color(255, 255, 255));
         add1.setText("Block");
         add1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,9 +80,6 @@ public class FriendSuggestionSearch extends javax.swing.JPanel {
             }
         });
 
-        add2.setBackground(new java.awt.Color(102, 153, 255));
-        add2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        add2.setForeground(new java.awt.Color(255, 255, 255));
         add2.setText("View Profile");
         add2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,14 +140,14 @@ public class FriendSuggestionSearch extends javax.swing.JPanel {
 
     private void Add(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add
 
-        sendFriendRequest(id);
+        a.sendFriendRequest(id);
         add.setText("Pending");
         add.setEnabled(false);
     }//GEN-LAST:event_Add
 
     private void Block(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Block
-        sendFriendRequest(id);
-        blockFriend(id);
+        a.sendFriendRequest(id);
+        a.blockFriend(id);
         add.setText("Blocked");
         add.setEnabled(false);  
     }//GEN-LAST:event_Block

@@ -61,14 +61,12 @@ public class MyGroupsCreator extends javax.swing.JPanel {
             }
         });
 
-        ViewGroupButton1.setBackground(new java.awt.Color(102, 153, 255));
+        ViewGroupButton1.setBackground(new java.awt.Color(51, 153, 255));
         ViewGroupButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ViewGroupButton1.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton1.setText("View Group");
 
-        ViewGroupButton2.setBackground(new java.awt.Color(102, 153, 255));
+        ViewGroupButton2.setBackground(new java.awt.Color(51, 153, 255));
         ViewGroupButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ViewGroupButton2.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton2.setText("Delete Group");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

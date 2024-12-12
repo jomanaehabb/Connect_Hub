@@ -60,12 +60,12 @@ public class MyGroups extends javax.swing.JPanel {
             }
         });
 
-        ViewGroupButton.setBackground(new java.awt.Color(102, 153, 255));
+        ViewGroupButton.setBackground(new java.awt.Color(0, 153, 255));
         ViewGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ViewGroupButton.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton.setText("view group");
 
-        LeaveGroupButton.setBackground(new java.awt.Color(102, 153, 255));
+        LeaveGroupButton.setBackground(new java.awt.Color(0, 153, 255));
         LeaveGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LeaveGroupButton.setForeground(new java.awt.Color(255, 255, 255));
         LeaveGroupButton.setText("Leave group");
@@ -89,9 +89,9 @@ public class MyGroups extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(GroupName, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

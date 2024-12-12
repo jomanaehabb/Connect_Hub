@@ -35,12 +35,12 @@ public class MembersForCreator extends javax.swing.JPanel {
 
         MemberNameField.setEditable(false);
 
-        RemoveMemberButton.setBackground(new java.awt.Color(102, 153, 255));
+        RemoveMemberButton.setBackground(new java.awt.Color(51, 153, 255));
         RemoveMemberButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RemoveMemberButton.setForeground(new java.awt.Color(255, 255, 255));
         RemoveMemberButton.setText("Remove");
 
-        MakeAdminButton1.setBackground(new java.awt.Color(102, 153, 255));
+        MakeAdminButton1.setBackground(new java.awt.Color(51, 153, 255));
         MakeAdminButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         MakeAdminButton1.setForeground(new java.awt.Color(255, 255, 255));
         MakeAdminButton1.setText("Make admin");

@@ -35,12 +35,12 @@ public class PendingMembers extends javax.swing.JPanel {
 
         PendingMemberNameField.setEditable(false);
 
-        AcceptButton.setBackground(new java.awt.Color(102, 153, 255));
+        AcceptButton.setBackground(new java.awt.Color(51, 153, 255));
         AcceptButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         AcceptButton.setForeground(new java.awt.Color(255, 255, 255));
         AcceptButton.setText("Accept");
 
-        DeclineButton2.setBackground(new java.awt.Color(102, 153, 255));
+        DeclineButton2.setBackground(new java.awt.Color(51, 153, 255));
         DeclineButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DeclineButton2.setForeground(new java.awt.Color(255, 255, 255));
         DeclineButton2.setText("Decline");

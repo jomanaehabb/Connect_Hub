@@ -5,7 +5,7 @@
 package Frontend.Search;
 
 import Frontend.*;
-
+import Backend.Manager;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -18,12 +18,13 @@ public class FriendRequestSearch extends javax.swing.JPanel {
     /**
      * Creates new form FriendRequest
      */
+    private Manager a;
     private String id;
     private String name;
     private String photo;
-    public FriendRequestSearch( String id,String name,String photo) {
+    public FriendRequestSearch( String id,String name,String photo,Manager a) {
         initComponents();
-
+        this.a = a;
         this.id = id;
         remove.setText("Pending");
         remove.setEnabled(false);
@@ -43,8 +44,6 @@ public class FriendRequestSearch extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         photoLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
         nameText.setEnabled(false);
         nameText.setFocusable(false);
         nameText.addActionListener(new java.awt.event.ActionListener() {
@@ -53,9 +52,6 @@ public class FriendRequestSearch extends javax.swing.JPanel {
             }
         });
 
-        remove.setBackground(new java.awt.Color(102, 153, 255));
-        remove.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        remove.setForeground(new java.awt.Color(255, 255, 255));
         remove.setText("decline");
         remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +61,6 @@ public class FriendRequestSearch extends javax.swing.JPanel {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
 
-        photoLabel.setBackground(new java.awt.Color(255, 255, 255));
         photoLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -76,17 +71,17 @@ public class FriendRequestSearch extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(remove)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(photoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(photoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator1))
+                        .addComponent(jSeparator1)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(remove)
+                .addGap(116, 116, 116))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

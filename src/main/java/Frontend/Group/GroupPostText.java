@@ -41,9 +41,8 @@ public class GroupPostText extends javax.swing.JPanel {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
 
-        AcceptButton1.setBackground(new java.awt.Color(102, 153, 255));
+        AcceptButton1.setBackground(new java.awt.Color(51, 153, 255));
         AcceptButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        AcceptButton1.setForeground(new java.awt.Color(255, 255, 255));
         AcceptButton1.setText("Accept");
         AcceptButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,9 +50,8 @@ public class GroupPostText extends javax.swing.JPanel {
             }
         });
 
-        DeclineButton2.setBackground(new java.awt.Color(102, 153, 255));
+        DeclineButton2.setBackground(new java.awt.Color(51, 153, 255));
         DeclineButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        DeclineButton2.setForeground(new java.awt.Color(255, 255, 255));
         DeclineButton2.setText("Decline");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

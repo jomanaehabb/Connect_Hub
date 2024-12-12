@@ -34,20 +34,16 @@ public class AcceptedPostImage extends javax.swing.JPanel {
         EditButton1 = new javax.swing.JButton();
         EditButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
         PostImageLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
 
-        EditButton1.setBackground(new java.awt.Color(102, 153, 255));
+        EditButton1.setBackground(new java.awt.Color(51, 153, 255));
         EditButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        EditButton1.setForeground(new java.awt.Color(255, 255, 255));
         EditButton1.setText("Edit");
 
-        EditButton2.setBackground(new java.awt.Color(255, 0, 51));
+        EditButton2.setBackground(new java.awt.Color(51, 153, 255));
         EditButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        EditButton2.setForeground(new java.awt.Color(255, 255, 255));
         EditButton2.setText("Remove");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -66,9 +62,9 @@ public class AcceptedPostImage extends javax.swing.JPanel {
                         .addComponent(DateField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
+                .addGap(86, 86, 86)
                 .addComponent(EditButton1)
-                .addGap(30, 30, 30)
+                .addGap(39, 39, 39)
                 .addComponent(EditButton2)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
@@ -85,10 +81,10 @@ public class AcceptedPostImage extends javax.swing.JPanel {
                 .addComponent(PostImageLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EditButton2)
-                    .addComponent(EditButton1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EditButton1)
+                    .addComponent(EditButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

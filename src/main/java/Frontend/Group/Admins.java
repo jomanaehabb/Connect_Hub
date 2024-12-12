@@ -31,19 +31,14 @@ public class Admins extends javax.swing.JPanel {
         RemoveAdminButton = new javax.swing.JButton();
         DemoteButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        AdminPhotoLabel.setBackground(new java.awt.Color(255, 255, 255));
-
         AdminNameField1.setEditable(false);
-        AdminNameField1.setBackground(new java.awt.Color(255, 255, 255));
 
-        RemoveAdminButton.setBackground(new java.awt.Color(102, 153, 255));
+        RemoveAdminButton.setBackground(new java.awt.Color(51, 153, 255));
         RemoveAdminButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RemoveAdminButton.setForeground(new java.awt.Color(255, 255, 255));
         RemoveAdminButton.setText("Remove");
 
-        DemoteButton.setBackground(new java.awt.Color(102, 153, 255));
+        DemoteButton.setBackground(new java.awt.Color(51, 153, 255));
         DemoteButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DemoteButton.setForeground(new java.awt.Color(255, 255, 255));
         DemoteButton.setText("Demote");
@@ -72,7 +67,7 @@ public class Admins extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(AdminPhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -82,7 +77,8 @@ public class Admins extends javax.swing.JPanel {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(RemoveAdminButton)
-                            .addComponent(DemoteButton))))
+                            .addComponent(DemoteButton))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

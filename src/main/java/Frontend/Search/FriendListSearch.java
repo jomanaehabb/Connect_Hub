@@ -5,7 +5,7 @@
 package Frontend.Search;
 
 import Frontend.*;
-import Backend.AppManager;
+import Backend.Manager;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -18,11 +18,11 @@ public class FriendListSearch extends javax.swing.JPanel {
     /**
      * Creates new form FriendList
      */
-    private AppManager a;
+    private Manager a;
     private String id;
     private String name;
     private String photo;
-    public FriendListSearch(String id, String name, String photo ,AppManager a) {
+    public FriendListSearch(String id, String name, String photo ,Manager a) {
         initComponents();
         this.a = a;
         this.id = id;
@@ -53,8 +53,6 @@ public class FriendListSearch extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         block1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-
         nameText.setEnabled(false);
         nameText.setFocusable(false);
         nameText.addActionListener(new java.awt.event.ActionListener() {
@@ -63,12 +61,8 @@ public class FriendListSearch extends javax.swing.JPanel {
             }
         });
 
-        photoLabel.setBackground(new java.awt.Color(255, 255, 255));
         photoLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        block.setBackground(new java.awt.Color(102, 153, 255));
-        block.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        block.setForeground(new java.awt.Color(255, 255, 255));
         block.setText("Block");
         block.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,9 +70,6 @@ public class FriendListSearch extends javax.swing.JPanel {
             }
         });
 
-        remove.setBackground(new java.awt.Color(102, 153, 255));
-        remove.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        remove.setForeground(new java.awt.Color(255, 255, 255));
         remove.setText("Remove");
         remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,9 +79,6 @@ public class FriendListSearch extends javax.swing.JPanel {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
 
-        block1.setBackground(new java.awt.Color(102, 153, 255));
-        block1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        block1.setForeground(new java.awt.Color(255, 255, 255));
         block1.setText("View Profile");
         block1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,11 +116,10 @@ public class FriendListSearch extends javax.swing.JPanel {
                     .addComponent(photoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(nameText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(remove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(block)
-                        .addComponent(block1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(block)
+                    .addComponent(block1)
+                    .addComponent(remove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11))

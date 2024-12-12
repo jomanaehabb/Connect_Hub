@@ -1,169 +1,373 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package Backend;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.io.Serializable;
+/**
+ *
+ * @author DELL-G3
+ */
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L; // Serializable version UID for object serialization
+import Backend.FriendManagement.Relationship;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import Backend.DataBase.Database;
+
+public class User implements Database {
+
     private String userId;
     private String email;
-    private String username;
-    private String hashedPassword; // Storing hashed password for security
-    private String status;
+    private String userName;
+    private String password;
+    private LocalDate DateOfBirth;
+    private Boolean status;
+    private String profilePhoto;
+    private String coverPhoto;
     private String bio;
-    private String profilePhotoPath;
-    private String coverPhotoPath;
-    private LocalDate dateOfBirth;
-    private List<Post> posts;
-    private List<Story> stories;
-    private List<String> friends;
+    private ArrayList<Notification> notifications = new ArrayList<>();
+    private ArrayList<String> myPosts = new ArrayList<>();
+    private ArrayList<String> myStories;
+    private ArrayList<String> myGroups;
+    private ArrayList<String> groupRequests;
+    private ArrayList<String> groupsLeftByMe;
+    private ArrayList<Relationship> friends;
+    private ArrayList<Relationship> Blocked;
+    private ArrayList<Relationship> received;
+    private ArrayList<Relationship> sent;
 
-    /**
-     * Constructor to create a new User instance.
-     * 
-     * @param userId the unique ID of the user
-     * @param email the user's email address
-     * @param username the user's chosen username
-     * @param hashedPassword the user's hashed password
-     * @param dateOfBirth the user's date of birth
-     */
-    @JsonCreator
-    public User(
-        @JsonProperty("userId") String userId,
-        @JsonProperty("email") String email,
-        @JsonProperty("username") String username,
-        @JsonProperty("hashedPassword") String hashedPassword,
-        @JsonProperty("dateOfBirth") LocalDate dateOfBirth
-    ) {
+
+    /*m7tagen arraylist ll friend 3lshan deh el httn3t lama a7tag a3rf men el online*/
+ /*lw 3mlna keda hn8yr fel relations w m7tagen nn2l kol relation l arraylist*/
+    public User(String userId, String email, String userName, String password, LocalDate DateOfBirth) {
         this.userId = userId;
         this.email = email;
-        this.username = username;
-        this.hashedPassword = hashedPassword; // Assigning the hashed password
-        this.dateOfBirth = dateOfBirth;
-        this.status = "Offline"; // Default status when the user is created
-        this.bio = "";
-        this.profilePhotoPath = "";
-        this.coverPhotoPath = "";
-        this.stories = new ArrayList<>();
-        this.posts = new ArrayList<>();
-        this.friends = new ArrayList<>();
+        this.userName = userName;
+        this.setPassword(password);
+        this.DateOfBirth = DateOfBirth;
+        friends = new ArrayList<>();
+        Blocked = new ArrayList<>();
+        received = new ArrayList<>();
+        sent = new ArrayList<>();
+
+        myStories = new ArrayList<>();
+        this.myGroups = new ArrayList<>();
+        this.groupsLeftByMe = new ArrayList<>();
+        this.groupRequests = new ArrayList<>();
+        moveFriends();
     }
 
-    // Getter and setter methods
     public String getUserId() {
         return userId;
     }
-    
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-    
+
     public String getEmail() {
         return email;
     }
-    
-    public void setEmail(String email) {
-        this.email = email;
+
+    public String getUserName() {
+        return userName;
     }
-    
-    public String getUsername() {
-        return username;
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(hashPassword(password));
     }
-    
-    public void setUsername(String username) {
-        this.username = username;
+
+    public void setPassword(String password) {
+        this.password = hashPassword(password);
     }
-    
-    public String getHashedPassword() {
-        return hashedPassword;
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = digest.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashedBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
     }
-    
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
+
+    public LocalDate getDateOfBirth() {
+        return DateOfBirth;
     }
-    
-    public String getStatus() {
+
+    public Boolean getStatus() {
+
         return status;
     }
-    
-    public void setStatus(String status) {
+
+    public void setStatus(Boolean status) {
+
         this.status = status;
     }
-    
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+
+    public String getProfilePhoto() {
+        return profilePhoto;
     }
-    
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
+    public String getCoverPhoto() {
+        return coverPhoto;
+    }
+
+    public void setCoverPhoto(String coverPhoto) {
+        this.coverPhoto = coverPhoto;
+    }
+
     public String getBio() {
         return bio;
     }
-    
+
     public void setBio(String bio) {
         this.bio = bio;
     }
-    
-    public String getProfilePhotoPath() {
-        return profilePhotoPath;
-    }
-    
-    public void setProfilePhotoPath(String profilePhotoPath) {
-        this.profilePhotoPath = profilePhotoPath;
-    }
-    
-    public String getCoverPhotoPath() {
-        return coverPhotoPath;
-    }
-    
-    public void setCoverPhotoPath(String coverPhotoPath) {
-        this.coverPhotoPath = coverPhotoPath;
-    }
-    
-    public List<Post> getPosts() {
-        return posts;
-    }
 
-    public List<Story> getStories() {
-        return stories;
-    }
-    
-    public List<String> getFriends() {
+    public ArrayList<Relationship> getFriends() {
+        moveFriends();
         return friends;
     }
 
-    // Helper method for hashing passwords (simple hash code for now)
-    public static String hashPassword(String password) {
-        // Use a more secure hashing library like BCrypt or SHA-256 in production
-        return Integer.toHexString(password.hashCode());  // Basic hash code (not secure for production)
+    public ArrayList<String> getMyPosts() {
+        return myPosts;
     }
 
-    // Setter for friends list
-    public void setFriends(List<String> friends) {
-        this.friends = friends;
+    public ArrayList<Relationship> getBlocked() {
+        moveFriends();
+        return Blocked;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public ArrayList<Relationship> getReceived() {
+        moveFriends();
+        return received;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public ArrayList<Relationship> getSent() {
+        return sent;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
+    public void sendRelation(Relationship relationship) {
+        sent.add(relationship);
     }
 
-    public void setStories(List<Story> stories) {
-        this.stories = stories;
+    public void addFriendRelation(Relationship relationship) {
+        friends.add(relationship);
     }
 
-
-    @Override
-    public String toString() {
-        return username;  // Return the username when the object is printed
+    public void receiveRelation(Relationship relationship) {
+        received.add(relationship);
     }
+
+    public void deleteRelation(Relationship relationship) {
+        received.remove(relationship);
+    }
+
+    public boolean acceptFriendRequest(String senderID) {
+        moveFriends();
+        for (int i = 0; i < received.size(); i++) {
+            if (received.get(i).getrelationWith().equalsIgnoreCase(senderID)) {
+                received.get(i).setFriend();
+                friends.add(received.get(i));
+                received.remove(received.get(i));
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public boolean cancelFriendRequest(String senderID) {
+        for (int i = 0; i < received.size(); i++) {
+            if (received.get(i).getrelationWith().equalsIgnoreCase(senderID)) {
+                received.get(i).setCancel();
+                received.remove(received.get(i));
+                
+            }
+        }
+        for (int i = 0; i < friends.size(); i++) {
+            if (friends.get(i).getrelationWith().equalsIgnoreCase(senderID)) {
+                friends.get(i).setCancel();
+                friends.remove(friends.get(i));
+                
+            }
+        }
+        return true;
+    }
+
+    public boolean blockFriend(String receiverID) {
+        moveFriends();
+        for (int i = 0; i < friends.size(); i++) {
+            if (friends.get(i).getrelationWith().equalsIgnoreCase(receiverID)) {
+                friends.get(i).setBlock();
+                Blocked.add(friends.get(i));
+                friends.remove(friends.get(i));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addPost(String contentID) {
+
+        myPosts.addFirst(contentID);
+    }
+
+    public void addStory(String contentID) {
+        myStories.addFirst(contentID);
+    }
+
+    public ArrayList<String> getMyStories() {
+        return myStories;
+    }
+
+    public void removeContent(String contentID) {
+        myPosts.remove(contentID);
+    }
+
+    private void moveFriends() {
+        for (int i = 0; i < sent.size(); i++) {
+            if (sent.get(i).getRelation().equalsIgnoreCase("Friend")) {
+                friends.add(sent.get(i));
+                sent.remove(sent.get(i));
+            }
+            else if(sent.get(i).getRelation().equalsIgnoreCase("Cancel")){
+                sent.remove(i);
+            }
+
+        }
+        for (int i = 0; i < friends.size(); i++) {
+             if(friends.get(i).getRelation().equalsIgnoreCase("Cancel")){
+                friends.remove(i);
+            }
+
+        }
+               
+        for (int i = 0; i < friends.size(); i++) {
+             if(friends.get(i).getRelation().equalsIgnoreCase("Block")){
+                friends.remove(i);
+            }
+
+        }
+        
+    }
+    boolean isFriend(String key){
+        for(int i=0;i<friends.size();i++){
+            if(key.equalsIgnoreCase(friends.get(i).getrelationWith())){
+              return true;
+            }
+        }
+    return false;
+    }
+    boolean isBlock(String key){
+        for(int i=0;i<Blocked.size();i++){
+            if(key.equalsIgnoreCase(Blocked.get(i).getrelationWith())){
+              return true;
+            }
+        }
+    return false;
+    }
+    boolean isPending(String key){
+        for(int i=0;i<sent.size();i++){
+            if(key.equalsIgnoreCase(sent.get(i).getrelationWith())){
+              return true;
+            }
+        }
+        for(int i=0;i<received.size();i++){
+            if(key.equalsIgnoreCase(received.get(i).getrelationWith())){
+              return true;
+            }
+        }
+    return false;
+    }
+
+    public ArrayList<String> getAllMyGroups() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.addAll(this.myGroups);
+        return temp;
+    }
+
+    public ArrayList<String> getAllGroupsLeftByMe() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.addAll(this.groupsLeftByMe);
+        return temp;
+    }
+
+    public ArrayList<String> getAllGroupRequests() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.addAll(this.groupRequests);
+        return temp;
+    }
+
+    public void addGroupRequest(String groupID){
+        groupRequests.add(groupID);
+    }
+
+    public void removeGroupRequest(String groupID){
+        groupRequests.remove(groupID);
+    }
+
+    public void joinGroup(String groupID){
+        groupRequests.remove(groupID);
+        myGroups.add(groupID);
+        groupsLeftByMe.remove(groupID);
+    }
+
+    public void leaveGroup(String groupID){
+        myGroups.remove(groupID);
+        groupsLeftByMe.add(groupID);
+    }
+
+    public void removeGroup(String groupID){
+         myGroups.remove(groupID);
+    }
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void addNotification(Notification notification) {
+        notifications.add(notification);
+    }
+    public void removeNotification(String notificationId) {
+
+    for (int i = 0; i < notifications.size(); i++) {
+
+        if (notifications.get(i).getId() == notificationId) {
+            notifications.remove(i);
+            i--;
+        }
+    }
+
+}
+public boolean isMember(String key){
+    for (int i = 0; i < myGroups.size(); i++) {
+        if(myGroups.get(i).equalsIgnoreCase(key)){
+            return true;
+        }
+
+    }
+        return false;
+}
+    public boolean isPendingGroup(String key){
+        for (int i = 0; i < groupRequests.size(); i++) {
+            if(groupRequests.get(i).equalsIgnoreCase(key)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

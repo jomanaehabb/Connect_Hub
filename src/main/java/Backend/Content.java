@@ -1,51 +1,77 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
 package Backend;
 
-import java.time.LocalDateTime;
+/**
+ *
+ * @author DELL-G3
+ */
 
-public abstract class Content{
-    private static int counter = 1;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import Backend.DataBase.Database;
+
+/**
+ *
+ * @author Mnw Emile
+ */
+public class Content implements Database {
+
+    private String photo;
     private String contentID;
     private String authorID;
-    private InternalContent content;
-    private LocalDateTime timeStamp;
+    private String text;
+    private LocalDateTime timePosted;
 
-    public Content(String authorID, InternalContent content, LocalDateTime timeStamp) {
-        this.contentID = Integer.toString(counter); // automatically created the content ID at creation
-        counter++;
+   
+     public Content(String photo, String contentID, String authorID, String text,LocalDateTime timePosted) {
+        //contructor used to take all values except time because it is the current time
+        this.photo = photo;
+        this.contentID = contentID;
         this.authorID = authorID;
-        this.content = content;
-        this.timeStamp = timeStamp;
+        this.text = text;
+        this.timePosted = timePosted;
+    }
+    
+    //getters for all attributed
+    public String getPhoto() {
+        return photo;
     }
 
     public String getContentID() {
         return contentID;
     }
 
-    public void setContentID(String contentID) {
-        this.contentID = contentID;
-    }
-
     public String getAuthorID() {
         return authorID;
     }
 
-    public void setAuthorID(String authorID) {
-        this.authorID = authorID;
+    public String getText() {
+        return text;
     }
 
-    public InternalContent getContent() {
-        return content;
+    public LocalDateTime getTimePosted() {
+        return timePosted;
+    }
+    
+    public Content() {
+    }
+    
+    //setters for photo and text because this is the only changeable attributes
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public void setContent(InternalContent content) {
-        this.content = content;
+    public void setText(String text) {
+        this.text = text;
     }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+    
 }
+/**
+ *
+ * @author DELL-G3
+ */

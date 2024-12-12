@@ -34,7 +34,7 @@ public class MembersForAdmin extends javax.swing.JPanel {
 
         MemberNameField1.setEditable(false);
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 51));
+        jButton1.setBackground(new java.awt.Color(51, 153, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Remove");
