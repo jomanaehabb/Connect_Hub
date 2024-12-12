@@ -32,7 +32,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         profileButton = new javax.swing.JButton();
         friendsButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
-        addFriendButton = new javax.swing.JButton();
+        addFriendButton = new javax.swing.JButton();//changed to search friend 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -69,7 +69,7 @@ public class SettingsWindow extends javax.swing.JFrame {
         addFriendButton.setBackground(new java.awt.Color(102, 153, 255));
         addFriendButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addFriendButton.setForeground(new java.awt.Color(255, 255, 255));
-        addFriendButton.setText("Add Friend");
+        addFriendButton.setText("Search Friend");//changed the addfriend to search friend function
         addFriendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addFriendButtonActionPerformed(evt);
@@ -114,8 +114,15 @@ public class SettingsWindow extends javax.swing.JFrame {
     }                                            
 
     private void addFriendButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        AddFriendWindow addFriend = new AddFriendWindow();
-        addFriend.setVisible(true);
+        String username1=currentUser.getEmail();
+        UserSearchWindow usersearch = new UserSearchWindow(username1);
+        
+        JFrame frame = new JFrame("Friends Management");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 400);
+            frame.setLocationRelativeTo(null);
+            frame.add(usersearch);
+            frame.setVisible(true);
     }                                               
 
     private void friendsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              

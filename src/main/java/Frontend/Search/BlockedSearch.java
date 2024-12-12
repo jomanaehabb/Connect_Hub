@@ -52,6 +52,8 @@ public class BlockedSearch extends javax.swing.JPanel {
         add1 = new javax.swing.JButton();
         add2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         photoLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         nameText.setEnabled(false);
@@ -64,6 +66,9 @@ public class BlockedSearch extends javax.swing.JPanel {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
 
+        add1.setBackground(new java.awt.Color(102, 153, 255));
+        add1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        add1.setForeground(new java.awt.Color(255, 255, 255));
         add1.setText("Unblock");
         add1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +76,9 @@ public class BlockedSearch extends javax.swing.JPanel {
             }
         });
 
+        add2.setBackground(new java.awt.Color(102, 153, 255));
+        add2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        add2.setForeground(new java.awt.Color(255, 255, 255));
         add2.setText("View Profile");
         add2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
