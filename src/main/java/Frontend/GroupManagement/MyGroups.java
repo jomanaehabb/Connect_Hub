@@ -53,6 +53,8 @@ public class MyGroups extends javax.swing.JPanel {
         ViewGroupButton = new javax.swing.JButton();
         LeaveGroupButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         GroupPhoto.setBackground(new java.awt.Color(255, 255, 255));
 
         GroupName.setEditable(false);
@@ -62,7 +64,7 @@ public class MyGroups extends javax.swing.JPanel {
             }
         });
 
-        ViewGroupButton.setBackground(new java.awt.Color(0, 153, 255));
+        ViewGroupButton.setBackground(new java.awt.Color(102, 153, 255));
         ViewGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ViewGroupButton.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton.setText("view group");
@@ -72,7 +74,7 @@ public class MyGroups extends javax.swing.JPanel {
             }
         });
 
-        LeaveGroupButton.setBackground(new java.awt.Color(0, 153, 255));
+        LeaveGroupButton.setBackground(new java.awt.Color(102, 153, 255));
         LeaveGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LeaveGroupButton.setForeground(new java.awt.Color(255, 255, 255));
         LeaveGroupButton.setText("Leave group");

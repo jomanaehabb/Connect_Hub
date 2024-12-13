@@ -55,11 +55,13 @@ public class PendingMembers extends javax.swing.JPanel {
         AcceptButton = new javax.swing.JButton();
         DeclineButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         PendingMemberPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         PendingMemberName.setEditable(false);
 
-        AcceptButton.setBackground(new java.awt.Color(51, 153, 255));
+        AcceptButton.setBackground(new java.awt.Color(102, 153, 255));
         AcceptButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         AcceptButton.setForeground(new java.awt.Color(255, 255, 255));
         AcceptButton.setText("Accept");
@@ -69,7 +71,7 @@ public class PendingMembers extends javax.swing.JPanel {
             }
         });
 
-        DeclineButton2.setBackground(new java.awt.Color(51, 153, 255));
+        DeclineButton2.setBackground(new java.awt.Color(102, 153, 255));
         DeclineButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DeclineButton2.setForeground(new java.awt.Color(255, 255, 255));
         DeclineButton2.setText("Decline");

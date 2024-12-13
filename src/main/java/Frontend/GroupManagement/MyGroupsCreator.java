@@ -55,6 +55,8 @@ public class MyGroupsCreator extends javax.swing.JPanel {
         ViewGroupButton1 = new javax.swing.JButton();
         DeleteGroupButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         GroupPhotoLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         GroupNameField1.setEditable(false);
@@ -64,8 +66,9 @@ public class MyGroupsCreator extends javax.swing.JPanel {
             }
         });
 
-        ViewGroupButton1.setBackground(new java.awt.Color(51, 153, 255));
+        ViewGroupButton1.setBackground(new java.awt.Color(102, 153, 255));
         ViewGroupButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ViewGroupButton1.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton1.setText("View Group");
         ViewGroupButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,8 +76,9 @@ public class MyGroupsCreator extends javax.swing.JPanel {
             }
         });
 
-        DeleteGroupButton2.setBackground(new java.awt.Color(51, 153, 255));
+        DeleteGroupButton2.setBackground(new java.awt.Color(102, 153, 255));
         DeleteGroupButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        DeleteGroupButton2.setForeground(new java.awt.Color(255, 255, 255));
         DeleteGroupButton2.setText("Delete Group");
         DeleteGroupButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
