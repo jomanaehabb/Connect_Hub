@@ -1,0 +1,23 @@
+[
+  {
+    "photo": "No file selected",
+    "contentID": "S-0",
+    "authorID": "U3",
+    "text": "hello",
+    "timePosted": "13-12-2024T00:18:17"
+  },
+  {
+    "photo": "C:\\Users\\Lenovo\\Downloads\\download.jpg",
+    "contentID": "P-0",
+    "authorID": "U4",
+    "text": "Hi",
+    "timePosted": "12-12-2024T22:34:27"
+  },
+  {
+    "photo": "No file selected",
+    "contentID": "P-0",
+    "authorID": "U3",
+    "text": "hello",
+    "timePosted": "13-12-2024T00:18:07"
+  }
+]

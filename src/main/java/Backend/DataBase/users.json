@@ -1,0 +1,157 @@
+[
+  {
+    "userId": "U1",
+    "email": "user1@gmail.com",
+    "userName": "testUser",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "12,12,2020",
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
+  },
+  {
+    "userId": "U2",
+    "email": "newuser@gmail.com",
+    "userName": "newuser",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "12,12,1998",
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
+  },
+  {
+    "userId": "U3",
+    "email": "omar@gmail.com",
+    "userName": "omar",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "12,12,2000",
+    "status": false,
+    "notifications": [
+      {
+        "name": "omar1",
+        "userId": "U4",
+        "profilePhoto": "C:\\Users\\Lenovo\\Downloads\\pngegg.png"
+      },
+      {
+        "name": "omar1",
+        "userId": "U4",
+        "profilePhoto": "C:\\Users\\Lenovo\\Downloads\\pngegg.png"
+      },
+      {
+        "name": "omar1",
+        "userId": "U4",
+        "profilePhoto": "C:\\Users\\Lenovo\\Downloads\\pngegg.png",
+        "message": "omar1 sent you a friend request",
+        "Id": "n1"
+      },
+      {
+        "name": "omar1",
+        "userId": "U4",
+        "profilePhoto": "C:\\Users\\Lenovo\\Downloads\\pngegg.png",
+        "message": "omar1 accepted your friend request",
+        "Id": "n2"
+      },
+      {
+        "name": "omar1",
+        "userId": "U4",
+        "profilePhoto": "C:\\Users\\Lenovo\\Downloads\\pngegg.png",
+        "message": "omar1 sent you a friend request",
+        "Id": "n3"
+      }
+    ],
+    "myPosts": [
+      "P-0"
+    ],
+    "myStories": [
+      "S-0"
+    ],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [
+      {
+        "relationWith": "U4",
+        "relation": {
+          "status": "pending"
+        }
+      }
+    ],
+    "sent": []
+  },
+  {
+    "userId": "U4",
+    "email": "omar1@gmail.com",
+    "userName": "omar1",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "12,12,2000",
+    "status": false,
+    "profilePhoto": "C:\\Users\\Lenovo\\Downloads\\pngegg.png",
+    "notifications": [
+      {
+        "name": "omar",
+        "userId": "U3",
+        "message": "omar sent you a friend request",
+        "Id": "n1"
+      },
+      {
+        "name": "omar",
+        "userId": "U3",
+        "message": "omar accepted your friend request",
+        "Id": "n2"
+      },
+      {
+        "name": "omar",
+        "userId": "U3",
+        "message": "omar created a new post: hello",
+        "Id": "n1"
+      },
+      {
+        "name": "omar",
+        "userId": "U3",
+        "message": "omar posted a new story: hello",
+        "Id": "n2"
+      },
+      {
+        "name": "omar",
+        "userId": "U3",
+        "message": "omar sent you a friend request",
+        "Id": "n1"
+      }
+    ],
+    "myPosts": [
+      "P-0"
+    ],
+    "myStories": [],
+    "myGroups": [
+      "G1"
+    ],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": [
+      {
+        "relationWith": "U3",
+        "relation": {
+          "status": "pending"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "senderID": "U3",
+    "receiverID": "U4",
+    "status": {
+      "status": "Block"
+    },
+    "notificationId": "n1"
+  },
+  {
+    "senderID": "U4",
+    "receiverID": "U3",
+    "status": {
+      "status": "pending"
+    },
+    "notificationId": "n3"
+  }
+]
