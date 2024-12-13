@@ -1,6 +1,7 @@
 package Backend;
 
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
 public class GroupUser {
@@ -31,11 +32,22 @@ public class GroupUser {
     }
     
     public void joinGroup(String groupId) {
-        GroupMembershipRequest.saveToGroupRequestsFile(groupId, this.groupUserId);
+        if(!GroupMemberDatabase.groupUserFound(groupId, this.getGroupUserId()))
+            GroupMembershipRequest.saveToGroupRequestsFile(groupId, this.groupUserId);
+        else
+            JOptionPane.showMessageDialog(null, "You already joined this group.");
     }
     
     public void leaveGroup(String groupId) {
-        GroupMemberDatabase groupMemberDatabase = new GroupMemberDatabase();
-        groupMemberDatabase.removeUserFromGroupMembersFile(groupId, this.getGroupUserId());
+        if (groupId == null || this.getGroupUserId() == null) {
+            JOptionPane.showMessageDialog(null, "Invalid groupID or userID.");
+            return;
+        }
+        if(GroupMemberDatabase.groupUserFound(groupId, this.getGroupUserId())) {
+            GroupMemberDatabase groupMemberDatabase = new GroupMemberDatabase();
+            groupMemberDatabase.removeUserFromGroupMembersFile(groupId, this.getGroupUserId());
+        }
+        else
+            JOptionPane.showMessageDialog(null, "You are not in this group.");
     }
 }

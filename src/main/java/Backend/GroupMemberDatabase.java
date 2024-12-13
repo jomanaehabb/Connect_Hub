@@ -50,30 +50,37 @@ public class GroupMemberDatabase {
             JOptionPane.showMessageDialog(null, "Group or user not found.");
     }
     
-    public void removeUserFromGroupMembersFile(String groupId, String groupUserId) {
+    public static boolean groupUserFound(String groupId, String userId) {
+        if (groupId == null || userId == null) 
+            return false;
         if (usersMap.containsKey(groupId)) {
             ArrayList<GroupUser> groupUsers = usersMap.get(groupId);
-            boolean userFound = false;
             if (groupUsers != null) {
                 for (int i = 0; i < groupUsers.size(); i++) {
-                    if (groupUsers.get(i).getGroupUserId().equals(groupUserId)) {
-                        groupUsers.remove(i);
-                        userFound = true;
-                        break;
+                    if (groupUsers.get(i).getGroupUserId().equals(userId)) {
+                        return true;
+                    }
                 }
             }
         }
-        if (userFound) {
-            saveToGroupMembersFile();
-            JOptionPane.showMessageDialog(null, "User with ID: " +groupUserId+ " has been removed successfully.");
-        } 
-        else {
-            JOptionPane.showMessageDialog(null, "User with ID" +groupUserId+ "not found in the specified group.");
-        }
-    } else {
-        JOptionPane.showMessageDialog(null, "Group not found.");
+        return false;
     }
-}
+    
+    public void removeUserFromGroupMembersFile(String groupId, String groupUserId) {
+        if (groupId == null || groupUserId == null) {
+            JOptionPane.showMessageDialog(null, "Invalid group or user ID.");
+            return;
+        }
+        ArrayList<GroupUser> groupUsers = usersMap.get(groupId);
+        for (int i = 0; i < groupUsers.size(); i++) {
+            if (groupUsers.get(i).getGroupUserId().equals(groupUserId)) {
+                groupUsers.remove(i);
+                saveToGroupMembersFile();
+                JOptionPane.showMessageDialog(null, "User with ID: " +groupUserId+ " has been successfully removed.");
+                return;
+            }
+        }
+    }
 
     public void loadFromGroupMembersFile() {
         try {
