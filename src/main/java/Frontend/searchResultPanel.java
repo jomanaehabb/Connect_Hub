@@ -6,11 +6,7 @@ package Frontend;
 
 import Backend.Manager;
 import Backend.User;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *

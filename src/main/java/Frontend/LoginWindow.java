@@ -5,10 +5,7 @@
 package Frontend;
 
 import Backend.Manager;
-import Backend.User;
-import Backend.Login;
 import Backend.Server;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**

@@ -4,7 +4,6 @@
  */
 package Frontend.Search;
 
-import Frontend.*;
 import Backend.Manager;
 import java.awt.Image;
 import javax.swing.ImageIcon;

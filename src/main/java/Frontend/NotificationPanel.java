@@ -6,10 +6,8 @@ package Frontend;
 
 import Backend.Manager;
 import Backend.Notification;  // Make sure to import the correct Notification class
-import Backend.NotificationManager;  // Import NotificationManager to fetch notifications
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;

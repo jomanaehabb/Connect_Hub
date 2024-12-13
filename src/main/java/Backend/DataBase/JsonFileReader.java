@@ -10,19 +10,6 @@ package Backend.DataBase;
  * @author DELL-G3
  */
 
-import Backend.Content;
-import Backend.FriendManagement.friendRequest;
-import Backend.Post;
-import Backend.Story;
-import Backend.User;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public abstract class JsonFileReader implements FilePaths {

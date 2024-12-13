@@ -5,11 +5,8 @@
 package Frontend;
 
 import Backend.Manager;
-import Backend.NotificationHandler;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import Backend.Notification;
 
 /**
  *

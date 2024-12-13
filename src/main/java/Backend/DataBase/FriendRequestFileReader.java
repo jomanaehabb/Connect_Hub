@@ -10,7 +10,6 @@ package Backend.DataBase;
  * @author DELL-G3
  */
 
-import java.util.ArrayList;
 
 import Backend.FriendManagement.friendRequest;
 import com.google.gson.Gson;

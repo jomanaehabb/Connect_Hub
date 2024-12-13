@@ -5,9 +5,6 @@
 package Main;
 
 import Frontend.LoginWindow;
-import Frontend.NewsfeedWindow;
-import Frontend.ProfileDetails;
-import Frontend.ProfileDetails;
 /**
  *
  * @author Mnw Emile

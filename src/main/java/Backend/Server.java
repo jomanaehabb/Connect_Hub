@@ -10,8 +10,6 @@ package Backend;
  */
 import Backend.GroupManagament.Group;
 import Backend.DataBase.*;
-import Backend.FriendManagement.Relationship;
-
 import java.util.ArrayList;
 
 import static Backend.DataBase.FilePaths.*;

@@ -8,7 +8,6 @@ package Backend.GroupManagament;
  *
  * @author DELL-G3
  */
-import Backend.GroupManagament.Group;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -10,7 +10,6 @@ package Backend.DataBase;
  * @author DELL-G3
  */
 
-import Backend.Content;
 import Backend.GroupManagament.Group;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,7 +19,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import javax.print.attribute.standard.MediaName;
 
 /**
  *
