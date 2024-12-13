@@ -8,6 +8,7 @@ package Backend;
  *
  * @author DELL-G3
  */
+import Backend.GroupManagament.Group;
 import Backend.DataBase.*;
 import Backend.FriendManagement.Relationship;
 

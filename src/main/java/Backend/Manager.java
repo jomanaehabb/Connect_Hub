@@ -8,6 +8,8 @@ package Backend;
  *
  * @author DELL-G3
  */
+import Backend.GroupManagament.GroupString;
+import Backend.GroupManagament.Group;
 import Backend.FriendManagement.PostString;
 import Backend.FriendManagement.RelationshipStatusString;
 import Backend.FriendManagement.Relationship;
