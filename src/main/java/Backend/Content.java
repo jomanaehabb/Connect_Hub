@@ -70,7 +70,3 @@ public class Content implements Database {
     }
     
 }
-/**
- *
- * @author DELL-G3
- */
