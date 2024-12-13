@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package Backend;
 
 /**
  *
  * @author DELL-G3
  */
-
 import Backend.FriendManagement.PostString;
 import Backend.FriendManagement.RelationshipStatusString;
 import Backend.FriendManagement.Relationship;
@@ -32,7 +30,7 @@ public class Manager {
     private ProfileManger profileManger;
     private ArrayList<Notification> notifications = new ArrayList<>();
 
-    public Manager(ArrayList<User> Data, ArrayList<Post> posts, ArrayList<Story> stories, ArrayList<friendRequest> request ,ArrayList<Group> groups) {
+    public Manager(ArrayList<User> Data, ArrayList<Post> posts, ArrayList<Story> stories, ArrayList<friendRequest> request, ArrayList<Group> groups) {
         currentUser = null;
         this.Data = Data;
         this.posts = posts;
@@ -76,30 +74,60 @@ public class Manager {
     /*friend requests*/
     public boolean sendFriendRequest(String receiver) {
         clearCancel();
-        /*need to handle if the user is already in the friends*/
         for (int i = 0; i < Data.size(); i++) {
             if (Data.get(i).getUserId().equalsIgnoreCase(receiver)) {
                 friendRequest temp = new friendRequest(currentUser.getUserId(), Data.get(i).getUserId());
                 temp.make(currentUser, Data.get(i));
                 request.add(temp);
-                Notification notification = new Notification(currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto());
+                Notification notification = new Notification(
+                        currentUser.getUserName(), // Sender's name
+                        currentUser.getUserId(),
+                        currentUser.getProfilePhoto(),
+                        currentUser.getUserName() + " sent you a friend request" // Notification message
+                );
                 temp.setNotificationId(notification.getId());
-                Data.get(i).addNotification(notification);
+                Data.get(i).addNotification(notification);  // Add notification to the receiver
                 return true;
             }
         }
         return false;
     }
 
+    public User getUserById(String userId) {
+        for (User user : Data) { // Assuming 'Data' is your list of users
+            if (user.getUserId().equalsIgnoreCase(userId)) {
+                return user;
+            }
+        }
+        return null;  // Return null if user is not found
+    }
+
     public boolean acceptFriendRequest(String senderID) {
         clearCancel();
         for (int i = 0; i < request.size(); i++) {
             if (request.get(i).getSenderID().equalsIgnoreCase(senderID) && request.get(i).getReceiverID().equalsIgnoreCase(currentUser.getUserId())) {
+                // Accept the request
                 request.get(i).accept();
+
+                // Add the sender as a friend
                 currentUser.acceptFriendRequest(senderID);
+
+                // Create a notification for the sender
+                User sender = getUserById(senderID); // Assuming you have a method to get a User by ID
+                if (sender != null) {
+                    Notification notification = new Notification(
+                            currentUser.getUserName(), // Current user (receiver) name
+                            currentUser.getUserId(),
+                            currentUser.getProfilePhoto(),
+                            currentUser.getUserName() + " accepted your friend request" // Notification message
+                    );
+
+                    // Add the notification to the sender's notification list
+                    sender.addNotification(notification);
+                }
+
                 return true;
             }
-
         }
         return false;
     }
@@ -110,8 +138,7 @@ public class Manager {
             if (request.get(i).getSenderID().equalsIgnoreCase(senderID) && request.get(i).getReceiverID().equalsIgnoreCase(currentUser.getUserId())) {
                 currentUser.cancelFriendRequest(senderID);
                 request.get(i).decline();
-                
-                
+
                 return true;
             }
 
@@ -120,7 +147,6 @@ public class Manager {
         return true;
     }
 
-    
     public boolean blockFriend(String userID) {
         clearCancel();
 
@@ -128,7 +154,7 @@ public class Manager {
             if (request.get(i).getSenderID().equalsIgnoreCase(userID) && request.get(i).getReceiverID().equalsIgnoreCase(currentUser.getUserId())) {
                 currentUser.blockFriend(userID);
                 request.get(i).blockAndSwitch();
-                
+
                 return true;
             } else if (request.get(i).getSenderID().equalsIgnoreCase(currentUser.getUserId()) && request.get(i).getReceiverID().equalsIgnoreCase(userID)) {
                 request.get(i).block();
@@ -142,7 +168,6 @@ public class Manager {
     }
 
     /*Profile Manager*/
-
     public boolean changePassword(String password) {
         currentUser.setPassword(password);
         return true;
@@ -182,16 +207,50 @@ public class Manager {
     /*content management*/
  /*posts manager*/
     public boolean createPost(String photo, String text) {
+        // Create a new post
         Post post = new Post(photo, currentUser.getUserId(), text);
         currentUser.addPost(post.getContentID());
         posts.add(post);
+
+        // Get the list of friends using the existing getFriends method
+        ArrayList<RelationshipStatusString> friends = getFriends();
+
+        // Send notifications to all friends using only the userName
+        for (RelationshipStatusString friend : friends) {
+            String friendName = friend.getUsernameString(); // Get friend's name
+            String message = currentUser.getUserName() + " created a new post: " + text;
+
+            // Create a notification object (assuming you have a Notification class)
+            Notification notification = new Notification(currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto(), message);
+
+            // Add the notification to the friend's notifications list
+            addNotificationToFriend(friendName, notification);
+        }
+
         return true;
     }
 
     public boolean createStory(String photo, String text) {
+        // Create a new story
         Story story = new Story(photo, currentUser.getUserId(), text);
         currentUser.addStory(story.getContentID());
         stories.add(story);
+
+        // Get the list of friends using the existing getFriends method
+        ArrayList<RelationshipStatusString> friends = getFriends();
+
+        // Send notifications to all friends using only the userName
+        for (RelationshipStatusString friend : friends) {
+            String friendName = friend.getUsernameString(); // Get friend's name
+            String message = currentUser.getUserName() + " posted a new story: " + text;
+
+            // Create a notification object (assuming you have a Notification class)
+            Notification notification = new Notification(currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto(), message);
+
+            // Add the notification to the friend's notifications list
+            addNotificationToFriend(friendName, notification);
+        }
+
         return true;
     }
 
@@ -230,13 +289,13 @@ public class Manager {
         LocalDateTime currentTime = LocalDateTime.now();
         for (int i = 0; i < stories.size(); i++) {
             Content temp = stories.get(i);
-            
+
             Duration duration = Duration.between(temp.getTimePosted(), currentTime);
             //System.out.print(duration.toHours());
-            if (duration.toHours()>=24) {
+            if (duration.toHours() >= 24) {
                 currentUser.removeContent(temp.getContentID());
                 stories.remove(temp);
-                
+
             }
         }
     }
@@ -363,7 +422,7 @@ public class Manager {
                 }
             }
         }
-       // System.out.print(stories.size());
+        // System.out.print(stories.size());
         return stories;
     }
 
@@ -374,7 +433,7 @@ public class Manager {
         temp.addAll(currentUser.getFriends());
         temp.addAll(currentUser.getBlocked());
         temp.addAll(currentUser.getReceived());
-temp.addAll(currentUser.getSent());
+        temp.addAll(currentUser.getSent());
         if (temp.isEmpty()) {
 
             for (int i = 0; i < Data.size(); i++) {
@@ -396,8 +455,8 @@ temp.addAll(currentUser.getSent());
         for (int i = 0; i < suggestion.size(); i++) {
             for (int k = 0; k < request.size(); k++) {
                 /*check if the user is receiver to block*/
-                if (currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block")&&suggestion.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
-                        suggestion.remove(suggestion.get(i));
+                if (currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block") && suggestion.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
+                    suggestion.remove(suggestion.get(i));
                 }
             }
         }
@@ -700,20 +759,21 @@ temp.addAll(currentUser.getSent());
         }
         return posts;
     }
-    public ArrayList<RelationshipStatusString> groupSuggest(){
-       ArrayList<String>temp=new ArrayList();
-       temp.addAll(currentUser.getAllGroupRequests());
-       temp.addAll(currentUser.getAllGroupsLeftByMe());
-       temp.addAll(currentUser.getAllMyGroups());
-        ArrayList<RelationshipStatusString> groups=new ArrayList();
-        for(int i=0;i<temp.size();i++){
-            for(int j=0;j<this.groups.size();j++){
-                if(!temp.get(i).equalsIgnoreCase(this.groups.get(j).getGroupID())){
-                    groups.add(new RelationshipStatusString(this.groups.get(j).getGroupName(),this.groups.get(j).getGroupPhoto(),this.groups.get(j).getGroupID()));
+
+    public ArrayList<RelationshipStatusString> groupSuggest() {
+        ArrayList<String> temp = new ArrayList();
+        temp.addAll(currentUser.getAllGroupRequests());
+        temp.addAll(currentUser.getAllGroupsLeftByMe());
+        temp.addAll(currentUser.getAllMyGroups());
+        ArrayList<RelationshipStatusString> groups = new ArrayList();
+        for (int i = 0; i < temp.size(); i++) {
+            for (int j = 0; j < this.groups.size(); j++) {
+                if (!temp.get(i).equalsIgnoreCase(this.groups.get(j).getGroupID())) {
+                    groups.add(new RelationshipStatusString(this.groups.get(j).getGroupName(), this.groups.get(j).getGroupPhoto(), this.groups.get(j).getGroupID()));
                 }
 
             }
-       }
+        }
         return groups;
     }
 
@@ -737,14 +797,15 @@ temp.addAll(currentUser.getSent());
         for (int i = 0; i < found.size(); i++) {
             for (int k = 0; k < request.size(); k++) {
                 /*check if the user is receiver to block*/
-                if (currentUser.getUserId().equalsIgnoreCase(found.get(i).getIdString())||currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block") && found.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
+                if (currentUser.getUserId().equalsIgnoreCase(found.get(i).getIdString()) || currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block") && found.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
                     found.remove(found.get(i));
                 }
             }
         }
-        
+
         return found;
     }
+
     public ArrayList<UserSearch> SearchGroup(String key) {
         ArrayList<UserSearch> found = new ArrayList();
         for (int i = 0; i < groups.size(); i++) {
@@ -761,6 +822,41 @@ temp.addAll(currentUser.getSent());
 
         return found;
     }
+
+    public ArrayList<Notification> getCurrentUserNotifications() {
+        return currentUser.getNotifications();  // Get the notifications for the current user
+    }
+
+    public void addNotificationToFriend(String friendName, Notification notification) {
+        // Loop through all users in the data list to find the friend by userName
+        for (User user : Data) {
+            if (user.getUserName().equals(friendName)) {
+                // Add the notification to the friend's notifications list
+                user.getNotifications().add(notification);
+                break;
+            }
+        }
+    }
+
+    public User searchUserByName(String userName) {
+        for (User user : Data) {
+            if (user.getUserName().equalsIgnoreCase(userName)) {
+                return user;
+            }
+        }
+        return null; // Return null if no user is found
+    }
     
+    public ArrayList<Post> getUserPosts(String userId) {
+    ArrayList<Post> userPosts = new ArrayList<>();
+
+    for (Post post : posts) { // Assuming `posts` is a list of all posts in the system
+        if (post.getOwnerId().equalsIgnoreCase(userId)) {
+            userPosts.add(post);
+        }
+    }
+    return userPosts;
+}
+
 
 }
