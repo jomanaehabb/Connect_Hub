@@ -31,12 +31,12 @@ public class GroupUser {
         groupPost.createGroupPost(groupId, this.getGroupUserId(), groupPostText, groupPostImagePath, groupPostDate);
     }
     
-    public void joinGroup(String groupId) {
-        if(!GroupMemberDatabase.groupUserFound(groupId, this.getGroupUserId()))
-            GroupMembershipRequest.saveToGroupRequestsFile(groupId, this.groupUserId);
-        else
-            JOptionPane.showMessageDialog(null, "You already joined this group.");
-    }
+//    public void joinGroup(String groupId) {
+//        if(!GroupMemberDatabase.groupUserFound(groupId, this.getGroupUserId()))
+//            GroupMembershipRequest.saveToGroupRequestsFile(groupId, this.groupUserId);
+//        else
+//            JOptionPane.showMessageDialog(null, "You already joined this group.");
+//    }
     
     public void leaveGroup(String groupId) {
         if (groupId == null || this.getGroupUserId() == null) {

@@ -39,14 +39,26 @@ public class GroupPost{
         return groupAuthorId;
     }
 
+    public void setGroupPostText(String groupPostText) {
+        this.groupPostText = groupPostText;
+    }
+    
     public String getGroupPostText() {
         return groupPostText;
     }
 
+    public void setGroupPostImagePath(String groupPostImagePath) {
+        this.groupPostImagePath = groupPostImagePath;
+    }
+    
     public String getGroupPostImagePath() {
         return groupPostImagePath;
     }
 
+    public void setGroupPostDate(LocalDateTime groupPostDate) {
+        this.groupPostDate = groupPostDate;
+    }
+    
     public LocalDateTime getGroupPostDate() {
         return groupPostDate;
     }
@@ -105,6 +117,5 @@ public class GroupPost{
     public static void deleteGroupPost(String groupPostId) {
         GroupPostDatabase groupPostDatabase = new GroupPostDatabase();
         groupPostDatabase.removeGroupPostFromGroupPostsFile(groupPostId);
-        JOptionPane.showMessageDialog(null, "GroupPost has been successfully deleted.");
     }
 }

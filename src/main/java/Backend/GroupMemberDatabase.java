@@ -50,6 +50,22 @@ public class GroupMemberDatabase {
             JOptionPane.showMessageDialog(null, "Group or user not found.");
     }
     
+    public static boolean groupAdminFound(String groupId, String userId) {
+        if (groupId == null || userId == null) 
+            return false;
+        if (adminsMap.containsKey(groupId)) {
+            ArrayList<GroupAdmin> groupAdmins = adminsMap.get(groupId);
+            if (groupAdmins != null) {
+                for (int i = 0; i < groupAdmins.size(); i++) {
+                    if (groupAdmins.get(i).getGroupUserId().equals(userId)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     public static boolean groupUserFound(String groupId, String userId) {
         if (groupId == null || userId == null) 
             return false;
@@ -66,9 +82,25 @@ public class GroupMemberDatabase {
         return false;
     }
     
+    public void removeAdminFromGroupMembersFile(String groupId, String groupAdminId) {
+        if (groupId == null || groupAdminId == null) {
+            JOptionPane.showMessageDialog(null, "Invalid group ID or admin ID.");
+            return;
+        }
+        ArrayList<GroupAdmin> groupAdmins = adminsMap.get(groupId);
+        for (int i = 0; i < groupAdmins.size(); i++) {
+            if (groupAdmins.get(i).getGroupUserId().equals(groupAdminId)) {
+                groupAdmins.remove(i);
+                saveToGroupMembersFile();
+                JOptionPane.showMessageDialog(null, "Admin with ID: " +groupAdminId+ " has been successfully removed.");
+                return;
+            }
+        }
+    }
+    
     public void removeUserFromGroupMembersFile(String groupId, String groupUserId) {
         if (groupId == null || groupUserId == null) {
-            JOptionPane.showMessageDialog(null, "Invalid group or user ID.");
+            JOptionPane.showMessageDialog(null, "Invalid group ID or user ID.");
             return;
         }
         ArrayList<GroupUser> groupUsers = usersMap.get(groupId);

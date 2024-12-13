@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.json.JSONArray;
@@ -23,6 +24,23 @@ public class GroupPostDatabase {
         saveToGroupPostsFile();
     }
     
+    public void editGroupPostFromGroupPostsFile(String groupPostId, String groupPostText, String groupPostImagePath, LocalDateTime groupPostDate) {
+        loadFromGroupPostsFile();
+        if(!groupPosts.isEmpty()) {
+            for(int i = 0; i < groupPosts.size(); i++) {
+                if(groupPosts.get(i).getGroupPostId().equals(groupPostId)) {
+                    groupPosts.get(i).setGroupPostText(groupPostText);
+                    groupPosts.get(i).setGroupPostImagePath(groupPostImagePath);
+                    groupPosts.get(i).setGroupPostDate(groupPostDate);
+                    saveToGroupPostsFile();    
+                    JOptionPane.showMessageDialog(null, "GroupPost has been successfully modified.");
+                }  
+            }
+        }
+        else 
+            JOptionPane.showMessageDialog(null, "GroupPost not found");
+    }
+    
     public void removeGroupPostFromGroupPostsFile(String groupPostId) {
         loadFromGroupPostsFile();
         if(!groupPosts.isEmpty()) {
@@ -36,8 +54,10 @@ public class GroupPostDatabase {
             if(flag == 0) {
                 JOptionPane.showMessageDialog(null, "GroupPost not found");
             }
-            else if(flag == 1)
+            else if(flag == 1) {
                 saveToGroupPostsFile();    
+                JOptionPane.showMessageDialog(null, "GroupPost has been successfully deleted.");
+            }    
         }
         else 
             JOptionPane.showMessageDialog(null, "GroupPost not found");

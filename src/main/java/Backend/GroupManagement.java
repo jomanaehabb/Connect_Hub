@@ -137,6 +137,7 @@ public class GroupManagement {
         GroupPostDatabase groupPostDatabase = new GroupPostDatabase();
         if(groupPostDatabase.checkGroupHasPost(groupId))
             GroupPost.deleteGroupPost(groupId);
+        GroupMembershipRequest.deleteGroupRequests(groupId);
         JOptionPane.showMessageDialog(null, "Group has been successfully deleted.");
     }
 }
