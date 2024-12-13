@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "senderID": "U5",
+    "receiverID": "U3",
+    "status": {
+      "status": "pending"
+    },
+    "notificationId": "n1"
+  }
+]
