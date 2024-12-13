@@ -102,9 +102,9 @@ public class GroupPost{
         this.countGroupPost();
     }
     
-    public static void deleteGroupPost(String groupId) {
+    public static void deleteGroupPost(String groupPostId) {
         GroupPostDatabase groupPostDatabase = new GroupPostDatabase();
-        groupPostDatabase.removeGroupPostFromGroupPostsFile(groupId);
+        groupPostDatabase.removeGroupPostFromGroupPostsFile(groupPostId);
         JOptionPane.showMessageDialog(null, "GroupPost has been successfully deleted.");
     }
 }

@@ -8,11 +8,6 @@ public class GroupAdmin extends GroupUser{
         super(userId);
     }
 
-    @Override
-    public String toString() {
-        return "GroupAdmin{name='" + super.getGroupUserId() + "'}";
-    }
-    
     public static GroupAdmin fromJson(JSONObject j) {
         return new GroupAdmin(j.getString("AdminID"));
     }

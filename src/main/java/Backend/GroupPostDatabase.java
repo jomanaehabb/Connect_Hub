@@ -23,12 +23,12 @@ public class GroupPostDatabase {
         saveToGroupPostsFile();
     }
     
-    public void removeGroupPostFromGroupPostsFile(String groupId) {
+    public void removeGroupPostFromGroupPostsFile(String groupPostId) {
         loadFromGroupPostsFile();
         if(!groupPosts.isEmpty()) {
             int flag = 0;
             for(int i = 0; i < groupPosts.size(); i++) {
-                if(groupPosts.get(i).getGroupId().equals(groupId)) {
+                if(groupPosts.get(i).getGroupPostId().equals(groupPostId)) {
                     groupPosts.remove(i);
                     flag = 1;
                 }  
@@ -43,13 +43,33 @@ public class GroupPostDatabase {
             JOptionPane.showMessageDialog(null, "GroupPost not found");
     }
     
-    public ArrayList<GroupPost> searchGroupPosts(String groupId) {
+    public ArrayList<GroupPost> getGroupPosts(String groupId) {
         loadFromGroupPostsFile();
         if(!groupPosts.isEmpty()) {
             int flag = 0;
             ArrayList<GroupPost> posts = new ArrayList<>();
             for(int i = 0; i < groupPosts.size(); i++) {
-                if(groupId.equals(groupPosts.get(i).getGroupId())) {
+                if(groupPosts.get(i).getGroupId().equals(groupId)) {
+                    posts.add(groupPosts.get(i));
+                    flag = 1;
+                }
+            }
+            if(flag == 0)
+                return null;
+            else
+                return posts;
+        }
+        else
+            return null;
+    }
+    
+    public ArrayList<GroupPost> getGroupAuthorPosts(String groupAuthorId) {
+        loadFromGroupPostsFile();
+        if(!groupPosts.isEmpty()) {
+            int flag = 0;
+            ArrayList<GroupPost> posts = new ArrayList<>();
+            for(int i = 0; i < groupPosts.size(); i++) {
+                if(groupPosts.get(i).getGroupAuthorId().equals(groupAuthorId)) {
                     posts.add(groupPosts.get(i));
                     flag = 1;
                 }
@@ -87,7 +107,6 @@ public class GroupPostDatabase {
                 groupPosts.add(groupPost);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "GroupPosts file not found.");
         }
     }
@@ -104,7 +123,6 @@ public class GroupPostDatabase {
             file.write(postsArray.toString(2));
             file.close();
         } catch (IOException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error loading GroupPosts file.");
         }
     }
