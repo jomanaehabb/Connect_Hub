@@ -24,7 +24,7 @@
                   <Group type="102" attributes="0">
                       <Component id="ViewGroupButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ViewGroupButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="DeleteGroupButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="GroupNameField1" max="32767" attributes="0"/>
               </Group>
@@ -44,7 +44,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ViewGroupButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ViewGroupButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DeleteGroupButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -85,7 +85,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewGroupButton1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="ViewGroupButton2">
+    <Component class="javax.swing.JButton" name="DeleteGroupButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -99,7 +99,7 @@
         <Property name="text" type="java.lang.String" value="Delete Group"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewGroupButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteGroupButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
