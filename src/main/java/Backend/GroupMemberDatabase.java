@@ -49,6 +49,31 @@ public class GroupMemberDatabase {
         else if(!usersMap.isEmpty())
             JOptionPane.showMessageDialog(null, "Group or user not found.");
     }
+    
+    public void removeUserFromGroupMembersFile(String groupId, String groupUserId) {
+        if (usersMap.containsKey(groupId)) {
+            ArrayList<GroupUser> groupUsers = usersMap.get(groupId);
+            boolean userFound = false;
+            if (groupUsers != null) {
+                for (int i = 0; i < groupUsers.size(); i++) {
+                    if (groupUsers.get(i).getGroupUserId().equals(groupUserId)) {
+                        groupUsers.remove(i);
+                        userFound = true;
+                        break;
+                }
+            }
+        }
+        if (userFound) {
+            saveToGroupMembersFile();
+            JOptionPane.showMessageDialog(null, "User with ID: " +groupUserId+ " has been removed successfully.");
+        } 
+        else {
+            JOptionPane.showMessageDialog(null, "User with ID" +groupUserId+ "not found in the specified group.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Group not found.");
+    }
+}
 
     public void loadFromGroupMembersFile() {
         try {
