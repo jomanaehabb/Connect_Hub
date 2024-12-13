@@ -65,11 +65,21 @@ public class MyGroupsCreator extends javax.swing.JPanel {
         ViewGroupButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ViewGroupButton1.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton1.setText("View Group");
+        ViewGroupButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewGroupButton1ActionPerformed(evt);
+            }
+        });
 
         ViewGroupButton2.setBackground(new java.awt.Color(51, 153, 255));
         ViewGroupButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ViewGroupButton2.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton2.setText("Delete Group");
+        ViewGroupButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewGroupButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,6 +117,14 @@ public class MyGroupsCreator extends javax.swing.JPanel {
     private void GroupNameField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GroupNameField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GroupNameField1ActionPerformed
+
+    private void ViewGroupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGroupButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewGroupButton1ActionPerformed
+
+    private void ViewGroupButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGroupButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ViewGroupButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

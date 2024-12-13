@@ -21,6 +21,7 @@ Frontend\NewsfeedWindow$1.class
 Frontend\NewsfeedWindow$10.class
 Frontend\Search\BlockedSearch.class
 Frontend\Search\FriendListSearch.class
+Backend\GroupManagament\GroupString.class
 Frontend\Search\FriendListSearch$2.class
 Frontend\SignUpWindow$3.class
 Backend\DataBase\ContentFileReader.class
@@ -33,6 +34,7 @@ Frontend\MembersForAdmin.class
 Frontend\SignUpWindow$6.class
 Frontend\ProfileDetails$7.class
 Backend\DataBase\ContentFileReader$1.class
+Backend\GroupManagament\GroupManager.class
 Frontend\MyPosts_Stories$1.class
 Backend\DataBase\GroupFileReader.class
 Frontend\GroupForCreator$1.class
@@ -73,6 +75,7 @@ Frontend\ProfileDetails$6.class
 Frontend\SignUpWindow$5.class
 Frontend\PostText.class
 Frontend\Search\FriendListSearch$1.class
+Backend\GroupManagament\Group.class
 Frontend\FriendSuggestion$1.class
 Frontend\SignUpWindow.class
 Frontend\searchResultPanel.class
@@ -89,9 +92,7 @@ Frontend\Search\FriendRequestSearch$1.class
 Frontend\GroupForCreator.class
 Frontend\ProfileDetails.class
 Frontend\FriendManagement$1.class
-Backend\Group.class
 Frontend\SignUpWindow$4.class
-Backend\GroupString.class
 Frontend\searchResultPanel$3.class
 Frontend\Search\FriendSuggestionSearch$3.class
 Backend\Story.class

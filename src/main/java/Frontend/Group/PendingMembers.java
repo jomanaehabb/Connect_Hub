@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Frontend;
+package Frontend.Group;
+
+import Backend.GroupManagament.Group;
+import Backend.GroupManagament.GroupManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,8 +17,23 @@ public class PendingMembers extends javax.swing.JPanel {
     /**
      * Creates new form PendingMembers
      */
-    public PendingMembers() {
+    private Group group;
+    private GroupManager groupManager;
+    private String userId;
+    
+    public PendingMembers(Group group, GroupManager groupManager, String userId) {
+        
         initComponents();
+        this.group = group;
+        this.groupManager = groupManager;
+        this.userId = userId;
+        updatePendingMembers();
+    }
+    
+    private void updatePendingMembers() {
+        // Set the name and photo for the pending member
+        PendingMemberNameField.setText(userId); // Set the name to the user's ID (replace with actual name if available)
+        // PendingMemberPhotoLabel.setIcon(...); // Set the photo (replace with the user's photo if available)
     }
 
     /**
@@ -34,16 +53,31 @@ public class PendingMembers extends javax.swing.JPanel {
         PendingMemberPhotoLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         PendingMemberNameField.setEditable(false);
+        PendingMemberNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PendingMemberNameFieldActionPerformed(evt);
+            }
+        });
 
         AcceptButton.setBackground(new java.awt.Color(51, 153, 255));
         AcceptButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         AcceptButton.setForeground(new java.awt.Color(255, 255, 255));
         AcceptButton.setText("Accept");
+        AcceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AcceptButtonActionPerformed(evt);
+            }
+        });
 
         DeclineButton2.setBackground(new java.awt.Color(51, 153, 255));
         DeclineButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DeclineButton2.setForeground(new java.awt.Color(255, 255, 255));
         DeclineButton2.setText("Decline");
+        DeclineButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeclineButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,6 +111,32 @@ public class PendingMembers extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AcceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButtonActionPerformed
+        // TODO add your handling code here:
+        if (group.isPendingRequest(userId)) {
+            group.acceptMember(userId);
+            JOptionPane.showMessageDialog(this, "Member accepted successfully!");
+            updatePendingMembers(); // Refresh the list after accepting
+        } else {
+            JOptionPane.showMessageDialog(this, "This user is not in the pending list.");
+        }
+    }//GEN-LAST:event_AcceptButtonActionPerformed
+
+    private void DeclineButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeclineButton2ActionPerformed
+        // TODO add your handling code here:
+        if (group.isPendingRequest(userId)) {
+            group.declineMember(userId);
+            JOptionPane.showMessageDialog(this, "Member declined.");
+            updatePendingMembers(); // Refresh the list after declining
+        } else {
+            JOptionPane.showMessageDialog(this, "This user is not in the pending list.");
+        }
+    }//GEN-LAST:event_DeclineButton2ActionPerformed
+
+    private void PendingMemberNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendingMemberNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PendingMemberNameFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
