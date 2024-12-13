@@ -152,9 +152,9 @@ public class PostsAndStories extends javax.swing.JPanel {
     }
 
     // Class to hold the result
-    static class Result {
-        String imagePath;
-        String userText;
+    public static class Result {
+        public String imagePath;
+        public String userText;
 
         public Result(String imagePath, String userText) {
             this.imagePath = imagePath;
