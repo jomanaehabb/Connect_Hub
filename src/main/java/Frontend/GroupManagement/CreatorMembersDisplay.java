@@ -54,11 +54,12 @@ public class CreatorMembersDisplay extends javax.swing.JPanel {
         RemoveMemberButton = new javax.swing.JButton();
         MakeAdminButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         MemberNameField.setEditable(false);
 
-        RemoveMemberButton.setBackground(new java.awt.Color(51, 153, 255));
+        RemoveMemberButton.setBackground(new java.awt.Color(102, 153, 255));
         RemoveMemberButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RemoveMemberButton.setForeground(new java.awt.Color(255, 255, 255));
         RemoveMemberButton.setText("Remove");
@@ -68,7 +69,7 @@ public class CreatorMembersDisplay extends javax.swing.JPanel {
             }
         });
 
-        MakeAdminButton1.setBackground(new java.awt.Color(51, 153, 255));
+        MakeAdminButton1.setBackground(new java.awt.Color(102, 153, 255));
         MakeAdminButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         MakeAdminButton1.setForeground(new java.awt.Color(255, 255, 255));
         MakeAdminButton1.setText("Make admin");

@@ -52,9 +52,11 @@ public class Admin extends javax.swing.JPanel {
         RemoveAdminButton = new javax.swing.JButton();
         DemoteButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         AdminName.setEditable(false);
 
-        RemoveAdminButton.setBackground(new java.awt.Color(51, 153, 255));
+        RemoveAdminButton.setBackground(new java.awt.Color(102, 153, 255));
         RemoveAdminButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RemoveAdminButton.setForeground(new java.awt.Color(255, 255, 255));
         RemoveAdminButton.setText("Remove");
@@ -64,7 +66,7 @@ public class Admin extends javax.swing.JPanel {
             }
         });
 
-        DemoteButton.setBackground(new java.awt.Color(51, 153, 255));
+        DemoteButton.setBackground(new java.awt.Color(102, 153, 255));
         DemoteButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DemoteButton.setForeground(new java.awt.Color(255, 255, 255));
         DemoteButton.setText("Demote");

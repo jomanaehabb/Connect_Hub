@@ -55,6 +55,8 @@ public class ManageGroupPosts extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        managePost.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout managePostLayout = new javax.swing.GroupLayout(managePost);
         managePost.setLayout(managePostLayout);
         managePostLayout.setHorizontalGroup(

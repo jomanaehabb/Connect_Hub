@@ -53,6 +53,8 @@ public class GroupSuggestionsCard extends javax.swing.JPanel {
         ViewGroupButton = new javax.swing.JButton();
         joinGroupBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         GroupPhoto.setBackground(new java.awt.Color(255, 255, 255));
         GroupPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -63,7 +65,7 @@ public class GroupSuggestionsCard extends javax.swing.JPanel {
             }
         });
 
-        ViewGroupButton.setBackground(new java.awt.Color(0, 153, 255));
+        ViewGroupButton.setBackground(new java.awt.Color(102, 153, 255));
         ViewGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ViewGroupButton.setForeground(new java.awt.Color(255, 255, 255));
         ViewGroupButton.setText("View Group");
@@ -73,7 +75,7 @@ public class GroupSuggestionsCard extends javax.swing.JPanel {
             }
         });
 
-        joinGroupBtn.setBackground(new java.awt.Color(0, 153, 255));
+        joinGroupBtn.setBackground(new java.awt.Color(102, 153, 255));
         joinGroupBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         joinGroupBtn.setForeground(new java.awt.Color(255, 255, 255));
         joinGroupBtn.setText("Join Group");
