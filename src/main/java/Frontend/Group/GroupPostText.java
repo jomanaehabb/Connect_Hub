@@ -30,8 +30,8 @@ public class GroupPostText extends javax.swing.JPanel {
         DateField = new javax.swing.JTextField();
         PostTextField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        AcceptButton1 = new javax.swing.JButton();
-        DeclineButton2 = new javax.swing.JButton();
+        AcceptButton = new javax.swing.JButton();
+        DeclineButton = new javax.swing.JButton();
 
         UserNameField1.setEditable(false);
 
@@ -41,18 +41,23 @@ public class GroupPostText extends javax.swing.JPanel {
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
 
-        AcceptButton1.setBackground(new java.awt.Color(51, 153, 255));
-        AcceptButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        AcceptButton1.setText("Accept");
-        AcceptButton1.addActionListener(new java.awt.event.ActionListener() {
+        AcceptButton.setBackground(new java.awt.Color(51, 153, 255));
+        AcceptButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        AcceptButton.setText("Accept");
+        AcceptButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AcceptButton1ActionPerformed(evt);
+                AcceptButtonActionPerformed(evt);
             }
         });
 
-        DeclineButton2.setBackground(new java.awt.Color(51, 153, 255));
-        DeclineButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        DeclineButton2.setText("Decline");
+        DeclineButton.setBackground(new java.awt.Color(51, 153, 255));
+        DeclineButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        DeclineButton.setText("Decline");
+        DeclineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeclineButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,9 +75,9 @@ public class GroupPostText extends javax.swing.JPanel {
                 .addGap(64, 64, 64))
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(AcceptButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AcceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(DeclineButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(DeclineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,21 +93,25 @@ public class GroupPostText extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AcceptButton1)
-                    .addComponent(DeclineButton2))
+                    .addComponent(AcceptButton)
+                    .addComponent(DeclineButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AcceptButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButton1ActionPerformed
+    private void AcceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AcceptButton1ActionPerformed
+    }//GEN-LAST:event_AcceptButtonActionPerformed
+
+    private void DeclineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeclineButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeclineButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AcceptButton1;
+    private javax.swing.JButton AcceptButton;
     private javax.swing.JTextField DateField;
-    private javax.swing.JButton DeclineButton2;
+    private javax.swing.JButton DeclineButton;
     private javax.swing.JTextField PostTextField;
     private javax.swing.JTextField UserNameField1;
     private javax.swing.JSeparator jSeparator1;

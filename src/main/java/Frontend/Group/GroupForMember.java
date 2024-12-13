@@ -4,6 +4,8 @@
  */
 package Frontend.Group;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author carls
@@ -43,11 +45,21 @@ public class GroupForMember extends javax.swing.JFrame {
         LeaveGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LeaveGroupButton.setForeground(new java.awt.Color(255, 255, 255));
         LeaveGroupButton.setText("Leave group");
+        LeaveGroupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LeaveGroupButtonActionPerformed(evt);
+            }
+        });
 
         CreatePostButton.setBackground(new java.awt.Color(51, 153, 255));
         CreatePostButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         CreatePostButton.setForeground(new java.awt.Color(255, 255, 255));
         CreatePostButton.setText("Create post");
+        CreatePostButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreatePostButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +105,38 @@ public class GroupForMember extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LeaveGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LeaveGroupButtonActionPerformed
+        // TODO add your handling code here:
+        int confirmation = JOptionPane.showConfirmDialog(this, 
+                "Are you sure you want to leave this group?", 
+                "Confirm Leave", 
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmation == JOptionPane.YES_OPTION) {
+            // Handle logic to leave the group, such as updating the backend, removing the user from the group
+            JOptionPane.showMessageDialog(this, "You have left the group.");
+            // Optionally, close the window or navigate back to the previous screen
+            this.dispose(); // Close the current window (if needed)
+        }
+    }//GEN-LAST:event_LeaveGroupButtonActionPerformed
+
+    private void CreatePostButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePostButtonActionPerformed
+        // TODO add your handling code here:
+        // Open a new dialog or frame to create a post
+        // For example, create a simple dialog asking for post content (or use a separate frame)
+        String postContent = JOptionPane.showInputDialog(this, "Enter your post content:");
+        
+        if (postContent != null && !postContent.trim().isEmpty()) {
+            // Handle post creation logic, e.g., adding the post to the list of posts in the group
+            JOptionPane.showMessageDialog(this, "Post created successfully!");
+            
+            // You can also refresh the post list to show the new post in GroupPostsPane
+            // For example, add it to a model for a list or refresh the view
+        } else {
+            JOptionPane.showMessageDialog(this, "Post content cannot be empty.");
+        }
+    }//GEN-LAST:event_CreatePostButtonActionPerformed
 
 /*
     public static void main(String args[]) {

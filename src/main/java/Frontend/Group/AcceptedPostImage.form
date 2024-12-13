@@ -34,7 +34,7 @@
               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
               <Component id="EditButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="EditButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="RemoveButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="77" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -56,7 +56,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="EditButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="EditButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RemoveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -65,8 +65,14 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="NameField1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NameField1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="DateField2">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DateField2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField3">
     </Component>
@@ -100,8 +106,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditButton1ActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="EditButton2">
+    <Component class="javax.swing.JButton" name="RemoveButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -111,6 +120,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Remove"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

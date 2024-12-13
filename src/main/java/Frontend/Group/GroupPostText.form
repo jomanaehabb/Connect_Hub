@@ -31,9 +31,9 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-              <Component id="AcceptButton1" min="-2" pref="91" max="-2" attributes="0"/>
+              <Component id="AcceptButton" min="-2" pref="91" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="DeclineButton2" min="-2" pref="91" max="-2" attributes="0"/>
+              <Component id="DeclineButton" min="-2" pref="91" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -52,8 +52,8 @@
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="AcceptButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="DeclineButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="AcceptButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DeclineButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -87,7 +87,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AcceptButton1">
+    <Component class="javax.swing.JButton" name="AcceptButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -98,10 +98,10 @@
         <Property name="text" type="java.lang.String" value="Accept"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AcceptButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AcceptButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="DeclineButton2">
+    <Component class="javax.swing.JButton" name="DeclineButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -111,6 +111,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Decline"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeclineButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

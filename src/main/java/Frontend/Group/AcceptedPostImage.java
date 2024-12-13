@@ -32,7 +32,19 @@ public class AcceptedPostImage extends javax.swing.JPanel {
         PostImageLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         EditButton1 = new javax.swing.JButton();
-        EditButton2 = new javax.swing.JButton();
+        RemoveButton = new javax.swing.JButton();
+
+        NameField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NameField1ActionPerformed(evt);
+            }
+        });
+
+        DateField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DateField2ActionPerformed(evt);
+            }
+        });
 
         PostImageLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -41,10 +53,20 @@ public class AcceptedPostImage extends javax.swing.JPanel {
         EditButton1.setBackground(new java.awt.Color(51, 153, 255));
         EditButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         EditButton1.setText("Edit");
+        EditButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditButton1ActionPerformed(evt);
+            }
+        });
 
-        EditButton2.setBackground(new java.awt.Color(51, 153, 255));
-        EditButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        EditButton2.setText("Remove");
+        RemoveButton.setBackground(new java.awt.Color(51, 153, 255));
+        RemoveButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RemoveButton.setText("Remove");
+        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,7 +87,7 @@ public class AcceptedPostImage extends javax.swing.JPanel {
                 .addGap(86, 86, 86)
                 .addComponent(EditButton1)
                 .addGap(39, 39, 39)
-                .addComponent(EditButton2)
+                .addComponent(RemoveButton)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -84,18 +106,35 @@ public class AcceptedPostImage extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditButton1)
-                    .addComponent(EditButton2))
+                    .addComponent(RemoveButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EditButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_EditButton1ActionPerformed
+
+    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveButtonActionPerformed
+
+    private void NameField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NameField1ActionPerformed
+
+    private void DateField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DateField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DateField2;
     private javax.swing.JButton EditButton1;
-    private javax.swing.JButton EditButton2;
     private javax.swing.JTextField NameField1;
     private javax.swing.JLabel PostImageLabel1;
+    private javax.swing.JButton RemoveButton;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables

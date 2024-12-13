@@ -31,17 +31,27 @@ public class AcceptedPostText extends javax.swing.JPanel {
         JTextField3 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         EditButton1 = new javax.swing.JButton();
-        EditButton2 = new javax.swing.JButton();
+        RemoveButton = new javax.swing.JButton();
 
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
 
         EditButton1.setBackground(new java.awt.Color(51, 153, 255));
         EditButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         EditButton1.setText("Edit");
+        EditButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditButton1ActionPerformed(evt);
+            }
+        });
 
-        EditButton2.setBackground(new java.awt.Color(51, 153, 255));
-        EditButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        EditButton2.setText("Remove");
+        RemoveButton.setBackground(new java.awt.Color(51, 153, 255));
+        RemoveButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RemoveButton.setText("Remove");
+        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -61,7 +71,7 @@ public class AcceptedPostText extends javax.swing.JPanel {
                 .addGap(92, 92, 92)
                 .addComponent(EditButton1)
                 .addGap(39, 39, 39)
-                .addComponent(EditButton2)
+                .addComponent(RemoveButton)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,18 +88,26 @@ public class AcceptedPostText extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditButton1)
-                    .addComponent(EditButton2))
+                    .addComponent(RemoveButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EditButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditButton1ActionPerformed
+
+    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DateField2;
     private javax.swing.JButton EditButton1;
-    private javax.swing.JButton EditButton2;
     private javax.swing.JTextField JTextField3;
     private javax.swing.JTextField NameField1;
+    private javax.swing.JButton RemoveButton;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

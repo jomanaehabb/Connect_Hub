@@ -81,6 +81,11 @@ public class GroupForCreator extends javax.swing.JFrame {
         ManagePostsButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ManagePostsButton.setForeground(new java.awt.Color(255, 255, 255));
         ManagePostsButton.setText("Manage posts");
+        ManagePostsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManagePostsButtonActionPerformed(evt);
+            }
+        });
 
         MembersLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         MembersLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -90,23 +95,43 @@ public class GroupForCreator extends javax.swing.JFrame {
         EditNameButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         EditNameButton.setForeground(new java.awt.Color(255, 255, 255));
         EditNameButton.setText("Edit name");
+        EditNameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditNameButtonActionPerformed(evt);
+            }
+        });
 
         SaveNameButton.setBackground(new java.awt.Color(51, 153, 255));
         SaveNameButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         SaveNameButton.setForeground(new java.awt.Color(255, 255, 255));
         SaveNameButton.setText("Save");
         SaveNameButton.setFocusable(false);
+        SaveNameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveNameButtonActionPerformed(evt);
+            }
+        });
 
         EditDescriptionButton.setBackground(new java.awt.Color(51, 153, 255));
         EditDescriptionButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         EditDescriptionButton.setForeground(new java.awt.Color(255, 255, 255));
         EditDescriptionButton.setText("Edit Description");
+        EditDescriptionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditDescriptionButtonActionPerformed(evt);
+            }
+        });
 
         SaveDescriptionButton.setBackground(new java.awt.Color(51, 153, 255));
         SaveDescriptionButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         SaveDescriptionButton.setForeground(new java.awt.Color(255, 255, 255));
         SaveDescriptionButton.setText("Save");
         SaveDescriptionButton.setFocusable(false);
+        SaveDescriptionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveDescriptionButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -223,11 +248,32 @@ public class GroupForCreator extends javax.swing.JFrame {
 
     private void DeleteGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteGroupButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_DeleteGroupButtonActionPerformed
 
     private void CreatePostButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatePostButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CreatePostButtonActionPerformed
+
+    private void EditNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNameButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditNameButtonActionPerformed
+
+    private void EditDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditDescriptionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditDescriptionButtonActionPerformed
+
+    private void ManagePostsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagePostsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ManagePostsButtonActionPerformed
+
+    private void SaveNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveNameButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveNameButtonActionPerformed
+
+    private void SaveDescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveDescriptionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveDescriptionButtonActionPerformed
 
     /*
     public static void main(String args[]) {
