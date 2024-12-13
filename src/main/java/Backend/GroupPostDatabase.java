@@ -103,16 +103,16 @@ public class GroupPostDatabase {
             return null;
     }
     
-    public boolean checkGroupHasPost(String groupId) {
+    public String checkGroupHasPost(String groupId) {
         loadFromGroupPostsFile();
         if(groupPosts.isEmpty())
-            return false;
+            return null;
         else {
             for(int i = 0; i < groupPosts.size(); i++) {
                 if(groupId.equals(groupPosts.get(i).getGroupId()))
-                    return true;
+                    return groupPosts.get(i).getGroupPostId();
             }
-            return false;
+            return null;
         }
     }
 

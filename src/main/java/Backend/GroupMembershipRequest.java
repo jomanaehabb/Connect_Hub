@@ -17,12 +17,32 @@ public class GroupMembershipRequest {
     private static Map<String, ArrayList<String>> requestsMap = new HashMap<>();
     
     public void addGroupRequest(String groupId, String userId) {
-        requestsMap.computeIfAbsent(groupId, k -> new ArrayList<>()).add(userId);
-        saveToGroupRequestsFile();
+        if(!hasGroupRequestWithSpecificUser(groupId,userId)) {
+            requestsMap.computeIfAbsent(groupId, k -> new ArrayList<>()).add(userId);
+            saveToGroupRequestsFile();
+            JOptionPane.showMessageDialog(null, "GroupRequest has been sent.");
+        }
+        else
+            JOptionPane.showMessageDialog(null, "GroupRequest already exists.");
     }
     
     public static ArrayList<String> getGroupRequests(String groupId) {
         return requestsMap.getOrDefault(groupId, new ArrayList<>());
+    }
+    
+    public static boolean hasGroupRequestWithSpecificUser(String groupId, String userId) {
+        for (Map.Entry<String, ArrayList<String>> entry : requestsMap.entrySet()) {
+            if (entry.getKey().equals(groupId)) {
+                ArrayList<String> groupRequests = entry.getValue();
+                for (int i = 0; i < groupRequests.size(); i++) {
+                    String id = groupRequests.get(i);
+                    if (id.equals(userId)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
     
     public static void deleteGroupRequests(String groupId) {
@@ -43,7 +63,7 @@ public class GroupMembershipRequest {
                 GroupMemberDatabase groupMemberDatabase = new GroupMemberDatabase();
                 groupMemberDatabase.addUser(groupId, groupUser);
                 saveToGroupRequestsFile();
-                JOptionPane.showMessageDialog(null, "GroupRequest for user with ID: " +userId+ "has been approved.");
+                JOptionPane.showMessageDialog(null, "GroupRequest for user with ID: " +userId+ " has been approved.");
                 return;
                 }   
             }
@@ -59,7 +79,7 @@ public class GroupMembershipRequest {
                 if (groupRequests.get(i).equals(userId)) {
                 groupRequests.remove(i);
                 saveToGroupRequestsFile();
-                JOptionPane.showMessageDialog(null, "GroupRequest for user with ID: " +userId+ "has been declined.");
+                JOptionPane.showMessageDialog(null, "GroupRequest for user with ID: " +userId+ " has been declined.");
                 return;
                 }   
             }

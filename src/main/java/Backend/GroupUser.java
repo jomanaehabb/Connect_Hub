@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class GroupUser {
     
-    protected String groupUserId;
+    private String groupUserId;
 
     public GroupUser(String userId) {
         this.groupUserId = userId;

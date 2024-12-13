@@ -21,10 +21,10 @@ public class GroupCreator extends GroupAdmin{
             groupMemberDatabase.removeUserFromGroupMembersFile(groupId, groupUserId);
             GroupAdmin groupAdmin = new GroupAdmin(groupUserId);
             groupMemberDatabase.addAdmin(groupId, groupAdmin);
-            JOptionPane.showMessageDialog(null, "Successfully promoted user with ID: " +groupUserId+ "to admin role.");
+            JOptionPane.showMessageDialog(null, "Successfully promoted user with ID: " +groupUserId+ " to admin role.");
         }
         else
-            JOptionPane.showMessageDialog(null, "User with ID: " +groupUserId+ "does not exist.");
+            JOptionPane.showMessageDialog(null, "User with ID: " +groupUserId+ " does not exist.");
     }
     
     public void demoteGroupAdmin(String groupId, String groupAdminId) {
@@ -33,10 +33,10 @@ public class GroupCreator extends GroupAdmin{
             groupMemberDatabase.removeAdminFromGroupMembersFile(groupId, groupAdminId);
             GroupUser groupUser = new GroupUser(groupAdminId);
             groupMemberDatabase.addUser(groupId, groupUser);
-            JOptionPane.showMessageDialog(null, "Successfully demoted user with ID: " +groupAdminId+ "to normal user role.");
+            JOptionPane.showMessageDialog(null, "Successfully demoted user with ID: " +groupAdminId+ " to normal user role.");
         }
         else
-            JOptionPane.showMessageDialog(null, "User with ID: " +groupAdminId+ "does not exist.");
+            JOptionPane.showMessageDialog(null, "User with ID: " +groupAdminId+ " does not exist.");
     }
     
     public void removeGroupAdmin(String groupId, String groupAdminId) {
@@ -49,7 +49,7 @@ public class GroupCreator extends GroupAdmin{
             groupMemberDatabase.removeAdminFromGroupMembersFile(groupId, groupAdminId);
         }
         else
-            JOptionPane.showMessageDialog(null, "User with ID:" +groupUserId+ "is not in this group.");
+            JOptionPane.showMessageDialog(null, "User with ID: " +groupAdminId+ " is not in this group.");
     }
     
     public void deleteGroup(String groupId) {

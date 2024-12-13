@@ -48,7 +48,7 @@ public class GroupAdmin extends GroupUser{
             groupMemberDatabase.removeUserFromGroupMembersFile(groupId, groupUserId);
         }
         else
-            JOptionPane.showMessageDialog(null, "User with ID:" +groupUserId+ "is not in this group.");
+            JOptionPane.showMessageDialog(null, "User with ID: " +groupUserId+ " is not in this group.");
     }
     
     @Override
