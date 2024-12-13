@@ -20,7 +20,7 @@ public class NotMemberUserWindow extends javax.swing.JFrame {
      */
      private GroupString gs;
      private Manager a ;
-    public NotMemberUserWindower(Manager a, GroupString gs) {
+    public NotMemberUserWindow(Manager a, GroupString gs) {
         initComponents();
         this.a = a;
         this.gs = gs;

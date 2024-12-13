@@ -8,7 +8,6 @@ import Backend.Manager;
 import Backend.PostString;
 import Backend.UserSearch;
 import Backend.GroupString;
-import Frontend.Group.PendingMembers;
 import Frontend.PostsAndStories;
 import static Frontend.PostsAndStories.showCustomDialog;
 import java.awt.Image;

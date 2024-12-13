@@ -7,7 +7,6 @@ import Backend.Manager;
 import Backend.PostString;
 import Backend.UserSearch;
 import Backend.GroupString;
-import Frontend.Group.PendingMembers;
 import Frontend.PostsAndStories;
 import static Frontend.PostsAndStories.showCustomDialog;
 import java.awt.Image;
@@ -422,7 +421,7 @@ public class CreatorGroupWindow extends javax.swing.JFrame {
             String userPhoto = u.getPhotoString();
             String relation = u.getRelationString();
             String id = u.getIdString();
-            MembersForAdmin m = new MembersForAdmin(a, name, userPhoto, id, gs.getId());
+            AdminMembersDisplay m = new AdminMembersDisplay(a, name, userPhoto, id, gs.getId());
             membersPanel.add(m);
         }
         membersPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 100));
@@ -486,7 +485,7 @@ public class CreatorGroupWindow extends javax.swing.JFrame {
 
     private void ManagePostsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagePostsButtonActionPerformed
         // TODO add your handling code here:
-        ManagePosts m = new ManagePosts(a, gs.getId());
+        ManageGroupPosts m = new ManageGroupPosts(a, gs.getId());
         m.setVisible(true);
     }//GEN-LAST:event_ManagePostsButtonActionPerformed
 
