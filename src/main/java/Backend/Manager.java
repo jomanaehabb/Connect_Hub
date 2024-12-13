@@ -475,37 +475,37 @@ temp.addAll(currentUser.getSent());
             }
         }
         group.setGroupPhoto(photoPath);
-        Notification notification = new Notification("Group Photo Changed", photoPath);
-        for(User u : Data){
-                if(group.checkUser(u.getUserId()) != null ){
-                    if(!currentUser.getUserId().equals(u.getUserId()))
-                    u.addNotification(notification);
-    }
-        }
+//        Notification notification = new Notification("Group Photo Changed", photoPath);
+//        for(User u : Data){
+//                if(group.checkUser(u.getUserId()) != null ){
+//                    if(!currentUser.getUserId().equals(u.getUserId()))
+//                    u.addNotification(notification);
+//    }
+        //}
     }
 
     public void changeGroupName(String name, String groupID) {
         Group group = getGroup(groupID);
         group.setGroupName(name);
-        Notification notification = new Notification("Group Name Changed", name);
-        for(User u : Data){
-                if(group.checkUser(u.getUserId()) != null ){
-                    if(!currentUser.getUserId().equals(u.getUserId()))
-                    u.addNotification(notification);
-    }
-        }
+//        Notification notification = new Notification("Group Name Changed", name);
+//        for(User u : Data){
+//                if(group.checkUser(u.getUserId()) != null ){
+//                    if(!currentUser.getUserId().equals(u.getUserId()))
+//                    u.addNotification(notification);
+//    }
+//        }
     }
 
     public void changeGroupDescription(String description, String groupID) {
         Group group = getGroup(groupID);
         group.setDescription(description);
-        Notification notification = new Notification("Group Description Changed", description);
-        for(User u : Data){
-                if(group.checkUser(u.getUserId()) != null ){
-                    if(!currentUser.getUserId().equals(u.getUserId()))
-                    u.addNotification(notification);
-    }
-        }
+//        Notification notification = new Notification("Group Description Changed", description);
+//        for(User u : Data){
+//                if(group.checkUser(u.getUserId()) != null ){
+//                    if(!currentUser.getUserId().equals(u.getUserId()))
+//                    u.addNotification(notification);
+//    }
+//        }
     }
 
     
@@ -952,23 +952,38 @@ temp.addAll(currentUser.getSent());
         
         return found;
     }
-    public ArrayList<UserSearch> SearchGroup(String key) {
-        ArrayList<UserSearch> found = new ArrayList();
-        for (int i = 0; i < groups.size(); i++) {
-            if (key.equalsIgnoreCase(groups.get(i).getGroupName())) {
-                if (currentUser.isMember(groups.get(i).getGroupID())) {
-                    found.add(new UserSearch(groups.get(i).getGroupName(), "Member", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
-                } else if (currentUser.isPendingGroup(groups.get(i).getGroupID())) {
-                    found.add(new UserSearch(groups.get(i).getGroupName(), "Pending group", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
-                } else {
-          
-                    found.add(new UserSearch(groups.get(i).getGroupName(), "Not member", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
-                }
-            }
-        }
-
+   public ArrayList<UserSearch> SearchGroup(String key) {
+    ArrayList<UserSearch> found = new ArrayList<>();
+    
+    // Ensure groups is not null and contains data
+    if (groups == null || groups.isEmpty()) {
+        System.out.println("No groups available.");
         return found;
     }
+
+    // Loop through the groups list
+    for (int i = 0; i < groups.size(); i++) {
+        // Check if the group name matches the search key
+        if (key.equalsIgnoreCase(groups.get(i).getGroupName())) {
+            // Determine the user's status in the group
+            if (currentUser.isMember(groups.get(i).getGroupID())) {
+                found.add(new UserSearch(groups.get(i).getGroupName(), "Member", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
+            } else if (currentUser.isPendingGroup(groups.get(i).getGroupID())) {
+                found.add(new UserSearch(groups.get(i).getGroupName(), "Pending group", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
+            } else {
+                found.add(new UserSearch(groups.get(i).getGroupName(), "Not member", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
+            }
+        }
+    }
+    
+    // If no groups found, print a message
+    if (found.isEmpty()) {
+        System.out.println("No matching groups found.");
+    }
+
+    return found;
+}
+
     
     public GetUser getProfile(String key){
         for(int i=0;i<Data.size();i++){
