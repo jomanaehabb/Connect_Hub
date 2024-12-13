@@ -39,7 +39,15 @@
     "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
     "DateOfBirth": "03,12,2003",
     "status": true,
-    "notifications": [],
+    "notifications": [
+      {
+        "name": "malak",
+        "userId": "U5",
+        "profilePhoto": "F:\\malak\\Photos\\DTI\\strawberry shortcake.png",
+        "message": "malak sent you a friend request",
+        "Id": "n1"
+      }
+    ],
     "myPosts": [],
     "myStories": [],
     "myGroups": [],
@@ -47,7 +55,14 @@
     "groupsLeftByMe": [],
     "friends": [],
     "Blocked": [],
-    "received": [],
+    "received": [
+      {
+        "relationWith": "U5",
+        "relation": {
+          "status": "pending"
+        }
+      }
+    ],
     "sent": []
   },
   {
@@ -66,5 +81,35 @@
     "Blocked": [],
     "received": [],
     "sent": []
+  },
+  {
+    "userId": "U5",
+    "email": "malak@gmail.com",
+    "userName": "malak",
+    "password": "75014006529893194012d453fd36bbcb45a0e9e4dbb3a6cfb194fdc8f9e52d0a",
+    "DateOfBirth": "12,01,2005",
+    "status": false,
+    "profilePhoto": "F:\\malak\\Photos\\DTI\\strawberry shortcake.png",
+    "coverPhoto": "F:\\malak\\Photos\\DTI\\cute.png",
+    "bio": "meow meow",
+    "notifications": [],
+    "myPosts": [
+      "P-0"
+    ],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": [
+      {
+        "relationWith": "U3",
+        "relation": {
+          "status": "pending"
+        }
+      }
+    ]
   }
 ]
