@@ -129,7 +129,7 @@ public class GroupManagement {
         this.countGroup();
     }
 
-    public void deleteGroup(String groupId) throws NullPointerException {
+    public static void deleteGroup(String groupId) {
         GroupDatabase groupDatabase = new GroupDatabase();
         groupDatabase.removeGroupFromGroupsFile(groupId);
         GroupMemberDatabase groupMemberDatabase = new GroupMemberDatabase();
