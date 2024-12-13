@@ -10,7 +10,6 @@ Frontend\NonFriendPanel.class
 Frontend\Search\BlockedSearch$2.class
 Frontend\StoryImage.class
 Frontend\GroupForAdmins.class
-Frontend\ViewProfile$1.class
 Frontend\CreateGroup.class
 Frontend\Notification.class
 Frontend\Search\FriendSuggestionSearch$1.class
@@ -52,7 +51,6 @@ Backend\Logout.class
 Frontend\StoryImage$1.class
 Frontend\FriendList.class
 Frontend\MyPosts_Stories$2.class
-Frontend\ProfileDetails$15.class
 Backend\DataBase\GroupFileWriter.class
 Frontend\NewsfeedWindow$8.class
 Frontend\AcceptedPostImage.class
@@ -60,12 +58,10 @@ Frontend\LoginWindow$2.class
 Frontend\LoginWindow.class
 Backend\DataBase\FriendRequestFileReader$1.class
 Backend\ProfileManger.class
-Frontend\GroupForAdmins$1.class
 Frontend\ViewProfile.class
 Backend\Notification.class
 Frontend\Group\MyGroupsCreator.class
 Frontend\GroupPostImage.class
-Frontend\ManagePosts$1.class
 Backend\DataBase\LocalDateAdapter.class
 Frontend\GroupForUserNotMember.class
 Frontend\ProfileDetails$6.class
@@ -86,16 +82,13 @@ Frontend\GroupForMember.class
 Frontend\Search\FriendRequestSearch$1.class
 Frontend\GroupForCreator.class
 Frontend\ProfileDetails.class
-Frontend\GroupForCreator$3.class
 Frontend\FriendManagement$1.class
 Backend\Group.class
 Frontend\SignUpWindow$4.class
 Backend\GroupString.class
-Frontend\SignUpWindow$10.class
 Frontend\Search\FriendSuggestionSearch$3.class
 Backend\Story.class
 Frontend\ProfileDetails$10.class
-Frontend\LoginWindow$4.class
 Frontend\NewsfeedWindow$3.class
 Frontend\ProfileDetails$13.class
 Frontend\ProfileDetails$1.class
@@ -105,6 +98,7 @@ Backend\FriendManagement\RelationshipStatus.class
 Backend\Online.class
 Frontend\CreateGroup$2.class
 Frontend\LoginWindow$1.class
+Main\Main.class
 Backend\DataBase\UserFileReader$1.class
 Frontend\FriendsPanel.class
 Backend\FriendManagement\Relationship.class
@@ -112,13 +106,10 @@ Frontend\ProfileDetails$4.class
 Backend\FriendManagement\PostString.class
 Frontend\SignUpWindow$2.class
 Frontend\SignUpWindow$9.class
-connecthub\ConnectHub.class
 Frontend\FriendRequest$3.class
 Frontend\Search\FriendSuggestionSearch.class
 Validation\Validator.class
 Backend\DataBase\UserFileReader.class
-Frontend\CreateGroup$5.class
-Frontend\GroupForUserNotMember$1.class
 Frontend\Search\FriendSuggestionSearch$2.class
 Backend\DataBase\FriendRequestFileWriter.class
 Backend\FriendManagement\RelationshipStatusString.class
@@ -128,7 +119,6 @@ Backend\DataBase\UserFileWriter.class
 Frontend\GroupPostText$1.class
 Frontend\PostImage.class
 Frontend\NewsfeedWindow.class
-Frontend\SearchResult$1.class
 Backend\DataBase\FriendRequestFileReader.class
 Frontend\ProfileDetails$8.class
 Frontend\GroupPostText.class
@@ -139,9 +129,7 @@ Frontend\Group\MyGroups$1.class
 Frontend\ProfileDetails$11.class
 Frontend\FriendRequest$2.class
 Frontend\CreateGroup$4.class
-connecthub\ConnectHub$1.class
 Frontend\Search\FriendListSearch$4.class
-Frontend\GroupForMember$1.class
 Frontend\Search\BlockedSearch$1.class
 Frontend\Search\FriendRequestSearch$2.class
 Frontend\SearchWindow$1.class
@@ -152,6 +140,7 @@ Frontend\PendingMembers.class
 Backend\DataBase\ContentFileWriter.class
 Frontend\Group\MyGroups.class
 Frontend\NonFriendPanel$1.class
+Main\Main$1.class
 Frontend\ProfileDetails$12.class
 Backend\DataBase\JsonFileReader.class
 Frontend\NewsfeedWindow$5.class

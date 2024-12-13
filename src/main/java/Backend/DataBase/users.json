@@ -31,5 +31,40 @@
     "Blocked": [],
     "received": [],
     "sent": []
+  },
+  {
+    "userId": "U3",
+    "email": "hello@gmail.com",
+    "userName": "hello",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "03,12,2003",
+    "status": true,
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
+  },
+  {
+    "userId": "U4",
+    "email": "usernew@gmail.com",
+    "userName": "usernew",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "02,12,1995",
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
   }
 ]
