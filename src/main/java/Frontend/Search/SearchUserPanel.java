@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Frontend;
+package Frontend.Search;
 
 import Backend.Manager;
 import Backend.User;
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Lenovo
  */
-public class searchResultPanel extends javax.swing.JPanel {
+public class SearchUserPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form searchResultPanel
@@ -20,7 +20,7 @@ public class searchResultPanel extends javax.swing.JPanel {
     private Manager manager;
     private User foundUser;
 
-    public searchResultPanel(Manager manager, User foundUser) {
+    public SearchUserPanel(Manager manager, User foundUser) {
         this.manager = manager;
         this.foundUser = foundUser;
         initComponents(); // NetBeans GUI initialization

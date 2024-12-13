@@ -4,6 +4,7 @@
  */
 package Frontend;
 
+import Frontend.Search.SearchUserPanel;
 import Backend.Manager;
 import Backend.FriendManagement.PostString;
 import Backend.GroupManagament.GroupString;
@@ -527,7 +528,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
     JFrame searchResultFrame = new JFrame("Search Results");
     searchResultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     searchResultFrame.setSize(500, 400);
-    searchResultFrame.add(new searchResultPanel(a, foundUser));
+    searchResultFrame.add(new SearchUserPanel(a, foundUser));
     searchResultFrame.setVisible(true);
     }//GEN-LAST:event_SearchUserBtnActionPerformed
 
