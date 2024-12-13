@@ -84,6 +84,7 @@
   },
   {
     "userId": "U5",
+<<<<<<< HEAD
     "email": "malak@gmail.com",
     "userName": "malak",
     "password": "75014006529893194012d453fd36bbcb45a0e9e4dbb3a6cfb194fdc8f9e52d0a",
@@ -96,6 +97,15 @@
     "myPosts": [
       "P-0"
     ],
+=======
+    "email": "test1@gmail.com",
+    "userName": "test1",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "05,12,2002",
+    "status": true,
+    "notifications": [],
+    "myPosts": [],
+>>>>>>> 4816ca9427892f59f757b8cdef29b7a4c3e01cd0
     "myStories": [],
     "myGroups": [],
     "groupRequests": [],
@@ -103,6 +113,7 @@
     "friends": [],
     "Blocked": [],
     "received": [],
+<<<<<<< HEAD
     "sent": [
       {
         "relationWith": "U3",
@@ -111,5 +122,25 @@
         }
       }
     ]
+=======
+    "sent": []
+  },
+  {
+    "userId": "U6",
+    "email": "test2@gmail.com",
+    "userName": "test2",
+    "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "DateOfBirth": "01,12,2005",
+    "notifications": [],
+    "myPosts": [],
+    "myStories": [],
+    "myGroups": [],
+    "groupRequests": [],
+    "groupsLeftByMe": [],
+    "friends": [],
+    "Blocked": [],
+    "received": [],
+    "sent": []
+>>>>>>> 4816ca9427892f59f757b8cdef29b7a4c3e01cd0
   }
 ]
