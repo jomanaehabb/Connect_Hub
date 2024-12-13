@@ -5,7 +5,7 @@
 package Frontend;
 
 import Backend.Manager;
-import Backend.FriendManagement.RelationshipStatusString;
+import Backend.RelationshipStatusString;
 import java.util.ArrayList;
 
 /**

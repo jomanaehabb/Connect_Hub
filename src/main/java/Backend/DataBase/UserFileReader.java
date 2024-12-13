@@ -10,9 +10,9 @@ package Backend.DataBase;
  * @author DELL-G3
  */
 
-import Backend.FriendManagement.RelationshipStatus;
-import Backend.FriendManagement.Relationship;
-import Backend.FriendManagement.friendRequest;
+import Backend.RelationshipStatus;
+import Backend.Relationship;
+import Backend.friendRequest;
 import Backend.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

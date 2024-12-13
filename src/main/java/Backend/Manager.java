@@ -1,20 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Backend;
 
-/**
- *
- * @author DELL-G3
- */
-import Backend.GroupManagament.GroupString;
-import Backend.GroupManagament.Group;
-import Backend.FriendManagement.PostString;
-import Backend.FriendManagement.RelationshipStatusString;
-import Backend.FriendManagement.Relationship;
-import Backend.FriendManagement.UserSearch;
-import Backend.FriendManagement.friendRequest;
+
+import Frontend.ProfileDetails;
+
+import Backend.Group;
 import java.time.Duration;
 
 import java.time.LocalDate;
@@ -32,7 +21,7 @@ public class Manager {
     private ProfileManger profileManger;
     private ArrayList<Notification> notifications = new ArrayList<>();
 
-    public Manager(ArrayList<User> Data, ArrayList<Post> posts, ArrayList<Story> stories, ArrayList<friendRequest> request, ArrayList<Group> groups) {
+    public Manager(ArrayList<User> Data, ArrayList<Post> posts, ArrayList<Story> stories, ArrayList<friendRequest> request ,ArrayList<Group> groups) {
         currentUser = null;
         this.Data = Data;
         this.posts = posts;
@@ -71,76 +60,51 @@ public class Manager {
         Server.writeUsers();
         Server.writeContent();
         Server.writeRelationShips();
+        Server.writeGroups();
     }
 
     /*friend requests*/
     public boolean sendFriendRequest(String receiver) {
         clearCancel();
+        /*need to handle if the user is already in the friends*/
         for (int i = 0; i < Data.size(); i++) {
             if (Data.get(i).getUserId().equalsIgnoreCase(receiver)) {
                 friendRequest temp = new friendRequest(currentUser.getUserId(), Data.get(i).getUserId());
                 temp.make(currentUser, Data.get(i));
                 request.add(temp);
-                Notification notification = new Notification(
-                        currentUser.getUserName(), // Sender's name
-                        currentUser.getUserId(),
-                        currentUser.getProfilePhoto(),
-                        currentUser.getUserName() + " sent you a friend request" // Notification message
-                );
+                Notification notification = new Notification("Friend request", currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto());
                 temp.setNotificationId(notification.getId());
-                Data.get(i).addNotification(notification);  // Add notification to the receiver
+                Data.get(i).addNotification(notification);
+                
                 return true;
             }
         }
         return false;
-    }
-
-    public User getUserById(String userId) {
-        for (User user : Data) { // Assuming 'Data' is your list of users
-            if (user.getUserId().equalsIgnoreCase(userId)) {
-                return user;
-            }
-        }
-        return null;  // Return null if user is not found
     }
 
     public boolean acceptFriendRequest(String senderID) {
         clearCancel();
         for (int i = 0; i < request.size(); i++) {
             if (request.get(i).getSenderID().equalsIgnoreCase(senderID) && request.get(i).getReceiverID().equalsIgnoreCase(currentUser.getUserId())) {
-                // Accept the request
                 request.get(i).accept();
-
-                // Add the sender as a friend
                 currentUser.acceptFriendRequest(senderID);
-
-                // Create a notification for the sender
-                User sender = getUserById(senderID); // Assuming you have a method to get a User by ID
-                if (sender != null) {
-                    Notification notification = new Notification(
-                            currentUser.getUserName(), // Current user (receiver) name
-                            currentUser.getUserId(),
-                            currentUser.getProfilePhoto(),
-                            currentUser.getUserName() + " accepted your friend request" // Notification message
-                    );
-
-                    // Add the notification to the sender's notification list
-                    sender.addNotification(notification);
-                }
-
+                removeNotification(request.get(i).getNotificationId());
                 return true;
             }
+
         }
         return false;
     }
-
+    
+    //function used to CancelFriend requests
     public boolean cancelFriendRequest(String senderID) {
         clearCancel();
         for (int i = 0; i < request.size(); i++) {
             if (request.get(i).getSenderID().equalsIgnoreCase(senderID) && request.get(i).getReceiverID().equalsIgnoreCase(currentUser.getUserId())) {
                 currentUser.cancelFriendRequest(senderID);
                 request.get(i).decline();
-
+                
+                removeNotification(request.get(i).getNotificationId());
                 return true;
             }
 
@@ -149,6 +113,7 @@ public class Manager {
         return true;
     }
 
+    
     public boolean blockFriend(String userID) {
         clearCancel();
 
@@ -156,7 +121,7 @@ public class Manager {
             if (request.get(i).getSenderID().equalsIgnoreCase(userID) && request.get(i).getReceiverID().equalsIgnoreCase(currentUser.getUserId())) {
                 currentUser.blockFriend(userID);
                 request.get(i).blockAndSwitch();
-
+                
                 return true;
             } else if (request.get(i).getSenderID().equalsIgnoreCase(currentUser.getUserId()) && request.get(i).getReceiverID().equalsIgnoreCase(userID)) {
                 request.get(i).block();
@@ -168,8 +133,24 @@ public class Manager {
 
         return true;
     }
+    //m7taga tzbet
+        public boolean blockNonFriend(String userID) {
+        clearCancel();
+        sendFriendRequest(userID);
+        for (int i = 0; i < request.size(); i++) {
+           if (request.get(i).getSenderID().equalsIgnoreCase(currentUser.getUserId()) && request.get(i).getReceiverID().equalsIgnoreCase(userID)) {
+                request.get(i).block();
+                currentUser.blockNonFriend(userID);
+                return true;
+            }
+
+        }
+
+        return true;
+    }
 
     /*Profile Manager*/
+
     public boolean changePassword(String password) {
         currentUser.setPassword(password);
         return true;
@@ -209,50 +190,16 @@ public class Manager {
     /*content management*/
  /*posts manager*/
     public boolean createPost(String photo, String text) {
-        // Create a new post
         Post post = new Post(photo, currentUser.getUserId(), text);
         currentUser.addPost(post.getContentID());
         posts.add(post);
-
-        // Get the list of friends using the existing getFriends method
-        ArrayList<RelationshipStatusString> friends = getFriends();
-
-        // Send notifications to all friends using only the userName
-        for (RelationshipStatusString friend : friends) {
-            String friendName = friend.getUsernameString(); // Get friend's name
-            String message = currentUser.getUserName() + " created a new post: " + text;
-
-            // Create a notification object (assuming you have a Notification class)
-            Notification notification = new Notification(currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto(), message);
-
-            // Add the notification to the friend's notifications list
-            addNotificationToFriend(friendName, notification);
-        }
-
         return true;
     }
 
     public boolean createStory(String photo, String text) {
-        // Create a new story
         Story story = new Story(photo, currentUser.getUserId(), text);
         currentUser.addStory(story.getContentID());
         stories.add(story);
-
-        // Get the list of friends using the existing getFriends method
-        ArrayList<RelationshipStatusString> friends = getFriends();
-
-        // Send notifications to all friends using only the userName
-        for (RelationshipStatusString friend : friends) {
-            String friendName = friend.getUsernameString(); // Get friend's name
-            String message = currentUser.getUserName() + " posted a new story: " + text;
-
-            // Create a notification object (assuming you have a Notification class)
-            Notification notification = new Notification(currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto(), message);
-
-            // Add the notification to the friend's notifications list
-            addNotificationToFriend(friendName, notification);
-        }
-
         return true;
     }
 
@@ -291,13 +238,13 @@ public class Manager {
         LocalDateTime currentTime = LocalDateTime.now();
         for (int i = 0; i < stories.size(); i++) {
             Content temp = stories.get(i);
-
+            
             Duration duration = Duration.between(temp.getTimePosted(), currentTime);
             //System.out.print(duration.toHours());
-            if (duration.toHours() >= 24) {
+            if (duration.toHours()>=24) {
                 currentUser.removeContent(temp.getContentID());
                 stories.remove(temp);
-
+                
             }
         }
     }
@@ -424,7 +371,7 @@ public class Manager {
                 }
             }
         }
-        // System.out.print(stories.size());
+       // System.out.print(stories.size());
         return stories;
     }
 
@@ -435,7 +382,7 @@ public class Manager {
         temp.addAll(currentUser.getFriends());
         temp.addAll(currentUser.getBlocked());
         temp.addAll(currentUser.getReceived());
-        temp.addAll(currentUser.getSent());
+temp.addAll(currentUser.getSent());
         if (temp.isEmpty()) {
 
             for (int i = 0; i < Data.size(); i++) {
@@ -457,8 +404,8 @@ public class Manager {
         for (int i = 0; i < suggestion.size(); i++) {
             for (int k = 0; k < request.size(); k++) {
                 /*check if the user is receiver to block*/
-                if (currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block") && suggestion.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
-                    suggestion.remove(suggestion.get(i));
+                if (currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block")&&suggestion.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
+                        suggestion.remove(suggestion.get(i));
                 }
             }
         }
@@ -528,23 +475,47 @@ public class Manager {
             }
         }
         group.setGroupPhoto(photoPath);
+        Notification notification = new Notification("Group Photo Changed", photoPath);
+        for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null ){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+    }
+        }
     }
 
     public void changeGroupName(String name, String groupID) {
         Group group = getGroup(groupID);
         group.setGroupName(name);
+        Notification notification = new Notification("Group Name Changed", name);
+        for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null ){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+    }
+        }
     }
 
     public void changeGroupDescription(String description, String groupID) {
         Group group = getGroup(groupID);
         group.setDescription(description);
+        Notification notification = new Notification("Group Description Changed", description);
+        for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null ){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+    }
+        }
     }
 
+    
+    //group data getting 
     public GroupString getCroupInfo(String id) {
         Group group = getGroup(id);
         return new GroupString(group.getGroupName(), group.getGroupPhoto(), group.getDescription(), group.getGroupID(), group.checkUser(currentUser.getUserId()));
     }
 
+    
     public ArrayList<GroupString> getMyGroups() {
         ArrayList<GroupString> data = new ArrayList<>();
         for (String groupId : currentUser.getAllMyGroups()) {
@@ -556,6 +527,73 @@ public class Manager {
         }
         return data;
     }
+    
+    public ArrayList<UserSearch> getAllMembersOfGroup(String groupId){
+        Group group = getGroup(groupId);
+         ArrayList<UserSearch> temp = new ArrayList<>();
+        for(User u : Data){
+            if(group.checkUser(u.getUserId()) != null){
+                temp.add(new UserSearch(u.getUserName(),group.checkUser(u.getUserId()),u.getUserId(),u.getProfilePhoto()));
+            }
+        }
+        return temp;
+    }
+    
+    public ArrayList<UserSearch> getAllAdminsOfGroup(String groupId){
+        Group group = getGroup(groupId);
+         ArrayList<UserSearch> temp = new ArrayList<>();
+        for(User u : Data){
+            if((group.checkUser(u.getUserId())!= null) && group.checkUser(u.getUserId()).equals("admin") ){
+                temp.add(new UserSearch(u.getUserName(),group.checkUser(u.getUserId()),u.getUserId(),u.getProfilePhoto()));
+            }
+        }
+        return temp;
+    }
+    
+    public ArrayList<UserSearch> getAllUsersOfGroup(String groupId){
+        Group group = getGroup(groupId);
+         ArrayList<UserSearch> temp = new ArrayList<>();
+        for(User u : Data){
+            if((group.checkUser(u.getUserId())!= null) &&group.checkUser(u.getUserId()).equals("user")){
+                temp.add(new UserSearch(u.getUserName(),group.checkUser(u.getUserId()),u.getUserId(),u.getProfilePhoto()));
+            }
+        }
+        return temp;
+    }
+    
+    public UserSearch getOwnerOfGroup(String groupId){
+        Group group = getGroup(groupId);
+         ArrayList<UserSearch> temp = new ArrayList<>();
+        for(User u : Data){
+            if(group.checkUser(u.getUserId()).equals("owner") ){
+                return new UserSearch(u.getUserName(),group.checkUser(u.getUserId()),u.getUserId(),u.getProfilePhoto());
+            }
+        }
+        return null;
+    }
+    
+     public ArrayList<UserSearch> getAllPendingRequestsOfGroup(String groupId){
+        Group group = getGroup(groupId);
+         ArrayList<UserSearch> temp = new ArrayList<>();
+        for(User u : Data){
+            if((group.checkUser(u.getUserId())!= null) &&group.isPendingRequest(u.getUserId())){
+                temp.add(new UserSearch(u.getUserName(),group.checkUser(u.getUserId()),u.getUserId(),u.getProfilePhoto()));
+            }
+        }
+        return temp;
+    }
+     
+     public ArrayList<PostString> getAllPendingPostsOfGroup(String groupId){
+        Group group = getGroup(groupId);
+         ArrayList<PostString> temp = new ArrayList<>();
+        for(Post post : posts){
+            if(group.isPendingPost(post.getContentID())){
+                temp.add(new PostString(getUser(post.getAuthorID()).getUserName(), post.getText(), post.getPhoto(), post.getTimePosted().toString(), post.getContentID()));
+            }
+        }
+        return temp;
+    }
+    
 
     public boolean createGroupPost(String groupId, String photo, String text) {
         Group group = getGroup(groupId);
@@ -565,13 +603,28 @@ public class Manager {
             Post post = new Post(photo, currentUser.getUserId(), text);
             userAddGroupPost(post.getContentID(), groupId);
             posts.add(post);
+            for(User u : Data){
+            if(group.checkUser(currentUser.getUserId()) != null && (group.checkUser(currentUser.getUserId()).equals("owner") || group.checkUser(currentUser.getUserId()).equals("admin"))){
+                Notification n = new Notification("New post need to be Approved", currentUser.getUserName(), post,groupId);
+                u.addNotification(n);
+                group.setRequestNotifcation(post.getContentID(), n.getId());
+            }
+            }
             return true;
         } else {
             Post post = new Post(photo, currentUser.getUserId(), text);
             adminAddGroupPost(post.getContentID(), groupId);
             posts.add(post);
+            for(User u : Data){
+              if(group.checkUser(currentUser.getUserId()) != null){
+                Notification n = new Notification("New post added to group", currentUser.getUserName(), post);
+                u.addNotification(n);
+                }  
+            }
+            
             return true;
         }
+        
     }
 
     public ArrayList<PostString> getAllGroupPost(String groupId) {
@@ -579,7 +632,7 @@ public class Manager {
         ArrayList<PostString> tempPosts = new ArrayList<>();
         for (Post post : posts) {
             if (group.isPost(post.getContentID())) { //check if it is a post inside the group
-                tempPosts.add(new PostString(post.getAuthorID(), post.getText(), post.getPhoto(), post.getTimePosted().toString()));
+                tempPosts.add(new PostString(getUser(post.getAuthorID()).getUserName(), post.getText(), post.getPhoto(), post.getTimePosted().toString(), post.getContentID()));
             }
         }
         return tempPosts;
@@ -625,13 +678,21 @@ public class Manager {
     public void approveRequest(String userId, String groupId) {
         Group group = getGroup(groupId);
         User user = getUser(userId);
+        
         if (group.checkUser(currentUser.getUserId()) != null && (group.checkUser(currentUser.getUserId()).equals("owner") || group.checkUser(currentUser.getUserId()).equals("admin"))) {
             if (group.isPendingRequest(userId)) {
                 user.joinGroup(groupId); //change group to mygroups array
                 group.acceptMember(userId); //change user from requests to users
-
+                Notification notification = new Notification("approve request",user.getUserName(),user.getUserId(),user.getProfilePhoto() );
+                for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null ){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+                }
+                }
             }
         }
+        removeNotification(group.getRequestNotifcation(userId));
 
     }
 
@@ -641,6 +702,15 @@ public class Manager {
             if (group.isPendingPost(postId)) {
                 group.acceptPost(postId); //change user from requests to users
             }
+             Content post = getPostWithID(postId);
+            Notification  notification = new Notification("approve post request" , currentUser.getUserName(), (Post) post);
+            for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null && !group.checkUser(u.getUserId()).equals("user")){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+                }
+            }
+            removeNotification(group.getRequestNotifcation(postId));
         }
     }
 
@@ -651,16 +721,24 @@ public class Manager {
             if (group.isPendingRequest(userId)) {
                 user.removeGroupRequest(groupId); //remove request from grouprequests
                 group.declineMember(userId); //remove user from requests
+                Notification  notification = new Notification("decline user request" ,"Your request have been declined");
+                    user.addNotification(notification);
+             
             }
         }
+        removeNotification(group.getRequestNotifcation(userId));
     }
 
     public void declinePostRequest(String postId, String groupId) {
         Group group = getGroup(groupId);
         if (group.checkUser(currentUser.getUserId()) != null && (group.checkUser(currentUser.getUserId()).equals("owner") || group.checkUser(currentUser.getUserId()).equals("admin"))) {
             if (group.isPendingPost(postId)) {
+                Content post = getPostWithID(postId);
                 group.declinePost(postId); //remove post from requests
+                Notification  notification = new Notification("decline post request" , currentUser.getUserName(), (Post) post);
+                currentUser.addNotification(notification);
             }
+            removeNotification(group.getRequestNotifcation(postId));
         }
     }
 
@@ -671,7 +749,16 @@ public class Manager {
             if (group.isUser(userId)) { //admins can only remove normal users
                 user.removeGroup(groupId); //remove request from grouprequests
                 group.removeMember(userId); //remove user from requests
+                Notification  notification = new Notification("Remove member", currentUser.getUserName()+" Removed "+ user.getUserName() +"From Group");
+             for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                        u.addNotification(notification);
+                }
             }
+            
+            }
+            
         }
     }
 
@@ -680,14 +767,33 @@ public class Manager {
 
         if (group.checkUser(currentUser.getUserId()) != null && (group.checkUser(currentUser.getUserId()).equals("owner") || group.checkUser(currentUser.getUserId()).equals("admin"))) {
             group.removePost(postId);
+            Notification  notification = new Notification("Delete post", currentUser.getUserName()+" Deleted a post");
+            for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                        u.addNotification(notification);
+                }
+            }
         }
     }
 
     private void adminAddGroupPost(String postId, String groupId) {
         Group group = getGroup(groupId);
+        boolean flag = false;
         if (group.checkUser(currentUser.getUserId()) != null && (group.checkUser(currentUser.getUserId()).equals("owner") || group.checkUser(currentUser.getUserId()).equals("admin"))) {
             group.addPostOfAdmin(postId);
-
+            flag = true;
+        }
+        if(flag){
+         Content post = getPostWithID(postId);
+         Notification  notification = new Notification("Admin added post to Group",currentUser.getUserName(), (Post) post);
+        for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                     u.addNotification(notification);
+                }
+            }
+        
         }
     }
 
@@ -699,7 +805,17 @@ public class Manager {
                 Post post = getPost(postId);
                 post.setPhoto(photo);
                 post.setText(text);
+                Notification  notification = new Notification("Edit post", currentUser.getUserName() + " Edited this post", post); // post not content
+                for(User u : Data){
+                   if(group.checkUser(u.getUserId()) != null){
+                       if(!currentUser.getUserId().equals(u.getUserId()))
+                       u.addNotification(notification);
+                   } 
+                }
                 return true;
+                
+                
+                
             }
         }
         return false;
@@ -711,6 +827,17 @@ public class Manager {
         if (group.checkUser(currentUser.getUserId()) != null && group.isUser(currentUser.getUserId())) {
             group.addPostOfUser(postId);
             ArrayList<String> admins = group.getAllAdmins();
+            Content post = getPostWithID(postId);
+            Notification  notification = new Notification("User added post to group" , currentUser.getUserName(), (Post) post);
+            for(User u : Data){
+                if(!currentUser.getUserId().equals(u.getUserId()))
+                if(group.checkUser(u.getUserId()) != null && !group.checkUser(u.getUserId()).equals("user")){
+                    u.addNotification(notification);
+                    
+                }
+                
+            }
+            group.setRequestNotifcation(postId, notification.getId());
         }
     }
 
@@ -719,6 +846,15 @@ public class Manager {
         if (group.checkUser(currentUser.getUserId()) == null && !group.isPendingRequest(currentUser.getUserId())) {
             group.addMember(groupId);
             currentUser.addGroupRequest(groupId);
+            Notification  notification = new Notification("Join Group", currentUser.getUserName(), currentUser.getUserId(), currentUser.getProfilePhoto());
+            for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null && !group.checkUser(u.getUserId()).equals("user")){
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+                }
+                
+            }
+            
         }
     }
 
@@ -729,7 +865,17 @@ public class Manager {
         } else if (group.checkUser(currentUser.getUserId()) != null) {
             group.removeMember(currentUser.getUserId());
             currentUser.leaveGroup(groupId);
+            Notification  notification = new Notification("Leave Group",currentUser.getUserName() + " Left " + group.getGroupName() + " Group");
+            
+            for(User u : Data){
+                if(group.checkUser(u.getUserId()) != null && !group.checkUser(u.getUserId()).equals("user") ){ // notification will not be sent to user as he has already left group
+                    if(!currentUser.getUserId().equals(u.getUserId()))
+                    u.addNotification(notification);
+                    //no need to delete this notification
+                }
+            }
         }
+        
     }
 
     public void removeNotification(String notificationId) {
@@ -749,33 +895,32 @@ public class Manager {
                             for (int m = 0; m < Data.size(); m++) {
                                 if (Data.get(m).getUserId().equalsIgnoreCase(this.posts.get(l).getAuthorID())) {
                                     posts.add(new PostString(Data.get(m).getUserName(), this.posts.get(l).getText(), this.posts.get(l).getPhoto(), this.posts.get(l).getTimePosted().toString()));
-
+                                    break;
                                 }
                             }
 
                         }
 
                     }
+                    break;
                 }
             }
         }
         return posts;
     }
 
-    public ArrayList<RelationshipStatusString> groupSuggest() {
-        ArrayList<String> temp = new ArrayList();
-        temp.addAll(currentUser.getAllGroupRequests());
-        temp.addAll(currentUser.getAllGroupsLeftByMe());
-        temp.addAll(currentUser.getAllMyGroups());
-        ArrayList<RelationshipStatusString> groups = new ArrayList();
-        for (int i = 0; i < temp.size(); i++) {
-            for (int j = 0; j < this.groups.size(); j++) {
-                if (!temp.get(i).equalsIgnoreCase(this.groups.get(j).getGroupID())) {
-                    groups.add(new RelationshipStatusString(this.groups.get(j).getGroupName(), this.groups.get(j).getGroupPhoto(), this.groups.get(j).getGroupID()));
-                }
-
-            }
+    public ArrayList<RelationshipStatusString> groupSuggest(){
+       ArrayList<String>temp=new ArrayList();
+       temp.addAll(currentUser.getAllGroupRequests());
+       temp.addAll(currentUser.getAllGroupsLeftByMe());
+       temp.addAll(currentUser.getAllMyGroups());
+        ArrayList<RelationshipStatusString> groups=new ArrayList();
+        for (Group group : this.groups) { 
+        if (!temp.contains(group.getGroupID())) {
+            groups.add(new RelationshipStatusString(group.getGroupName(), group.getGroupPhoto(), group.getGroupID()));
         }
+    }
+       
         return groups;
     }
 
@@ -799,66 +944,55 @@ public class Manager {
         for (int i = 0; i < found.size(); i++) {
             for (int k = 0; k < request.size(); k++) {
                 /*check if the user is receiver to block*/
-                if (currentUser.getUserId().equalsIgnoreCase(found.get(i).getIdString()) || currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block") && found.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
+                if (currentUser.getUserId().equalsIgnoreCase(found.get(i).getIdString())||currentUser.getUserId().equalsIgnoreCase(request.get(k).getReceiverID()) && request.get(k).getStatus().getRelation().equalsIgnoreCase("Block") && found.get(i).getIdString().equalsIgnoreCase(request.get(k).getSenderID())) {
                     found.remove(found.get(i));
                 }
             }
         }
-
+        
         return found;
     }
-
     public ArrayList<UserSearch> SearchGroup(String key) {
         ArrayList<UserSearch> found = new ArrayList();
         for (int i = 0; i < groups.size(); i++) {
-            if (key.equalsIgnoreCase(groups.get(i).getGroupID())) {
+            if (key.equalsIgnoreCase(groups.get(i).getGroupName())) {
                 if (currentUser.isMember(groups.get(i).getGroupID())) {
                     found.add(new UserSearch(groups.get(i).getGroupName(), "Member", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
                 } else if (currentUser.isPendingGroup(groups.get(i).getGroupID())) {
-                    found.add(new UserSearch(groups.get(i).getGroupName(), "Pending", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
+                    found.add(new UserSearch(groups.get(i).getGroupName(), "Pending group", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
                 } else {
-                    found.add(new UserSearch(groups.get(i).getGroupName(), "No Relation", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
+          
+                    found.add(new UserSearch(groups.get(i).getGroupName(), "Not member", groups.get(i).getGroupID(), groups.get(i).getGroupPhoto()));
                 }
             }
         }
 
         return found;
     }
-
-    public ArrayList<Notification> getCurrentUserNotifications() {
-        return currentUser.getNotifications();  // Get the notifications for the current user
-    }
-
-    public void addNotificationToFriend(String friendName, Notification notification) {
-        // Loop through all users in the data list to find the friend by userName
-        for (User user : Data) {
-            if (user.getUserName().equals(friendName)) {
-                // Add the notification to the friend's notifications list
-                user.getNotifications().add(notification);
-                break;
+    
+    public GetUser getProfile(String key){
+        for(int i=0;i<Data.size();i++){
+            if(key.equalsIgnoreCase(Data.get(i).getUserId())){       
+             return new GetUser(Data.get(i).getUserId(),Data.get(i).getUserName(),Data.get(i).getProfilePhoto(),Data.get(i).getBio())  ; 
             }
         }
+      return null;  
     }
-
+    public void unblock(String userID){
+        currentUser.unblock(userID);
+    }
     public User searchUserByName(String userName) {
-        for (User user : Data) {
+    for (User user : Data) {
             if (user.getUserName().equalsIgnoreCase(userName)) {
                 return user;
             }
-        }
-        return null; // Return null if no user is found
+    }
+        return null;
+    
+    }
+    public ArrayList<Notification> getCurrentUserNotifications() {
+        return currentUser.getNotifications(); 
+    }
     }
     
-    public ArrayList<Post> getUserPosts(String userId) {
-    ArrayList<Post> userPosts = new ArrayList<>();
-
-    for (Post post : posts) { // Assuming `posts` is a list of all posts in the system
-        if (post.getOwnerId().equalsIgnoreCase(userId)) {
-            userPosts.add(post);
-        }
-    }
-    return userPosts;
-}
-
-
-}
+   

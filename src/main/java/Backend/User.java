@@ -2,22 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package Backend;
-
-/**
- *
- * @author DELL-G3
- */
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Backend.FriendManagement.Relationship;
+import Backend.DataBase.Database;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import Backend.DataBase.Database;
 
+/**
+ *
+ * @author carls
+ */
 public class User implements Database {
 
     private String userId;
@@ -177,6 +174,7 @@ public class User implements Database {
     }
 
     public boolean acceptFriendRequest(String senderID) {
+                moveFriends();
         moveFriends();
         for (int i = 0; i < received.size(); i++) {
             if (received.get(i).getrelationWith().equalsIgnoreCase(senderID)) {
@@ -215,6 +213,18 @@ public class User implements Database {
                 friends.get(i).setBlock();
                 Blocked.add(friends.get(i));
                 friends.remove(friends.get(i));
+                return true;
+            }
+        }
+        return false;
+    }
+        public boolean blockNonFriend(String receiverID) {
+        moveFriends();
+        for (int i = 0; i < sent.size(); i++) {
+            if (sent.get(i).getrelationWith().equalsIgnoreCase(receiverID)) {
+                sent.get(i).setBlock();
+                Blocked.add(sent.get(i));
+                sent.remove(sent.get(i));
                 return true;
             }
         }
@@ -262,6 +272,19 @@ public class User implements Database {
             }
 
         }
+        for (int i = 0; i < received.size(); i++) {
+             if(received.get(i).getRelation().equalsIgnoreCase("Block")){
+                received.remove(i);
+            }
+
+        }
+        for (int i = 0; i < sent.size(); i++) {
+             if(sent.get(i).getRelation().equalsIgnoreCase("Block")){
+                sent.remove(i);
+            }
+
+        }
+        
         
     }
     boolean isFriend(String key){
@@ -369,7 +392,13 @@ public boolean isMember(String key){
         }
         return false;
     }
-    
-    
+    public void unblock(String userID){
+        for(int i=0;i<Blocked.size();i++){
+            if(Blocked.get(i).getrelationWith().equalsIgnoreCase(userID)){
+                Blocked.get(i).setCancel();
+                Blocked.remove(i);
+            }
+        }
+    }
 
 }

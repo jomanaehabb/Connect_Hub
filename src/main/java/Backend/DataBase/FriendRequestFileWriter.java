@@ -10,7 +10,7 @@ package Backend.DataBase;
  * @author DELL-G3
  */
 
-import Backend.FriendManagement.friendRequest;
+import Backend.friendRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

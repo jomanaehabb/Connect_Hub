@@ -11,7 +11,7 @@ package Backend.DataBase;
  */
 
 
-import Backend.FriendManagement.friendRequest;
+import Backend.friendRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

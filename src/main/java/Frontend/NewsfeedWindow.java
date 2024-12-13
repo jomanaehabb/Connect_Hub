@@ -4,14 +4,14 @@
  */
 package Frontend;
 
-import Frontend.Search.SearchUserPanel;
+import Frontend.SearchManagement.SearchUserPanel;
 import Backend.Manager;
-import Backend.FriendManagement.PostString;
-import Backend.GroupManagament.GroupString;
+import Backend.PostString;
+import Backend.GroupString;
 import Backend.Online;
 import Backend.User;
-import Frontend.Group.MyGroups;
-import Frontend.Group.MyGroupsCreator;
+import Frontend.GroupManagement.MyGroups;
+import Frontend.GroupManagement.MyGroupsCreator;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;

@@ -1,19 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Backend;
 
-/**
- *
- * @author DELL-G3
- */
-import Backend.GroupManagament.Group;
 import Backend.DataBase.*;
+
 import java.util.ArrayList;
 
 import static Backend.DataBase.FilePaths.*;
-import Backend.FriendManagement.friendRequest;
 
 public class Server {
 
@@ -104,7 +95,18 @@ public class Server {
     }
 
     private ArrayList<Group> loadGroups() {
-        return new GroupFileReader(groupsDataBase).readAll();
+        ArrayList<Group> temp=new GroupFileReader(groupsDataBase).readAll();
+         try {
+        Group.setGroupsCount(Integer.parseInt(temp.getLast().getGroupID().split("G")[1]));
+        return temp;
+         }catch (Exception e) {
+            return temp;
+        }
+        
+        
+    }
+    public static void writeGroups() {
+        new GroupFileWriter(groupsDataBase).writeAll(groups);
     }
 
 }

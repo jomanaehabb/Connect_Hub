@@ -10,7 +10,7 @@ package Backend.DataBase;
  * @author DELL-G3
  */
 
-import Backend.GroupManagament.Group;
+import Backend.Group;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

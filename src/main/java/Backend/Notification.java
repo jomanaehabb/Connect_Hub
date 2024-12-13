@@ -18,6 +18,18 @@ public class Notification {
     private static int num = 0;
     private String Id;
 
+    Notification(String group_Photo_Changed, String photoPath) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Notification(String new_post_added_to_group, String userName, Post post) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Notification(String new_post_need_to_be_Approved, String userName, Post post, String groupId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getName() {
         return name;
     }
