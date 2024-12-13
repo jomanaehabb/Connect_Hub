@@ -7,7 +7,9 @@ package Frontend;
 import Backend.Manager;
 import Backend.FriendManagement.PostString;
 import Backend.GroupString;
+import Backend.Notification;
 import Backend.Online;
+import Backend.User;
 import Frontend.Group.MyGroups;
 import Frontend.Group.MyGroupsCreator;
 import java.awt.Image;
@@ -135,7 +137,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         status = new javax.swing.JTable();
         friendManagement_btn = new javax.swing.JButton();
-        jSearchField = new javax.swing.JTextField();
+        searchField = new javax.swing.JTextField();
         SearchUserBtn = new javax.swing.JButton();
         MyGroupsLabel = new javax.swing.JLabel();
         MyGroupsPane = new javax.swing.JScrollPane();
@@ -173,7 +175,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
         photoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         photoLabel.setText("photo");
 
-        RefreshButton.setBackground(new java.awt.Color(102, 153, 255));
+        RefreshButton.setBackground(new java.awt.Color(0, 153, 255));
         RefreshButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RefreshButton.setForeground(new java.awt.Color(255, 255, 255));
         RefreshButton.setText("Refresh");
@@ -183,7 +185,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        profileMangmentButton.setBackground(new java.awt.Color(102, 153, 255));
+        profileMangmentButton.setBackground(new java.awt.Color(0, 153, 255));
         profileMangmentButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         profileMangmentButton.setForeground(new java.awt.Color(255, 255, 255));
         profileMangmentButton.setText("My profile");
@@ -193,7 +195,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        LogoutButton.setBackground(new java.awt.Color(102, 153, 255));
+        LogoutButton.setBackground(new java.awt.Color(0, 153, 255));
         LogoutButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LogoutButton.setForeground(new java.awt.Color(255, 255, 255));
         LogoutButton.setText("Logout");
@@ -203,7 +205,6 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        status.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         status.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
@@ -245,16 +246,16 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        jSearchField.addActionListener(new java.awt.event.ActionListener() {
+        searchField.setText("Search...");
+
+        SearchUserBtn.setBackground(new java.awt.Color(0, 153, 255));
+        SearchUserBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SearchUserBtn.setText("Search User");
+        SearchUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSearchFieldActionPerformed(evt);
+                SearchUserBtnActionPerformed(evt);
             }
         });
-
-        SearchUserBtn.setBackground(new java.awt.Color(102, 153, 255));
-        SearchUserBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        SearchUserBtn.setForeground(new java.awt.Color(255, 255, 255));
-        SearchUserBtn.setText("Search User");
 
         MyGroupsLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         MyGroupsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -268,7 +269,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Group Suggestions");
 
-        NotificitionButton.setBackground(new java.awt.Color(102, 153, 255));
+        NotificitionButton.setBackground(new java.awt.Color(0, 153, 255));
         NotificitionButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         NotificitionButton.setForeground(new java.awt.Color(255, 255, 255));
         NotificitionButton.setText("Notifications");
@@ -278,9 +279,8 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        SearchGroupButton1.setBackground(new java.awt.Color(102, 153, 255));
+        SearchGroupButton1.setBackground(new java.awt.Color(51, 153, 255));
         SearchGroupButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        SearchGroupButton1.setForeground(new java.awt.Color(255, 255, 255));
         SearchGroupButton1.setText("Search Group");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -312,38 +312,26 @@ public class NewsfeedWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(SearchUserBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(SearchGroupButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(photoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(20, 20, 20))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(LogoutButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(friendManagement_btn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(profileMangmentButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(RefreshButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(NotificitionButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(RefreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profileMangmentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LogoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(friendManagement_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(photoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(NotificitionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SearchUserBtn)
-                            .addComponent(SearchGroupButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(photoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,7 +343,14 @@ public class NewsfeedWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(friendManagement_btn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NotificitionButton)))
+                        .addComponent(NotificitionButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchUserBtn)
+                            .addComponent(SearchGroupButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
@@ -368,7 +363,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(GroupSuggestPane))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -504,24 +499,75 @@ public class NewsfeedWindow extends javax.swing.JFrame {
 
     private void NotificitionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotificitionButtonActionPerformed
         // TODO add your handling code here:
+        // Create a new frame to display the notifications
+        JFrame frame = new JFrame("Notifications");
+
+        // Set the frame to close on exit
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Set the size of the frame
+        frame.setSize(1176, 615);
+
+        // Create the Notification panel (which will handle the display of notifications)
+        NotificationPanel notificationPanel = new NotificationPanel(a); // 'a' is your Manager instance
+
+        // Add the Notification panel to the frame
+        frame.add(notificationPanel);
+
+        // Make the frame visible
+        frame.setVisible(true);
+
     }//GEN-LAST:event_NotificitionButtonActionPerformed
 
-    private void jSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchFieldActionPerformed
+    private void SearchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUserBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jSearchFieldActionPerformed
+            String searchName = searchField.getText(); // Get the name entered in the search field
+    User foundUser = a.searchUserByName(searchName); // Search for the user in the backend
+
+    // Open the new page (Search Results) with the result
+    JFrame searchResultFrame = new JFrame("Search Results");
+    searchResultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    searchResultFrame.setSize(500, 400);
+    searchResultFrame.add(new searchResultPanel(a, foundUser));
+    searchResultFrame.setVisible(true);
+    }//GEN-LAST:event_SearchUserBtnActionPerformed
     
 
 
-    /*
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewsfeedWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             //    new NewsfeedWindow(a).setVisible(true);
             }
         });
     }
-*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel GroupPanel1;
@@ -538,10 +584,10 @@ public class NewsfeedWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jSearchField;
     private javax.swing.JLabel photoLabel;
     private javax.swing.JPanel postPanel;
     private javax.swing.JButton profileMangmentButton;
+    private javax.swing.JTextField searchField;
     private javax.swing.JTable status;
     private javax.swing.JPanel storyPanel;
     // End of variables declaration//GEN-END:variables
