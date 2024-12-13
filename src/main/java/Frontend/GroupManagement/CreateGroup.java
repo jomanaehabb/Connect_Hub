@@ -11,10 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import Backend.Manager;
 
-/**
- *
- * @author carls
- */
+
 public class CreateGroup extends javax.swing.JFrame {
 
     /**

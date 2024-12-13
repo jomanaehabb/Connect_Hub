@@ -8,7 +8,7 @@ import Backend.Manager;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class PostTextForGroup extends javax.swing.JPanel {
 

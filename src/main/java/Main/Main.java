@@ -7,7 +7,7 @@ package Main;
 import Frontend.LoginWindow;
 /**
  *
- * @author Mnw Emile
+ * @author DELL-G3
  */
 public class Main {
 

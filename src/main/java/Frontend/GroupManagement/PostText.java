@@ -6,10 +6,7 @@ package Frontend.GroupManagement;
 
 import Backend.Manager;
 
-/**
- *
- * @author carls
- */
+
 public class PostText extends javax.swing.JPanel {
 
     /**

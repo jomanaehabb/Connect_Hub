@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author User
+ * @author DELL-G3
  */
 public class PostsAndStories extends javax.swing.JPanel {
 

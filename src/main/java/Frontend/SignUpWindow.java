@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class SignUpWindow extends javax.swing.JFrame {
 
@@ -398,7 +398,7 @@ public class SignUpWindow extends javax.swing.JFrame {
          else if(!(password.equals(confirmPassword))){
              JOptionPane.showMessageDialog(null, "passwords not identical", "Warning", JOptionPane.WARNING_MESSAGE);
          }
-         else if(!(Validation.Validator.isEmail(email))){
+         else if(!(Validation.Validation.isEmail(email))){
              JOptionPane.showMessageDialog(null, "enter correct email.", "Warning", JOptionPane.WARNING_MESSAGE);
          }
          else if (age < 12) {

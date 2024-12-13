@@ -13,12 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author User
- */
-// m7tagen nzbt lma yt2fl wlma n8yr el profile manager
-//check current password
+
 public class ProfileDetails extends javax.swing.JFrame {
 
     /**

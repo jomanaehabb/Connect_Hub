@@ -9,7 +9,7 @@ import Backend.GroupString;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class GroupForUserNotMember extends javax.swing.JFrame {
 

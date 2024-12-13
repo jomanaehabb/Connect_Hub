@@ -18,10 +18,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author carls
- */
 public class NewsfeedWindow extends javax.swing.JFrame {
 
     /**

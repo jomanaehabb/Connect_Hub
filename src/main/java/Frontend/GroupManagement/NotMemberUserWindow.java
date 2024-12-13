@@ -9,10 +9,7 @@ import Backend.GroupString;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author carls
- */
+
 public class NotMemberUserWindow extends javax.swing.JFrame {
 
     /**

@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Validation;
-
 /**
  *
- * @author Mnw Emile
+ * @author DELL-G3
  */
-public class Validator {
+public class Validation {
     public static boolean isEmail(String email){
         if (email == null || email.isEmpty()) {
             return false;

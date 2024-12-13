@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class PostImageForGroup extends javax.swing.JPanel {
 

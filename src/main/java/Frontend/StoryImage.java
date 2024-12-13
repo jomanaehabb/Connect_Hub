@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author User
+ * @author DELL-G3
  */
 public class StoryImage extends javax.swing.JPanel {
 

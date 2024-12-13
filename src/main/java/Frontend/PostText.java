@@ -6,7 +6,7 @@ package Frontend;
 
 /**
  *
- * @author User
+ * @author DELL-G3
  */
 public class PostText extends javax.swing.JPanel {
 

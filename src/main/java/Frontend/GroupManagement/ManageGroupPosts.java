@@ -8,10 +8,7 @@ import Backend.Manager;
 import Backend.PostString;
 import java.util.ArrayList;
 
-/**
- *
- * @author carls
- */
+
 public class ManageGroupPosts extends javax.swing.JFrame {
 
     /**

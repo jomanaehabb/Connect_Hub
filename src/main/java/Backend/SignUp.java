@@ -4,7 +4,7 @@
  */
 package Backend;
 
-import Validation.Validator;
+import Validation.Validation;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class SignUp {
     private static int counter;
     
     public User addUser (String email, String password, String userName,LocalDate dateOfBirth, ArrayList <User> users ){
-        Validator v = new Validator();
+        Validation v = new Validation();
         // Checking if the email is already signed
         if(users == null)
         for(User u : users){

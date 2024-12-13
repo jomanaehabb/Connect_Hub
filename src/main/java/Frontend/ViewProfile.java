@@ -6,7 +6,7 @@ package Frontend;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class ViewProfile extends javax.swing.JFrame {
 

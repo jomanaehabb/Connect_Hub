@@ -9,7 +9,7 @@ package Backend;
  *
  * @author DELL-G3
  */
-import Validation.Validator;
+import Validation.Validation;
 
 public class ProfileManger {
     private User user;
@@ -30,7 +30,7 @@ public class ProfileManger {
 //        return true;
 //    }
     public boolean changePassword(String password){
-        boolean isValidPassword = Validator.isPassword(password);
+        boolean isValidPassword = Validation.isPassword(password);
         if(isValidPassword){
         user.setPassword(password);
         return true;

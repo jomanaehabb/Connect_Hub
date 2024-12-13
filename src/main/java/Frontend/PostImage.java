@@ -7,10 +7,9 @@ package Frontend;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
 /**
  *
- * @author User
+ * @author DELL-G3
  */
 public class PostImage extends javax.swing.JPanel {
 

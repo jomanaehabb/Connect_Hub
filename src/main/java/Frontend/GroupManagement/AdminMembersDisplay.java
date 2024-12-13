@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class AdminMembersDisplay extends javax.swing.JPanel {
 

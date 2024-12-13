@@ -15,10 +15,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author carls
- */
+
 public class AdminGroupWindow extends javax.swing.JFrame {
 
     /**

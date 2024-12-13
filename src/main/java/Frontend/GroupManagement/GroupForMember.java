@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class GroupForMember extends javax.swing.JFrame {
 

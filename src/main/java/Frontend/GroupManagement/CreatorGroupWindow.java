@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author carls
+ * @author DELL-G3
  */
 public class CreatorGroupWindow extends javax.swing.JFrame {
 

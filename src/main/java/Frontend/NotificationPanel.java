@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Frontend;
-
+/**
+ *
+ * @author DELL-G3
+ */
 import Backend.Manager;
 import Backend.Notification;  // Make sure to import the correct Notification class
 import javax.swing.JLabel;

@@ -8,10 +8,7 @@ import Backend.Manager;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author carls
- */
+
 public class Admin extends javax.swing.JPanel {
 
     /**

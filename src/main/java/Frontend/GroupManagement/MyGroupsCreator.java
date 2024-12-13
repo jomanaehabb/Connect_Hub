@@ -10,10 +10,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author carls
- */
 public class MyGroupsCreator extends javax.swing.JPanel {
 
     /**

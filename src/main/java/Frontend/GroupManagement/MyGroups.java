@@ -8,10 +8,7 @@ import Backend.GroupString;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-/**
- *
- * @author carls
- */
+
 public class MyGroups extends javax.swing.JPanel {
 
     /**
