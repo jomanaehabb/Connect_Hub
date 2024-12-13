@@ -5,6 +5,7 @@
 package Frontend;
 
 import Backend.Manager;
+import Frontend.Group.CreateGroup;
 import java.awt.Image;
 import java.io.File;
 import javax.swing.ImageIcon;

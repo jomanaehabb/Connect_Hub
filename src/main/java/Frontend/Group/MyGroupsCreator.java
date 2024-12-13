@@ -51,7 +51,7 @@ public class MyGroupsCreator extends javax.swing.JPanel {
         GroupPhotoLabel1 = new javax.swing.JLabel();
         GroupNameField1 = new javax.swing.JTextField();
         ViewGroupButton1 = new javax.swing.JButton();
-        ViewGroupButton2 = new javax.swing.JButton();
+        DeleteGroupButton = new javax.swing.JButton();
 
         GroupPhotoLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -71,13 +71,13 @@ public class MyGroupsCreator extends javax.swing.JPanel {
             }
         });
 
-        ViewGroupButton2.setBackground(new java.awt.Color(51, 153, 255));
-        ViewGroupButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ViewGroupButton2.setForeground(new java.awt.Color(255, 255, 255));
-        ViewGroupButton2.setText("Delete Group");
-        ViewGroupButton2.addActionListener(new java.awt.event.ActionListener() {
+        DeleteGroupButton.setBackground(new java.awt.Color(51, 153, 255));
+        DeleteGroupButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        DeleteGroupButton.setForeground(new java.awt.Color(255, 255, 255));
+        DeleteGroupButton.setText("Delete Group");
+        DeleteGroupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewGroupButton2ActionPerformed(evt);
+                DeleteGroupButtonActionPerformed(evt);
             }
         });
 
@@ -93,7 +93,7 @@ public class MyGroupsCreator extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ViewGroupButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ViewGroupButton2))
+                        .addComponent(DeleteGroupButton))
                     .addComponent(GroupNameField1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -109,7 +109,7 @@ public class MyGroupsCreator extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ViewGroupButton1)
-                            .addComponent(ViewGroupButton2))))
+                            .addComponent(DeleteGroupButton))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -122,15 +122,15 @@ public class MyGroupsCreator extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ViewGroupButton1ActionPerformed
 
-    private void ViewGroupButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewGroupButton2ActionPerformed
+    private void DeleteGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteGroupButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ViewGroupButton2ActionPerformed
+    }//GEN-LAST:event_DeleteGroupButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteGroupButton;
     private javax.swing.JTextField GroupNameField1;
     private javax.swing.JLabel GroupPhotoLabel1;
     private javax.swing.JButton ViewGroupButton1;
-    private javax.swing.JButton ViewGroupButton2;
     // End of variables declaration//GEN-END:variables
 }
