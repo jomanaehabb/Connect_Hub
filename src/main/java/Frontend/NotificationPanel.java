@@ -54,6 +54,8 @@ public class NotificationPanel extends javax.swing.JPanel {
 
         notificationPanel = new javax.swing.JScrollPane();
 
+        setMaximumSize(new java.awt.Dimension(636, 468));
+
         notificationPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
