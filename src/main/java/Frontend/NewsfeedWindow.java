@@ -10,6 +10,7 @@ import Backend.GroupString;
 import Backend.Notification;
 import Backend.Online;
 import Backend.User;
+import Backend.Group;
 import Frontend.Group.MyGroups;
 import Frontend.Group.MyGroupsCreator;
 import java.awt.Image;
@@ -175,7 +176,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
         photoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         photoLabel.setText("photo");
 
-        RefreshButton.setBackground(new java.awt.Color(0, 153, 255));
+        RefreshButton.setBackground(new java.awt.Color(102, 153, 255));
         RefreshButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RefreshButton.setForeground(new java.awt.Color(255, 255, 255));
         RefreshButton.setText("Refresh");
@@ -185,7 +186,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        profileMangmentButton.setBackground(new java.awt.Color(0, 153, 255));
+        profileMangmentButton.setBackground(new java.awt.Color(102, 153, 255));
         profileMangmentButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         profileMangmentButton.setForeground(new java.awt.Color(255, 255, 255));
         profileMangmentButton.setText("My profile");
@@ -195,7 +196,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        LogoutButton.setBackground(new java.awt.Color(0, 153, 255));
+        LogoutButton.setBackground(new java.awt.Color(102, 153, 255));
         LogoutButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LogoutButton.setForeground(new java.awt.Color(255, 255, 255));
         LogoutButton.setText("Logout");
@@ -246,10 +247,9 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        searchField.setText("Search...");
-
-        SearchUserBtn.setBackground(new java.awt.Color(0, 153, 255));
+        SearchUserBtn.setBackground(new java.awt.Color(102, 153, 255));
         SearchUserBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SearchUserBtn.setForeground(new java.awt.Color(255, 255, 255));
         SearchUserBtn.setText("Search User");
         SearchUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,7 +269,7 @@ public class NewsfeedWindow extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Group Suggestions");
 
-        NotificitionButton.setBackground(new java.awt.Color(0, 153, 255));
+        NotificitionButton.setBackground(new java.awt.Color(102, 153, 255));
         NotificitionButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         NotificitionButton.setForeground(new java.awt.Color(255, 255, 255));
         NotificitionButton.setText("Notifications");
@@ -279,9 +279,15 @@ public class NewsfeedWindow extends javax.swing.JFrame {
             }
         });
 
-        SearchGroupButton1.setBackground(new java.awt.Color(51, 153, 255));
+        SearchGroupButton1.setBackground(new java.awt.Color(102, 153, 255));
         SearchGroupButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SearchGroupButton1.setForeground(new java.awt.Color(255, 255, 255));
         SearchGroupButton1.setText("Search Group");
+        SearchGroupButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchGroupButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -526,6 +532,10 @@ public class NewsfeedWindow extends javax.swing.JFrame {
     searchResultFrame.add(new searchResultPanel(a, foundUser));
     searchResultFrame.setVisible(true);
     }//GEN-LAST:event_SearchUserBtnActionPerformed
+
+    private void SearchGroupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchGroupButton1ActionPerformed
+
+    }//GEN-LAST:event_SearchGroupButton1ActionPerformed
     
 
 
